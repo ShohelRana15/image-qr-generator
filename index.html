@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Hub</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>QR Hub</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-<h1>QR Hub</h1>
+    <h1>QR Hub</h1>
 
-<p class="subtitle">
-Image & Text QR Code Generator
-</p>
+    <p class="subtitle">
+        Image & Text QR Code Generator
+    </p>
 
-<div class="tabs">
+    <div class="tabs">
 
-<button class="tab active">
-🖼️ Image QR
-</button>
+        <button class="tab active" id="imageTab">
+            🖼️ Image QR
+        </button>
 
-<button class="tab">
-📝 Text QR
-</button>
+        <button class="tab" id="textTab">
+            📝 Text QR
+        </button>
 
-</div>
+    </div>
 
-<div class="card">
+    <div class="card">
 
-<div id="imageSection">
+        <!-- IMAGE -->
 
-<h2>Upload Image</h2>
+        <div id="imageSection">
 
-<input type="file" id="imageFile">
+            <h2>Upload Image</h2>
 
-<br><br>
+            <input type="file" id="imageFile">
 
-<button id="uploadBtn">
-Upload Image
-</button>
+            <br><br>
 
-</div>
+            <button class="primary-btn" id="uploadBtn">
+                Upload Image
+            </button>
 
-<div id="textSection" style="display:none;">
+        </div>
 
-<h2>Enter Text</h2>
+        <!-- TEXT -->
 
-<textarea id="textInput"
-rows="5"
-placeholder="Write something..."></textarea>
+        <div id="textSection">
 
-<br><br>
+            <h2>Enter Text</h2>
 
-<button id="textBtn">
-Generate QR
-</button>
+            <textarea
+                id="textInput"
+                rows="6"
+                placeholder="Write anything here..."></textarea>
 
-</div>
+            <br><br>
 
-</div>
+            <button class="primary-btn" id="generateBtn">
+                Generate QR
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
