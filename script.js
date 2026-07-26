@@ -1,25 +1,31 @@
-const tabs = document.querySelectorAll(".tab");
+const imageTab=document.getElementById("imageTab");
 
-const imageSection = document.getElementById("imageSection");
+const textTab=document.getElementById("textTab");
 
-const textSection = document.getElementById("textSection");
+const imageSection=document.getElementById("imageSection");
 
-tabs[0].onclick = ()=>{
+const textSection=document.getElementById("textSection");
 
-tabs[0].classList.add("active");
-tabs[1].classList.remove("active");
+imageTab.addEventListener("click",()=>{
 
-imageSection.style.display="block";
-textSection.style.display="none";
+    imageTab.classList.add("active");
 
-}
+    textTab.classList.remove("active");
 
-tabs[1].onclick = ()=>{
+    imageSection.style.display="block";
 
-tabs[1].classList.add("active");
-tabs[0].classList.remove("active");
+    textSection.style.display="none";
 
-imageSection.style.display="none";
-textSection.style.display="block";
+});
 
-}
+textTab.addEventListener("click",()=>{
+
+    textTab.classList.add("active");
+
+    imageTab.classList.remove("active");
+
+    textSection.style.display="block";
+
+    imageSection.style.display="none";
+
+});
