@@ -36,11 +36,35 @@ Image & Text QR Code Generator
 
 <div class="card">
 
-<h2>Welcome</h2>
+<div id="imageSection">
 
-<p>
-Upload an image or enter text to generate a QR Code.
-</p>
+<h2>Upload Image</h2>
+
+<input type="file" id="imageFile">
+
+<br><br>
+
+<button id="uploadBtn">
+Upload Image
+</button>
+
+</div>
+
+<div id="textSection" style="display:none;">
+
+<h2>Enter Text</h2>
+
+<textarea id="textInput"
+rows="5"
+placeholder="Write something..."></textarea>
+
+<br><br>
+
+<button id="textBtn">
+Generate QR
+</button>
+
+</div>
 
 </div>
 
