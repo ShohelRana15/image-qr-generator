@@ -176,3 +176,72 @@ hr{
     justify-content:center;
     align-items:center;
 }
+.actions{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.actions button{
+    min-width:160px;
+}
+
+.message{
+    margin-top:25px;
+    text-align:center;
+    font-weight:bold;
+    color:#16a34a;
+}
+
+canvas{
+    max-width:100%;
+    background:#fff;
+    padding:10px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+@media (max-width:768px){
+
+    .container{
+        width:95%;
+        margin:20px auto;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .header h1{
+        font-size:32px;
+    }
+
+    .tabs{
+        flex-direction:column;
+    }
+
+    .tab{
+        width:100%;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .actions button{
+        width:100%;
+    }
+
+    #qrContainer{
+        width:220px;
+        min-height:220px;
+    }
+
+}
