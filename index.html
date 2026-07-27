@@ -3,66 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>QR Hub</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- QRCode -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>QR Hub</h1>
+    <div class="header">
 
-    <p class="subtitle">
-        Image & Text QR Code Generator
-    </p>
+        <h1>
+            <i class="fa-solid fa-qrcode"></i>
+            QR Hub
+        </h1>
+
+        <p>
+            Image & Text QR Code Generator
+        </p>
+
+    </div>
+
+    <!-- Tabs -->
 
     <div class="tabs">
 
         <button class="tab active" id="imageTab">
-            🖼️ Image QR
+            <i class="fa-regular fa-image"></i>
+            Image QR
         </button>
 
         <button class="tab" id="textTab">
-            📝 Text QR
+            <i class="fa-solid fa-font"></i>
+            Text QR
         </button>
 
     </div>
 
+    <!-- Card -->
+
     <div class="card">
 
-        <!-- IMAGE -->
+        <!-- IMAGE SECTION -->
 
         <div id="imageSection">
 
             <h2>Upload Image</h2>
 
-            <input type="file" id="imageFile">
+            <input
+                type="file"
+                id="imageFile"
+                accept="image/*">
 
-            <br><br>
+            <div class="preview-box">
 
-            <button class="primary-btn" id="uploadBtn">
+                <img
+                    id="imagePreview"
+                    src=""
+                    alt=""
+                    style="display:none;">
+
+            </div>
+
+            <button
+                id="uploadBtn"
+                class="primary-btn">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
                 Upload Image
+
             </button>
 
         </div>
 
-        <!-- TEXT -->
+        <!-- TEXT SECTION -->
 
-        <div id="textSection">
+        <div
+            id="textSection"
+            style="display:none;">
 
-            <h2>Enter Text</h2>
+            <h2>Generate Text QR</h2>
 
             <textarea
                 id="textInput"
                 rows="6"
-                placeholder="Write anything here..."></textarea>
+                placeholder="Write anything..."></textarea>
 
-            <br><br>
+            <button
+                id="generateBtn"
+                class="primary-btn">
 
-            <button class="primary-btn" id="generateBtn">
+                <i class="fa-solid fa-qrcode"></i>
+
                 Generate QR
+
             </button>
+
+        </div>
+
+        <hr>
+
+        <!-- RESULT -->
+
+        <div class="result">
+
+            <h2>Result</h2>
+
+            <input
+                type="text"
+                id="imageUrl"
+                placeholder="Image URL will appear here..."
+                readonly>
+
+            <div id="qrContainer">
+
+                <canvas id="qrcode"></canvas>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    id="copyBtn"
+                    class="secondary-btn">
+
+                    <i class="fa-regular fa-copy"></i>
+
+                    Copy URL
+
+                </button>
+
+                <button
+                    id="downloadBtn"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download QR
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message">
 
         </div>
 
