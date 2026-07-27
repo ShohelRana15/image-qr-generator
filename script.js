@@ -1,31 +1,56 @@
-const imageTab=document.getElementById("imageTab");
+// ======================
+// TAB SWITCH
+// ======================
 
-const textTab=document.getElementById("textTab");
+const imageTab = document.getElementById("imageTab");
+const textTab = document.getElementById("textTab");
 
-const imageSection=document.getElementById("imageSection");
+const imageSection = document.getElementById("imageSection");
+const textSection = document.getElementById("textSection");
 
-const textSection=document.getElementById("textSection");
-
-imageTab.addEventListener("click",()=>{
+imageTab.addEventListener("click", () => {
 
     imageTab.classList.add("active");
-
     textTab.classList.remove("active");
 
-    imageSection.style.display="block";
-
-    textSection.style.display="none";
+    imageSection.style.display = "block";
+    textSection.style.display = "none";
 
 });
 
-textTab.addEventListener("click",()=>{
+textTab.addEventListener("click", () => {
 
     textTab.classList.add("active");
-
     imageTab.classList.remove("active");
 
-    textSection.style.display="block";
+    textSection.style.display = "block";
+    imageSection.style.display = "none";
 
-    imageSection.style.display="none";
+});
+
+
+// ======================
+// IMAGE PREVIEW
+// ======================
+
+const imageFile = document.getElementById("imageFile");
+const imagePreview = document.getElementById("imagePreview");
+
+imageFile.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
 
 });
