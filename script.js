@@ -1,3 +1,4 @@
+console.log(window.supabase);
 // ======================
 // SUPABASE
 // ======================
