@@ -1,112 +1,83 @@
-// ======================
-// SUPABASE
-// ======================
+// ===============================
+// QR HUB v3.0
+// Part 1
+// ===============================
 
-const SUPABASE_URL = "https://vbufbeaktxvcxfcskyhr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_HD8afj98r3io1rI-qRNVOw__JgSxR87";
+// ---------- SUPABASE ----------
 
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+const SUPABASE_URL="https://vbufbeaktxvcxfcskyhr.supabase.co";
+
+const SUPABASE_KEY="sb_publishable_HD8afj98r3io1rI-qRNVOw__JgSxR87";
+
+const supabaseClient=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
-// ======================
-// ELEMENTS
-// ======================
+// ---------- ELEMENTS ----------
 
-const imageTab = document.getElementById("imageTab");
-const textTab = document.getElementById("textTab");
+const imageTab=document.getElementById("imageTab");
+const textTab=document.getElementById("textTab");
 
-const imageSection = document.getElementById("imageSection");
-const textSection = document.getElementById("textSection");
+const imageSection=document.getElementById("imageSection");
+const textSection=document.getElementById("textSection");
 
-const imageFile = document.getElementById("imageFile");
-const dropArea = document.getElementById("dropArea");
+const imageFile=document.getElementById("imageFile");
+const imagePreview=document.getElementById("imagePreview");
+const finalPreview=document.getElementById("finalPreview");
 
-const imagePreview = document.getElementById("imagePreview");
-const finalPreview = document.getElementById("finalPreview");
+const uploadBtn=document.getElementById("uploadBtn");
 
-const uploadBtn = document.getElementById("uploadBtn");
+const imageUrl=document.getElementById("imageUrl");
 
-const imageUrl = document.getElementById("imageUrl");
+const qrCanvas=document.getElementById("qrcode");
 
-const qrCanvas = document.getElementById("qrcode");
+const message=document.getElementById("message");
 
-const message = document.getElementById("message");
+const cropBtn=document.getElementById("cropBtn");
+const zoomInBtn=document.getElementById("zoomInBtn");
+const zoomOutBtn=document.getElementById("zoomOutBtn");
+const rotateBtn=document.getElementById("rotateBtn");
+const resetBtn=document.getElementById("resetBtn");
 
-const fileInfo = document.getElementById("fileInfo");
+let cropper=null;
+let croppedBlob=null;
 
-const progress = document.getElementById("uploadProgress");
+// ---------- TAB ----------
 
-const cropBtn = document.getElementById("cropBtn");
-const zoomInBtn = document.getElementById("zoomInBtn");
-const zoomOutBtn = document.getElementById("zoomOutBtn");
-const rotateBtn = document.getElementById("rotateBtn");
-const resetBtn = document.getElementById("resetBtn");
-
-let cropper = null;
-
-// ======================
-// TAB
-// ======================
-
-imageTab.onclick = () => {
+imageTab.onclick=()=>{
 
 imageTab.classList.add("active");
 textTab.classList.remove("active");
 
-imageSection.style.display = "block";
-textSection.style.display = "none";
+imageSection.style.display="block";
+textSection.style.display="none";
 
 };
 
-textTab.onclick = () => {
+textTab.onclick=()=>{
 
 textTab.classList.add("active");
 imageTab.classList.remove("active");
 
-textSection.style.display = "block";
-imageSection.style.display = "none";
+textSection.style.display="block";
+imageSection.style.display="none";
 
 };
 
-// ======================
-// IMAGE SELECT
-// ======================
+// ---------- IMAGE ----------
 
-imageFile.addEventListener("change", loadImage);
+imageFile.addEventListener("change",()=>{
 
-dropArea.addEventListener("dragover", e => {
+const file=imageFile.files[0];
 
-e.preventDefault();
+if(!file)return;
 
-});
+const reader=new FileReader();
 
-dropArea.addEventListener("drop", e => {
+reader.onload=e=>{
 
-e.preventDefault();
-
-imageFile.files = e.dataTransfer.files;
-
-loadImage();
-
-});
-
-function loadImage(){
-
-const file = imageFile.files[0];
-
-if(!file) return;
-
-fileInfo.innerHTML =
-file.name + "<br>" +
-(file.size/1024).toFixed(1)+" KB";
-
-const reader = new FileReader();
-
-reader.onload = e=>{
-
-imagePreview.src = e.target.result;
+imagePreview.src=e.target.result;
 
 imagePreview.style.display="block";
 
@@ -116,11 +87,12 @@ cropper.destroy();
 
 }
 
-cropper = new Cropper(imagePreview,{
+cropper=new Cropper(imagePreview,{
 
-viewMode:0,
+viewMode:1,
 autoCropArea:1,
-responsive:true
+responsive:true,
+background:false
 
 });
 
@@ -128,63 +100,89 @@ responsive:true
 
 reader.readAsDataURL(file);
 
-}
-// ======================
-// CROP BUTTONS
-// ======================
+});
+// ===============================
+// CROP TOOLS
+// ===============================
 
-cropBtn.onclick = () => {
+cropBtn.onclick=()=>{
 
-if(!cropper) return;
+if(!cropper)return;
 
-const canvas = cropper.getCroppedCanvas();
+cropper.getCroppedCanvas({
 
-imagePreview.src = canvas.toDataURL();
+imageSmoothingQuality:"high"
+
+}).toBlob(blob=>{
+
+croppedBlob=blob;
+
+imagePreview.src=URL.createObjectURL(blob);
 
 cropper.destroy();
 
-cropper = new Cropper(imagePreview,{
-viewMode:0,
-autoCropArea:1
+cropper=new Cropper(imagePreview,{
+
+viewMode:1,
+autoCropArea:1,
+responsive:true,
+background:false
+
 });
+
+},"image/png");
 
 };
 
 zoomInBtn.onclick=()=>{
 
-if(cropper) cropper.zoom(0.1);
+if(cropper)cropper.zoom(0.1);
 
 };
 
 zoomOutBtn.onclick=()=>{
 
-if(cropper) cropper.zoom(-0.1);
+if(cropper)cropper.zoom(-0.1);
 
 };
 
 rotateBtn.onclick=()=>{
 
-if(cropper) cropper.rotate(90);
+if(cropper)cropper.rotate(90);
 
 };
 
 resetBtn.onclick=()=>{
 
-if(cropper) cropper.reset();
+if(cropper)cropper.reset();
 
 };
 
-// ======================
+// ===============================
 // IMAGE UPLOAD
-// ======================
+// ===============================
 
-uploadBtn.onclick = async()=>{
+uploadBtn.onclick=async()=>{
 
-const file=imageFile.files[0];
+let uploadFile=imageFile.files[0];
 
-if(!file){
+if(croppedBlob){
 
-message.innerHTML="Select an image";
+uploadFile=new File(
+
+[croppedBlob],
+
+"cropped.png",
+
+{type:"image/png"}
+
+);
+
+}
+
+if(!uploadFile){
+
+message.innerHTML="Select Image";
 
 message.style.color="red";
 
@@ -192,17 +190,19 @@ return;
 
 }
 
-progress.style.display="block";
-
-progress.value=10;
-
 uploadBtn.disabled=true;
 
-const fileName=Date.now()+"_"+file.name;
+uploadBtn.innerHTML="Uploading...";
+
+const fileName=Date.now()+"_"+uploadFile.name;
 
 const {error}=await supabaseClient.storage
+
 .from("images")
-.upload(fileName,file);
+
+.upload(fileName,uploadFile,{
+upsert:true
+});
 
 if(error){
 
@@ -210,18 +210,18 @@ message.innerHTML=error.message;
 
 message.style.color="red";
 
-progress.style.display="none";
-
 uploadBtn.disabled=false;
+
+uploadBtn.innerHTML="Upload Image";
 
 return;
 
 }
 
-progress.value=100;
-
 const {data}=supabaseClient.storage
+
 .from("images")
+
 .getPublicUrl(fileName);
 
 imageUrl.value=data.publicUrl;
@@ -238,61 +238,87 @@ message.style.color="green";
 
 uploadBtn.disabled=false;
 
-setTimeout(()=>{
-
-progress.style.display="none";
-
-progress.value=0;
-
-},1000);
+uploadBtn.innerHTML="Upload Image";
 
 };
-
-// ======================
+// ===============================
 // TEXT QR
-// ======================
+// ===============================
 
-document.getElementById("generateBtn").onclick=()=>{
+const generateBtn=document.getElementById("generateBtn");
+const textInput=document.getElementById("textInput");
 
-const text=document.getElementById("textInput").value.trim();
+generateBtn.onclick=()=>{
+
+const text=textInput.value.trim();
 
 if(text===""){
 
-alert("Write something");
+alert("Please enter text.");
 
 return;
 
 }
 
-imageUrl.value=text;
-
 finalPreview.style.display="none";
 
-QRCode.toCanvas(qrCanvas,text);
+imageUrl.value=text;
 
-};
+QRCode.toCanvas(qrCanvas,text,{
 
-// ======================
-// COPY URL
-// ======================
+width:260
 
-document.getElementById("copyBtn").onclick=()=>{
+});
 
-if(imageUrl.value==="") return;
-
-navigator.clipboard.writeText(imageUrl.value);
-
-message.innerHTML="Copied";
+message.innerHTML="Text QR Generated";
 
 message.style.color="green";
 
 };
 
-// ======================
-// DOWNLOAD QR
-// ======================
+// ===============================
+// COPY URL
+// ===============================
 
-document.getElementById("downloadBtn").onclick=()=>{
+const copyBtn=document.getElementById("copyBtn");
+
+copyBtn.onclick=()=>{
+
+if(imageUrl.value===""){
+
+alert("Nothing to copy.");
+
+return;
+
+}
+
+navigator.clipboard.writeText(imageUrl.value);
+
+copyBtn.innerHTML="✅ Copied";
+
+setTimeout(()=>{
+
+copyBtn.innerHTML="Copy URL";
+
+},2000);
+
+};
+
+// ===============================
+// DOWNLOAD QR
+// ===============================
+
+const downloadBtn=document.getElementById("downloadBtn");
+
+downloadBtn.onclick=()=>{
+
+if(qrCanvas.width===0){
+
+alert("Generate QR first.");
+
+return;
+
+}
 
 const link=document.createElement("a");
 
@@ -303,3 +329,132 @@ link.href=qrCanvas.toDataURL("image/png");
 link.click();
 
 };
+
+// ===============================
+// DRAG & DROP
+// ===============================
+
+const dropArea=document.getElementById("dropArea");
+
+dropArea.addEventListener("dragover",(e)=>{
+
+e.preventDefault();
+
+dropArea.style.borderColor="#2563eb";
+
+});
+
+dropArea.addEventListener("dragleave",()=>{
+
+dropArea.style.borderColor="#2563eb";
+
+});
+
+dropArea.addEventListener("drop",(e)=>{
+
+e.preventDefault();
+
+imageFile.files=e.dataTransfer.files;
+
+imageFile.dispatchEvent(new Event("change"));
+
+});
+// ===============================
+// QR OPTIONS
+// ===============================
+
+function generateQR(value){
+
+QRCode.toCanvas(
+
+qrCanvas,
+
+value,
+
+{
+
+width:260,
+
+margin:2,
+
+errorCorrectionLevel:"H",
+
+color:{
+
+dark:"#000000",
+
+light:"#ffffff"
+
+}
+
+}
+
+);
+
+}
+
+// ===============================
+// CLEAR MESSAGE
+// ===============================
+
+function showMessage(text,color){
+
+message.innerHTML=text;
+
+message.style.color=color;
+
+setTimeout(()=>{
+
+message.innerHTML="";
+
+},3000);
+
+}
+
+// ===============================
+// DEFAULT STATE
+// ===============================
+
+imageSection.style.display="block";
+
+textSection.style.display="none";
+
+imagePreview.style.display="none";
+
+finalPreview.style.display="none";
+
+// ===============================
+// PREVENT DOUBLE CLICK
+// ===============================
+
+uploadBtn.addEventListener("dblclick",(e)=>{
+
+e.preventDefault();
+
+});
+
+// ===============================
+// IMAGE LOAD ERROR
+// ===============================
+
+imagePreview.onerror=()=>{
+
+showMessage("Image Preview Failed","red");
+
+};
+
+// ===============================
+// QR ERROR
+// ===============================
+
+window.addEventListener("error",(e)=>{
+
+console.log(e);
+
+});
+
+// ===============================
+// FINISH
+// ===============================
+
+console.log("QR Hub v3.0 Loaded Successfully");
