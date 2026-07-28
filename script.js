@@ -172,12 +172,23 @@ downloadBtn.addEventListener("click", () => {
 
     const canvas = document.getElementById("qrcode");
 
-    const link = document.createElement("a");
+    if (!canvas || canvas.width === 0) {
 
-    link.download = "QR-Code.png";
+        alert("QR Code is not ready yet.");
+        return;
+
+    }
+
+    const link = document.createElement("a");
 
     link.href = canvas.toDataURL("image/png");
 
+    link.download = "QR-Code.png";
+
+    document.body.appendChild(link);
+
     link.click();
+
+    document.body.removeChild(link);
 
 });
