@@ -1,4 +1,16 @@
 // ======================
+// SUPABASE
+// ======================
+
+const SUPABASE_URL = "https://vbufbeaktxvcxfcskyhr.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_HD8afj98r3io1rI-qRNVOw__JgSxR87";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+// ======================
 // TAB SWITCH
 // ======================
 
