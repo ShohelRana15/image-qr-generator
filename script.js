@@ -155,3 +155,22 @@ copyBtn.addEventListener("click", () => {
     }, 2000);
 
 });
+// ======================
+// DOWNLOAD QR
+// ======================
+
+const downloadBtn = document.getElementById("downloadBtn");
+
+downloadBtn.addEventListener("click", () => {
+
+    const canvas = document.getElementById("qrcode");
+
+    const link = document.createElement("a");
+
+    link.download = "QR-Code.png";
+
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+
+});
