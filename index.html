@@ -18,7 +18,9 @@
 
     <!-- QRCode -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
 </head>
 
 <body>
@@ -70,7 +72,49 @@
                 accept="image/*">
 
             <div class="preview-box">
+<div class="crop-tools">
 
+    <button
+        id="cropBtn"
+        class="secondary-btn">
+
+        Crop
+
+    </button>
+
+    <button
+        id="zoomInBtn"
+        class="secondary-btn">
+
+        Zoom +
+
+    </button>
+
+    <button
+        id="zoomOutBtn"
+        class="secondary-btn">
+
+        Zoom -
+
+    </button>
+
+    <button
+        id="rotateBtn"
+        class="secondary-btn">
+
+        Rotate
+
+    </button>
+
+    <button
+        id="resetBtn"
+        class="secondary-btn">
+
+        Reset
+
+    </button>
+
+</div>
                 <img
                     id="imagePreview"
                     src=""
@@ -235,7 +279,7 @@
     </div>
 
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
 <script src="script.js"></script>
 
 </body>
