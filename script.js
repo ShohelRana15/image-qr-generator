@@ -113,14 +113,45 @@ uploadBtn.addEventListener("click", async () => {
         .from("images")
         .getPublicUrl(fileName);
 
-    imageUrl.value = data.publicUrl;
+   imageUrl.value = data.publicUrl;
 
-    QRCode.toCanvas(qrCanvas, data.publicUrl);
+const finalPreview = document.getElementById("finalPreview");
+
+finalPreview.src = imagePreview.src;
+finalPreview.style.display = "block";
+
+QRCode.toCanvas(qrCanvas, data.publicUrl);
 
     message.innerHTML = "Upload Successful";
     message.style.color = "green";
 
     uploadBtn.disabled = false;
     uploadBtn.innerHTML = "Upload Image";
+
+});
+// ======================
+// COPY URL
+// ======================
+
+const copyBtn = document.getElementById("copyBtn");
+
+copyBtn.addEventListener("click", () => {
+
+    if (imageUrl.value === "") {
+
+        alert("No URL available.");
+        return;
+
+    }
+
+    navigator.clipboard.writeText(imageUrl.value);
+
+    copyBtn.innerHTML = "✅ Copied";
+
+    setTimeout(() => {
+
+        copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy URL';
+
+    }, 2000);
 
 });
