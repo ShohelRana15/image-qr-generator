@@ -120,7 +120,14 @@ const finalPreview = document.getElementById("finalPreview");
 finalPreview.src = imagePreview.src;
 finalPreview.style.display = "block";
 
-QRCode.toCanvas(qrCanvas, data.publicUrl);
+QRCode.toCanvas(qrCanvas, data.publicUrl, function (error) {
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+});
 
     message.innerHTML = "Upload Successful";
     message.style.color = "green";
