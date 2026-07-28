@@ -271,3 +271,16 @@ button:disabled{
     }
 
 }
+.crop-tools{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    margin-top:20px;
+
+}
