@@ -198,7 +198,7 @@ const fileName=Date.now()+"_"+uploadFile.name;
 
 const {error}=await supabaseClient.storage
 
-.from("images")
+.from("IMAGES")
 
 .upload(fileName,uploadFile,{
 upsert:true
@@ -220,7 +220,7 @@ return;
 
 const {data}=supabaseClient.storage
 
-.from("images")
+.from("IMAGES")
 
 .getPublicUrl(fileName);
 
