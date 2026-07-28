@@ -89,7 +89,7 @@ cropper.destroy();
 
 cropper=new Cropper(imagePreview,{
 
-viewMode:1,
+viewMode:0,
 autoCropArea:1,
 responsive:true,
 background:false
@@ -123,7 +123,7 @@ cropper.destroy();
 
 cropper=new Cropper(imagePreview,{
 
-viewMode:1,
+viewMode:0,
 autoCropArea:1,
 responsive:true,
 background:false
