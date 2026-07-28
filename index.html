@@ -121,6 +121,69 @@
 
         <div class="result">
 
+    <div class="result-grid">
+
+        <!-- LEFT -->
+
+        <div class="left-result">
+
+            <h2>Image Preview</h2>
+
+            <img
+                id="finalPreview"
+                src=""
+                alt=""
+                style="display:none;max-width:100%;border-radius:12px;">
+
+            <input
+                type="text"
+                id="imageUrl"
+                placeholder="Image URL will appear here..."
+                readonly>
+
+            <div class="actions">
+
+                <button
+                    id="copyBtn"
+                    class="secondary-btn">
+
+                    <i class="fa-regular fa-copy"></i>
+                    Copy URL
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right-result">
+
+            <h2>QR Code</h2>
+
+            <canvas id="qrcode"></canvas>
+
+            <br><br>
+
+            <button
+                id="downloadBtn"
+                class="primary-btn">
+
+                <i class="fa-solid fa-download"></i>
+                Download QR
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="message" class="message"></div>
+
+</div>
+        
+
             <h2>Result</h2>
 
             <input
