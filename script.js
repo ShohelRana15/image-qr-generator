@@ -7,7 +7,7 @@
 
 const SUPABASE_URL = "https://vbufbeaktxvcxfcskyhr.supabase.co";
 
-const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_HD8afj98r3io1rI-qRNVOw__JgSxR87";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
@@ -151,9 +151,9 @@ document.getElementById("cropBtn").onclick=()=>{
 
     cropper=new Cropper(imagePreview,{
 
-        aspectRatio:1,
+        aspectRatio: NaN,
 
-        viewMode:1
+        viewMode: 0,
 
     });
 
