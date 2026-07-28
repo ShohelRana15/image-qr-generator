@@ -245,3 +245,29 @@ button:disabled{
     }
 
 }
+.result-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    align-items:start;
+}
+
+.left-result,
+.right-result{
+    text-align:center;
+}
+
+#qrcode{
+    max-width:250px;
+    width:100%;
+}
+
+@media(max-width:768px){
+
+    .result-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
