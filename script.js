@@ -1,5 +1,47 @@
 console.log(window.supabase);
 // ======================
+// CROPPER
+// ======================
+
+let cropper = null;
+
+imageFile.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = "block";
+
+        if (cropper) {
+
+            cropper.destroy();
+
+        }
+
+        cropper = new Cropper(imagePreview, {
+
+            aspectRatio: 1,
+
+            viewMode: 1,
+
+            autoCropArea: 1,
+
+            responsive: true,
+
+        });
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+// ======================
 // SUPABASE
 // ======================
 
