@@ -66,3 +66,60 @@ imageFile.addEventListener("change", function () {
     reader.readAsDataURL(file);
 
 });
+// ======================
+// IMAGE UPLOAD
+// ======================
+
+const uploadBtn = document.getElementById("uploadBtn");
+const imageUrl = document.getElementById("imageUrl");
+const qrCanvas = document.getElementById("qrcode");
+const message = document.getElementById("message");
+
+uploadBtn.addEventListener("click", async () => {
+
+    const file = imageFile.files[0];
+
+    if (!file) {
+
+        message.innerHTML = "Please select an image.";
+        message.style.color = "red";
+        return;
+
+    }
+
+    uploadBtn.disabled = true;
+    uploadBtn.innerHTML = "Uploading...";
+
+    const fileName = Date.now() + "_" + file.name;
+
+    const { error } = await supabaseClient.storage
+        .from("images")
+        .upload(fileName, file);
+
+    if (error) {
+
+        message.innerHTML = error.message;
+        message.style.color = "red";
+
+        uploadBtn.disabled = false;
+        uploadBtn.innerHTML = "Upload Image";
+
+        return;
+
+    }
+
+    const { data } = supabaseClient.storage
+        .from("images")
+        .getPublicUrl(fileName);
+
+    imageUrl.value = data.publicUrl;
+
+    QRCode.toCanvas(qrCanvas, data.publicUrl);
+
+    message.innerHTML = "Upload Successful";
+    message.style.color = "green";
+
+    uploadBtn.disabled = false;
+    uploadBtn.innerHTML = "Upload Image";
+
+});
