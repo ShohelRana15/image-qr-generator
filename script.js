@@ -453,21 +453,45 @@ console.log(e);
 
 });
 
+// ===============================
+// Welcome Screen
+// ===============================
+
 window.addEventListener("load", () => {
 
     const welcome = document.getElementById("welcomeScreen");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
 
     welcome.style.display = "flex";
 
-    setTimeout(() => {
-        welcome.classList.add("hideWelcome");
+    let progress = 0;
 
-        setTimeout(() => {
-            welcome.style.display = "none";
-            welcome.classList.remove("hideWelcome");
-        }, 600);
+    const timer = setInterval(() => {
 
-    }, 2000);
+        progress++;
+
+        progressBar.style.width = progress + "%";
+        progressText.innerText = "Loading... " + progress + "%";
+
+        if(progress >= 100){
+
+            clearInterval(timer);
+
+            setTimeout(() => {
+
+                welcome.classList.add("hideWelcome");
+
+                setTimeout(() => {
+                    welcome.style.display = "none";
+                    welcome.classList.remove("hideWelcome");
+                },600);
+
+            },300);
+
+        }
+
+    },20);
 
 });
 
