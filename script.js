@@ -472,7 +472,28 @@ window.addEventListener("load", () => {
         progress++;
 
         progressBar.style.width = progress + "%";
-        progressText.innerText = "Loading... " + progress + "%";
+
+let status = "";
+
+if (progress <= 25) {
+    status = "Initializing QR Hub...";
+} else if (progress <= 50) {
+    status = "Preparing Workspace...";
+} else if (progress <= 75) {
+    status = "Loading Resources...";
+} else if (progress < 100) {
+    status = "Almost Ready...";
+} else {
+    status = "Finalizing...";
+}
+
+// Animated dots
+const dots = ".".repeat((progress % 3) + 1);
+
+progressText.innerHTML = `
+    <div class="loading-status">${status}</div>
+    <div class="loading-percent">Loading${dots} ${progress}%</div>
+`;
 
         if(progress >= 100){
 
