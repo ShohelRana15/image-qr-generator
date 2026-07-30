@@ -531,6 +531,31 @@ document.getElementById("refreshBtn").addEventListener("click",()=>{
     },600);
 
 });
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt",(e)=>{
+
+    e.preventDefault();
+
+    deferredPrompt=e;
+
+    document.getElementById("installBtn").hidden=false;
+
+});
+
+document.getElementById("installBtn").addEventListener("click",async()=>{
+
+    if(!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    await deferredPrompt.userChoice;
+
+    deferredPrompt=null;
+
+    document.getElementById("installBtn").hidden=true;
+
+});
 
 // ===============================
 // FINISH
