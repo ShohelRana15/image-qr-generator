@@ -453,6 +453,26 @@ console.log(e);
 
 });
 
+window.addEventListener("load", () => {
+
+    if(localStorage.getItem("welcomeShown")){
+        document.getElementById("welcomeScreen").style.display="none";
+        return;
+    }
+
+    setTimeout(()=>{
+        document.getElementById("welcomeScreen").classList.add("hideWelcome");
+
+        setTimeout(()=>{
+            document.getElementById("welcomeScreen").style.display="none";
+        },600);
+
+        localStorage.setItem("welcomeShown","true");
+
+    },2000);
+
+});
+
 // ===============================
 // FINISH
 // ===============================
