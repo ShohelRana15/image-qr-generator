@@ -566,4 +566,20 @@ width:100%;
     font-size:14px;
     letter-spacing:1px;
 }
+.loading-status{
+    color:#ffffff;
+    font-size:15px;
+    font-weight:600;
+    margin-top:12px;
+    text-align:center;
+}
+
+.loading-percent{
+    color:#9ad8ff;
+    font-size:14px;
+    font-weight:500;
+    margin-top:6px;
+    text-align:center;
+    letter-spacing:.5px;
+}
 
