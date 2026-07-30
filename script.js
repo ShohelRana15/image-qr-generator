@@ -516,6 +516,22 @@ progressText.innerHTML = `
 
 });
 
+// Refresh Button
+
+document.getElementById("refreshBtn").addEventListener("click",()=>{
+
+    const icon=document.getElementById("refreshIcon");
+
+    icon.classList.add("rotate-refresh");
+
+    setTimeout(()=>{
+
+        location.reload();
+
+    },600);
+
+});
+
 // ===============================
 // FINISH
 // ===============================
