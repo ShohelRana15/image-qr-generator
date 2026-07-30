@@ -455,21 +455,19 @@ console.log(e);
 
 window.addEventListener("load", () => {
 
-    if(localStorage.getItem("welcomeShown")){
-        document.getElementById("welcomeScreen").style.display="none";
-        return;
-    }
+    const welcome = document.getElementById("welcomeScreen");
 
-    setTimeout(()=>{
-        document.getElementById("welcomeScreen").classList.add("hideWelcome");
+    welcome.style.display = "flex";
 
-        setTimeout(()=>{
-            document.getElementById("welcomeScreen").style.display="none";
-        },600);
+    setTimeout(() => {
+        welcome.classList.add("hideWelcome");
 
-        localStorage.setItem("welcomeShown","true");
+        setTimeout(() => {
+            welcome.style.display = "none";
+            welcome.classList.remove("hideWelcome");
+        }, 600);
 
-    },2000);
+    }, 2000);
 
 });
 
