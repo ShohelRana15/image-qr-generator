@@ -544,5 +544,27 @@ width:100%;
     letter-spacing:1px;
 }
 
+.progress-container{
+    width:220px;
+    height:10px;
+    background:rgba(255,255,255,.25);
+    border-radius:30px;
+    overflow:hidden;
+    margin:20px auto 10px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#00e5ff,#ffffff);
+    border-radius:30px;
+    transition:width .08s linear;
+}
+
+#progressText{
+    color:#fff;
+    font-size:14px;
+    letter-spacing:1px;
+}
 
 
