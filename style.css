@@ -641,7 +641,7 @@ width:100%;
 .refresh-btn{
     position:fixed;
     left:20px;
-    bottom:20px;
+    top:20px;
 
     width:60px;
     height:60px;
@@ -662,7 +662,7 @@ width:100%;
 
     transition:.35s;
 
-    z-index:9999;
+    z-index:100000;
 }
 
 .refresh-btn:hover{
@@ -722,7 +722,7 @@ width:100%;
 
     transition:.35s;
 
-    z-index:9999;
+    z-index:100000;
 
 }
 
