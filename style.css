@@ -387,11 +387,22 @@ flex-direction:column;
 
 }
 
-.primary-btn,
-.secondary-btn{
+.primary-btn{
+    width:100%;
+}
 
-width:100%;
+/* Crop Tools - Mobile */
+.crop-tools{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+}
 
+.crop-tools .secondary-btn{
+    width:auto;
+    min-width:60px;
+    padding:10px 14px;
 }
 
 }
