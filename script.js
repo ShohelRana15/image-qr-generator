@@ -516,19 +516,31 @@ progressText.innerHTML = `
 
 });
 
-// Refresh Button
+// ===============================
+// Refresh Button (Fixed Version)
+// ===============================
 
-document.getElementById("refreshBtn").addEventListener("click",()=>{
+window.addEventListener("DOMContentLoaded", () => {
 
-    const icon=document.getElementById("refreshIcon");
+    const refreshBtn = document.getElementById("refreshBtn");
 
-    icon.classList.add("rotate-refresh");
+    if (refreshBtn) {
 
-    setTimeout(()=>{
+        refreshBtn.addEventListener("click", () => {
 
-        location.reload();
+            const icon = document.getElementById("refreshIcon");
 
-    },600);
+            if (icon) {
+                icon.classList.add("rotate-refresh");
+            }
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 600);
+
+        });
+
+    }
 
 });
 let deferredPrompt;
