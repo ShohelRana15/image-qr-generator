@@ -249,7 +249,99 @@ if ("serviceWorker" in navigator) {
 <button id="installBtn" class="install-btn">
     📲 Install
 </button>
+<!-- ==========================================
+     Premium Install Dialog
+========================================== -->
 
+<div id="installModal" class="install-modal" hidden>
+
+    <div class="install-card">
+
+        <div class="install-header">
+
+            <div class="install-icon">📲</div>
+
+            <h2>Install QR Hub</h2>
+
+            <p>
+                Install QR Hub for faster access and
+                a premium app experience.
+            </p>
+
+        </div>
+
+        <div class="install-section">
+
+            <h3>🖥 Desktop</h3>
+
+            <ol>
+                <li>
+                    Click the
+                    <b>⊕ Install App</b>
+                    icon in the Address Bar.
+                </li>
+
+                <li>
+                    Or open
+                    <b>Chrome Menu (⋮)</b>
+                </li>
+
+                <li>
+                    Click
+                    <b>Install QR Hub</b>
+                </li>
+            </ol>
+
+        </div>
+
+        <div class="install-section">
+
+            <h3>📱 Android</h3>
+
+            <ol>
+
+                <li>
+                    Open
+                    <b>Chrome Menu (⋮)</b>
+                </li>
+
+                <li>
+                    Tap
+                    <b>Install app</b>
+                </li>
+
+                <li>
+                    Or
+                    <b>Add to Home screen</b>
+                </li>
+
+            </ol>
+
+        </div>
+
+        <div class="install-actions">
+
+            <button
+                id="closeInstallModal"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="okInstallModal"
+                class="primary-btn">
+
+                OK
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 </body>
 
 </html>
