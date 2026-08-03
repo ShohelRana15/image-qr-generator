@@ -559,15 +559,11 @@ const installModal = document.getElementById("installModal");
 const closeInstallModal = document.getElementById("closeInstallModal");
 const okInstallModal = document.getElementById("okInstallModal");
 
-if (installBtn && installModal) {
+installBtn.onclick = function () {
 
-    installBtn.addEventListener("click", () => {
+    installModal.hidden = false;
 
-        installModal.hidden = false;
-
-    });
-
-}
+};
 
 function closeInstallPopup() {
 
