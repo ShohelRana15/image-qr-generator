@@ -747,4 +747,132 @@ flex-direction:column;
 
 }
 
+/* ===========================================
+   Premium Install Dialog
+=========================================== */
 
+.install-modal{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(8px);
+
+    z-index:100000;
+}
+
+.install-modal[hidden]{
+    display:none;
+}
+
+.install-card{
+
+    width:92%;
+    max-width:430px;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.25);
+
+    animation:installPopup .28s ease;
+}
+
+@keyframes installPopup{
+
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+.install-header{
+
+    text-align:center;
+    margin-bottom:22px;
+
+}
+
+.install-icon{
+
+    width:74px;
+    height:74px;
+
+    margin:auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#0d6efd,#00b4ff);
+
+    color:#fff;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+        0 0 25px rgba(13,110,253,.35);
+
+}
+
+.install-header h2{
+
+    color:#2563eb;
+    margin-bottom:8px;
+
+}
+
+.install-header p{
+
+    color:#666;
+    line-height:1.6;
+
+}
+
+.install-section{
+
+    margin-top:18px;
+
+}
+
+.install-section h3{
+
+    color:#2563eb;
+    margin-bottom:10px;
+
+}
+
+.install-section ol{
+
+    padding-left:22px;
+    color:#444;
+    line-height:1.8;
+
+}
+
+.install-actions{
+
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+
+    margin-top:28px;
+
+}
