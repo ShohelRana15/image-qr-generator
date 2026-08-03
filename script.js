@@ -543,12 +543,14 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
 let deferredPrompt;
 
 const installBtn = document.getElementById("installBtn");
 
 if (installBtn) {
 
+    // Install Event
     window.addEventListener("beforeinstallprompt", (e) => {
 
         e.preventDefault();
@@ -557,73 +559,46 @@ if (installBtn) {
 
         installBtn.hidden = false;
 
+        console.log("✅ beforeinstallprompt Fired");
+
     });
 
+    // Install Button Click
     installBtn.addEventListener("click", async () => {
 
-        if (!deferredPrompt) return;
+        if (deferredPrompt) {
 
-        deferredPrompt.prompt();
+            deferredPrompt.prompt();
 
-        await deferredPrompt.userChoice;
+            const choice = await deferredPrompt.userChoice;
 
-        deferredPrompt = null;
+            console.log("User Choice:", choice);
 
-        installBtn.hidden = true;
+            deferredPrompt = null;
+
+            installBtn.hidden = true;
+
+        } else {
+
+            alert(
+`📲 Install QR Hub
+
+Chrome Menu (⋮)
+
+→ Install app
+
+or
+
+→ Add to Home screen`
+            );
+
+        }
 
     });
 
 }
-
 // ===============================
 // FINISH
 // ===============================
 
 console.log("QR Hub v3.0 Loaded Successfully");
-
-// ===============================
-// AUTO UPDATE DETECTION
-// ===============================
-
-if ("serviceWorker" in navigator) {
-
-    navigator.serviceWorker.register("./sw.js").then((registration) => {
-
-        registration.addEventListener("updatefound", () => {
-
-            const newWorker = registration.installing;
-
-            newWorker.addEventListener("statechange", () => {
-
-                if (
-                    newWorker.state === "installed" &&
-                    navigator.serviceWorker.controller
-                ) {
-
-                    document.getElementById("updateBanner").hidden = false;
-
-                }
-
-            });
-
-        });
-
-    });
-
-}
-
-document.getElementById("updateBtn")?.addEventListener("click", async () => {
-
-    const registration = await navigator.serviceWorker.getRegistration();
-
-    if (registration && registration.waiting) {
-
-        registration.waiting.postMessage({
-            type: "SKIP_WAITING"
-        });
-
-    }
-
-    window.location.reload();
-
-});
