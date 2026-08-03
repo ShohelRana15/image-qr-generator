@@ -557,25 +557,33 @@ if (installBtn) {
 
         deferredPrompt = e;
 
-        console.log("✅ beforeinstallprompt Fired");
+        installBtn.hidden = false;
+
+        console.log("✅ Install Prompt Ready");
 
     });
 
     // Install Button Click
     installBtn.addEventListener("click", async () => {
 
-    if (deferredPrompt) {
+        if (deferredPrompt) {
 
-        deferredPrompt.prompt();
+            deferredPrompt.prompt();
 
-        await deferredPrompt.userChoice;
+            const choice = await deferredPrompt.userChoice;
 
-        deferredPrompt = null;
+            console.log(choice);
 
-    } else {
+            deferredPrompt = null;
 
-        alert(
-`Install QR Hub
+            installBtn.hidden = true;
+
+        } else {
+
+            alert(
+`Automatic install is not available right now.
+
+Install QR Hub manually:
 
 Chrome Menu (⋮)
 
@@ -584,11 +592,12 @@ Chrome Menu (⋮)
 or
 
 → Add to Home screen`
-        );
+            );
 
-    }
+        }
 
-});
+    });
+
 }
 
 // ===============================
