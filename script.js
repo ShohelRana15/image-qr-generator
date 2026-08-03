@@ -544,50 +544,48 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
-let deferredPrompt;
-
-const installBtn = document.getElementById("installBtn");
-
-if (installBtn) {
-
-    // Install Event
-    window.addEventListener("beforeinstallprompt", (e) => {
-
-        e.preventDefault();
-
-        deferredPrompt = e;
-
-        installBtn.hidden = false;
-
-        console.log("✅ Install Prompt Ready");
-
-    });
-
-    // Install Button Click
-    installBtn.addEventListener("click", async () => {
-
-    console.log("Install button clicked");
-
-    if (deferredPrompt) {
-
-        deferredPrompt.prompt();
-
-        await deferredPrompt.userChoice;
-
-        deferredPrompt = null;
-
-    } else {
-
-        alert("No install prompt available");
-
-    }
-
-});
-
-}
-
 // ===============================
 // FINISH
 // ===============================
 
 console.log("QR Hub v3.0 Loaded Successfully");
+
+// ======================================
+// Premium Install Dialog
+// ======================================
+
+const installBtn = document.getElementById("installBtn");
+const installModal = document.getElementById("installModal");
+const closeInstallModal = document.getElementById("closeInstallModal");
+const okInstallModal = document.getElementById("okInstallModal");
+
+if (installBtn && installModal) {
+
+    installBtn.addEventListener("click", () => {
+
+        installModal.hidden = false;
+
+    });
+
+}
+
+function closeInstallPopup() {
+
+    installModal.hidden = true;
+
+}
+
+closeInstallModal?.addEventListener("click", closeInstallPopup);
+
+okInstallModal?.addEventListener("click", closeInstallPopup);
+
+// Close when clicking outside
+installModal?.addEventListener("click", (e) => {
+
+    if (e.target === installModal) {
+
+        closeInstallPopup();
+
+    }
+
+});
