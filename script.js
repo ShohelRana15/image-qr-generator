@@ -557,8 +557,6 @@ if (installBtn) {
 
         deferredPrompt = e;
 
-        installBtn.hidden = false;
-
         console.log("✅ beforeinstallprompt Fired");
 
     });
@@ -566,22 +564,18 @@ if (installBtn) {
     // Install Button Click
     installBtn.addEventListener("click", async () => {
 
-        if (deferredPrompt) {
+    if (deferredPrompt) {
 
-            deferredPrompt.prompt();
+        deferredPrompt.prompt();
 
-            const choice = await deferredPrompt.userChoice;
+        await deferredPrompt.userChoice;
 
-            console.log("User Choice:", choice);
+        deferredPrompt = null;
 
-            deferredPrompt = null;
+    } else {
 
-            installBtn.hidden = true;
-
-        } else {
-
-            alert(
-`📲 Install QR Hub
+        alert(
+`Install QR Hub
 
 Chrome Menu (⋮)
 
@@ -590,13 +584,12 @@ Chrome Menu (⋮)
 or
 
 → Add to Home screen`
-            );
+        );
 
-        }
+    }
 
-    });
+});
 
-}
 // ===============================
 // FINISH
 // ===============================
