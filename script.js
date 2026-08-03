@@ -580,3 +580,50 @@ if (installBtn) {
 // ===============================
 
 console.log("QR Hub v3.0 Loaded Successfully");
+
+// ===============================
+// AUTO UPDATE DETECTION
+// ===============================
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.register("./sw.js").then((registration) => {
+
+        registration.addEventListener("updatefound", () => {
+
+            const newWorker = registration.installing;
+
+            newWorker.addEventListener("statechange", () => {
+
+                if (
+                    newWorker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                ) {
+
+                    document.getElementById("updateBanner").hidden = false;
+
+                }
+
+            });
+
+        });
+
+    });
+
+}
+
+document.getElementById("updateBtn")?.addEventListener("click", async () => {
+
+    const registration = await navigator.serviceWorker.getRegistration();
+
+    if (registration && registration.waiting) {
+
+        registration.waiting.postMessage({
+            type: "SKIP_WAITING"
+        });
+
+    }
+
+    window.location.reload();
+
+});

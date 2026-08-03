@@ -746,3 +746,61 @@ flex-direction:column;
         0 0 40px rgba(13,110,253,.45);
 
 }
+
+
+/* ===========================
+   Update Notification
+=========================== */
+
+.update-banner{
+
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:translateX(-50%);
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    z-index:99999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.update-banner button{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.update-banner button:hover{
+
+    background:#1d4ed8;
+
+}
