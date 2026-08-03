@@ -545,29 +545,35 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 let deferredPrompt;
 
-window.addEventListener("beforeinstallprompt",(e)=>{
+const installBtn = document.getElementById("installBtn");
 
-    e.preventDefault();
+if (installBtn) {
 
-    deferredPrompt=e;
+    window.addEventListener("beforeinstallprompt", (e) => {
 
-    document.getElementById("installBtn").hidden=false;
+        e.preventDefault();
 
-});
+        deferredPrompt = e;
 
-document.getElementById("installBtn").addEventListener("click",async()=>{
+        installBtn.hidden = false;
 
-    if(!deferredPrompt) return;
+    });
 
-    deferredPrompt.prompt();
+    installBtn.addEventListener("click", async () => {
 
-    await deferredPrompt.userChoice;
+        if (!deferredPrompt) return;
 
-    deferredPrompt=null;
+        deferredPrompt.prompt();
 
-    document.getElementById("installBtn").hidden=true;
+        await deferredPrompt.userChoice;
 
-});
+        deferredPrompt = null;
+
+        installBtn.hidden = true;
+
+    });
+
+}
 
 // ===============================
 // FINISH
