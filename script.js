@@ -565,40 +565,24 @@ if (installBtn) {
 
     // Install Button Click
     installBtn.addEventListener("click", async () => {
-        console.log("Install button clicked");
-        console.log(deferredPrompt);
 
-        if (deferredPrompt) {
+    console.log("Install button clicked");
 
-            deferredPrompt.prompt();
+    if (deferredPrompt) {
 
-            const choice = await deferredPrompt.userChoice;
+        deferredPrompt.prompt();
 
-            console.log(choice);
+        await deferredPrompt.userChoice;
 
-            deferredPrompt = null;
+        deferredPrompt = null;
 
-            installBtn.hidden = true;
+    } else {
 
-        } else {
+        alert("No install prompt available");
 
-            alert(
-`Automatic install is not available right now.
+    }
 
-Install QR Hub manually:
-
-Chrome Menu (⋮)
-
-→ Install app
-
-or
-
-→ Add to Home screen`
-            );
-
-        }
-
-    });
+});
 
 }
 
