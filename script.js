@@ -565,6 +565,8 @@ if (installBtn) {
 
     // Install Button Click
     installBtn.addEventListener("click", async () => {
+        console.log("Install button clicked");
+        console.log(deferredPrompt);
 
         if (deferredPrompt) {
 
