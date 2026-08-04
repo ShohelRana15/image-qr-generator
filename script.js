@@ -634,6 +634,17 @@ if ("serviceWorker" in navigator) {
 
 }
 
-document.getElementById("updateBtn").onclick = function () {
-    alert("Update Button Working");
-};
+window.addEventListener("DOMContentLoaded", () => {
+
+    const updateBtn = document.getElementById("updateBtn");
+
+    if (!updateBtn) {
+        console.log("updateBtn not found");
+        return;
+    }
+
+    updateBtn.onclick = function () {
+        alert("Update Button Working");
+    };
+
+});
