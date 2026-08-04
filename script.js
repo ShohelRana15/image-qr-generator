@@ -638,12 +638,9 @@ document.getElementById("updateBtn")?.addEventListener("click", async () => {
 
     const registration = await navigator.serviceWorker.getRegistration();
 
-    if (registration?.waiting) {
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
-    }
+    console.log(registration);
+    console.log(registration?.waiting);
 
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-        window.location.reload();
-    });
+});
 
 });
