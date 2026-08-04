@@ -87,13 +87,16 @@ cropper.destroy();
 
 }
 
-cropper=new Cropper(imagePreview,{
+cropper = new Cropper(imagePreview, {
+    viewMode: 0,
+    autoCropArea: 1,
+    responsive: true,
+    background: false,
 
-viewMode:0,
-autoCropArea:1,
-responsive:true,
-background:false
-
+    movable: true,        // ছবি move করা যাবে
+    cropBoxMovable: false, // Crop box টেনে move করা যাবে না
+    cropBoxResizable: true, // শুধু handle ধরে resize করা যাবে
+    dragMode: "move"
 });
 
 };
