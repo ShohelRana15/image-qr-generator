@@ -634,11 +634,6 @@ if ("serviceWorker" in navigator) {
 
 }
 
-document.getElementById("updateBtn")?.addEventListener("click", async () => {
-
-    const registration = await navigator.serviceWorker.getRegistration();
-
-    console.log(registration);
-    console.log(registration?.waiting);
-
-});
+document.getElementById("updateBtn").onclick = function () {
+    alert("Update Button Working");
+};
