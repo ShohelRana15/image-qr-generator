@@ -245,6 +245,7 @@ finalPreview.style.display="block";
 QRCode.toCanvas(qrCanvas,data.publicUrl);
 
 message.innerHTML="Upload Successful";
+document.body.style.overflowY = "auto";
 
 message.style.color="green";
 
@@ -283,7 +284,7 @@ width:260
 });
 
 message.innerHTML="Text QR Generated";
-
+document.body.style.overflowY = "auto";
 message.style.color="green";
 
 };
