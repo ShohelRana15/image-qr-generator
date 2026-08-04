@@ -642,5 +642,3 @@ document.getElementById("updateBtn")?.addEventListener("click", async () => {
     console.log(registration?.waiting);
 
 });
-
-});
