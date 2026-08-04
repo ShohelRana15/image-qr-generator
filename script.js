@@ -613,38 +613,50 @@ if ("serviceWorker" in navigator) {
 
     navigator.serviceWorker.register("./sw.js").then((registration) => {
 
+        function showUpdateBanner() {
+
+            const banner = document.getElementById("updateBanner");
+            const btn = document.getElementById("updateBtn");
+
+            if (!banner || !btn) return;
+
+            banner.hidden = false;
+
+            btn.onclick = () => {
+
+                if (registration.waiting) {
+                    registration.waiting.postMessage({
+                        type: "SKIP_WAITING"
+                    });
+                }
+
+            };
+
+        }
+
+        // New Service Worker Found
         registration.addEventListener("updatefound", () => {
 
-            const worker = registration.installing;
+            const newWorker = registration.installing;
 
-            worker.addEventListener("statechange", () => {
+            newWorker.addEventListener("statechange", () => {
 
                 if (
-                    worker.state === "installed" &&
+                    newWorker.state === "installed" &&
                     navigator.serviceWorker.controller
                 ) {
-                    document.getElementById("updateBanner").hidden = false;
+                    showUpdateBanner();
                 }
 
             });
 
         });
 
+        // Reload after update
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+            window.location.reload();
+        });
+
     });
 
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const updateBtn = document.getElementById("updateBtn");
-
-    if (!updateBtn) {
-        console.log("updateBtn not found");
-        return;
-    }
-
-    updateBtn.onclick = function () {
-        alert("Update Button Working");
-    };
-
-});
