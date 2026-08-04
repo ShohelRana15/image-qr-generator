@@ -88,15 +88,24 @@ cropper.destroy();
 }
 
 cropper = new Cropper(imagePreview, {
+
     viewMode: 0,
     autoCropArea: 1,
     responsive: true,
     background: false,
 
-    movable: true,        // ছবি move করা যাবে
-    cropBoxMovable: false, // Crop box টেনে move করা যাবে না
-    cropBoxResizable: true, // শুধু handle ধরে resize করা যাবে
-    dragMode: "move"
+    // Image
+    movable: false,      // ছবি drag করা যাবে না
+    zoomable: true,      // Zoom করা যাবে
+    scalable: false,
+    rotatable: true,
+
+    // Crop Box
+    cropBoxMovable: false,
+    cropBoxResizable: true,
+
+    dragMode: "none"
+
 });
 
 };
