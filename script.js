@@ -642,6 +642,8 @@ document.getElementById("updateBtn")?.addEventListener("click", async () => {
         registration.waiting.postMessage({ type: "SKIP_WAITING" });
     }
 
-    location.reload();
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+        window.location.reload();
+    });
 
 });
