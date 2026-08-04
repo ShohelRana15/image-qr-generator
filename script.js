@@ -604,3 +604,44 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
 });
+
+// ===============================
+// AUTO UPDATE
+// ===============================
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.register("./sw.js").then((registration) => {
+
+        registration.addEventListener("updatefound", () => {
+
+            const worker = registration.installing;
+
+            worker.addEventListener("statechange", () => {
+
+                if (
+                    worker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                ) {
+                    document.getElementById("updateBanner").hidden = false;
+                }
+
+            });
+
+        });
+
+    });
+
+}
+
+document.getElementById("updateBtn")?.addEventListener("click", async () => {
+
+    const registration = await navigator.serviceWorker.getRegistration();
+
+    if (registration?.waiting) {
+        registration.waiting.postMessage({ type: "SKIP_WAITING" });
+    }
+
+    location.reload();
+
+});
