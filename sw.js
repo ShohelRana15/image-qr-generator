@@ -38,30 +38,34 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch
+// Fetch (Network First)
+
 self.addEventListener("fetch", (event) => {
 
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
 
-      return (
-        cached ||
-        fetch(event.request).then((response) => {
+    fetch(event.request)
 
-          const clone = response.clone();
+      .then((response) => {
 
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, clone);
-          });
+        const clone = response.clone();
 
-          return response;
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, clone);
+        });
 
-        }).catch(() => cached)
-      );
+        return response;
 
-    })
+      })
+
+      .catch(() => {
+
+        return caches.match(event.request);
+
+      })
+
   );
 
 });
