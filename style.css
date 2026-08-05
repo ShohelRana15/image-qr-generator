@@ -150,7 +150,13 @@ h2{
 
     background:#f8fbff;
 
-    padding:35px;
+    padding:20px;
+min-height:180px;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
     text-align:center;
 
@@ -184,9 +190,9 @@ h2{
 
 .preview-box{
 
-    margin-top:25px;
-
     text-align:center;
+
+    margin-top:15px;
 
 }
 
@@ -228,9 +234,8 @@ h2{
 
     flex-wrap:wrap;
 
-    margin-top:20px;
-
-    margin-bottom:20px;
+   margin-top:12px;
+margin-bottom:12px;
 
 }
 
