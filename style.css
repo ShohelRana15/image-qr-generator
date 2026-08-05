@@ -122,13 +122,17 @@ body{
 
 .left-panel{
 
-    width:100%;
+    min-height:0;
+
+    overflow:hidden;
 
 }
 
 .right-panel{
 
-    text-align:center;
+    min-height:0;
+
+    overflow:hidden;
 
 }
 
