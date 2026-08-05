@@ -21,12 +21,17 @@ body{
 .container{
 
     width:95%;
-
     max-width:1400px;
+
+    height:calc(100vh - 40px);
 
     margin:10px auto;
 
+    display:flex;
+    flex-direction:column;
+
 }
+
 .header{
 
     text-align:center;
@@ -105,9 +110,13 @@ body{
 
     grid-template-columns:1fr 420px;
 
-    gap:35px;
+    gap:25px;
 
     box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    flex:1;
+
+    overflow:hidden;
 
 }
 
