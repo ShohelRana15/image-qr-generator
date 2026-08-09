@@ -549,19 +549,25 @@ Bottom Dashboard
 
 <section class="dashboard-bottom">
 
-    <!-- Create QR -->
+    <!-- =======================
+    CREATE QR / UPLOAD + PREVIEW
+    ======================= -->
 
     <div class="upload-panel">
 
         <div class="section-header">
 
-            <h2>Create Your QR Code</h2>
-
-            <p>Upload an image or enter text to generate QR code</p>
+            <div>
+                <h2>Create Your QR Code</h2>
+                <p>Upload an image or enter text to generate QR code</p>
+            </div>
 
         </div>
 
+
         <div class="upload-layout">
+
+            <!-- Upload Area -->
 
             <div class="upload-box">
 
@@ -572,72 +578,63 @@ Bottom Dashboard
                 <span>or</span>
 
                 <button class="primary-btn">
-
                     Choose File
-
                 </button>
 
                 <div class="supported-files">
+                    JPG • PNG • WEBP
+                </div>
 
-            JPG • PNG • WEBP
+                <small>
+                    Max. 10MB
+                </small>
+
+            </div>
+
+
+            <!-- Preview Area -->
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+
+                        <i class="fa-solid fa-qrcode"></i>
+
+                        <p>
+                            Your QR code will
+                            appear here
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button class="secondary-btn">
+                        Download
+                    </button>
+
+                    <button class="primary-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <small>Max. 10MB</small>
-
     </div>
 
 
-    </div>
-
-    </div>
-
-    <!-- Preview Panel -->
-
-<div class="preview-panel">
-
-    <div class="section-header">
-
-        <h2>Preview</h2>
-
-    </div>
-
-    <div class="preview-box">
-
-        <div class="preview-placeholder">
-
-            <i class="fa-solid fa-qrcode"></i>
-
-            <p>Your QR Code will appear here</p>
-
-        <div class="preview-actions">
-
-    <button class="secondary-btn">
-
-        Download
-
-    </button>
-
-    <button class="primary-btn">
-
-        Share
-
-    </button>
-
-</div>    
-        </div>
-
-        <button class="primary-btn">
-
-            Download QR
-
-        </button>
-
-    </div>
-
-</div>
-
-    <!-- Recent Activity -->
+    <!-- =======================
+    RECENT ACTIVITY
+    ======================= -->
 
     <div class="activity-panel">
 
@@ -645,68 +642,81 @@ Bottom Dashboard
 
             <h2>Recent Activity</h2>
 
-            <a href="#">View All</a>
+            <a href="#">
+                View All
+            </a>
 
         </div>
 
         <ul class="activity-list">
 
             <li>
+
                 <div>
                     <strong>My Website</strong>
                     <span>URL QR Code</span>
                 </div>
+
                 <small>2 mins ago</small>
+
             </li>
 
 
-
             <li>
+
                 <div>
                     <strong>Product Image</strong>
                     <span>Image QR Code</span>
                 </div>
-                <small>2 mins ago</small>
+
+                <small>15 mins ago</small>
+
             </li>
 
 
-
-
             <li>
+
                 <div>
                     <strong>Meeting Notes</strong>
                     <span>Text QR Code</span>
                 </div>
-                <small>2 mins ago</small>
+
+                <small>1 hour ago</small>
+
             </li>
 
 
-
-
             <li>
+
                 <div>
                     <strong>Home WiFi</strong>
                     <span>WiFi QR Code</span>
                 </div>
-                <small>2 mins ago</small>
+
+                <small>2 hours ago</small>
+
             </li>
 
 
-
-
             <li>
+
                 <div>
                     <strong>My Contact</strong>
                     <span>Contact QR Code</span>
                 </div>
-                <small>2 mins ago</small>
+
+                <small>3 hours ago</small>
+
             </li>
 
         </ul>
 
     </div>
 
-    <!-- Quick Stats -->
+
+    <!-- =======================
+    QUICK STATS
+    ======================= -->
 
     <div class="quick-panel">
 
@@ -720,39 +730,28 @@ Bottom Dashboard
 
             <i class="fa-solid fa-chart-pie"></i>
 
-            <p>Statistics Chart</p>
+            <strong>1,245</strong>
+
+            <span>Total QR</span>
 
         </div>
 
         <div class="month-stats">
 
-            <h3>This Month</h3>
+            <span>This Month</span>
 
             <strong>2,156</strong>
 
-            <span>Total Scans</span>
+            <small>
+                Total Scans
+            </small>
 
         </div>
 
-        <div class="quick-summary">
-            <div>
-        <strong>245</strong>
-        <span>Today's QR</span>
     </div>
-
-    <div>
-
-        <strong>98%</strong>
-        <span>Success Rate</span>
-
-    </div>
-
-</div>
-
-</div>
 
 </section>
-
+        
     </main>
 
 </div>
