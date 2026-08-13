@@ -602,9 +602,9 @@ padding:30px;
 
 
 
-/*=========================*
-    HERO BANNER
-*=========================*/
+/*========================================================
+    HERO BANNER - QR HUB PREMIUM
+========================================================*/
 
 .hero-banner{
     position:relative;
@@ -619,28 +619,42 @@ padding:30px;
 
     margin-bottom:30px;
 
-    background:#ffffff;
+    background:
+        linear-gradient(
+            120deg,
+            #1769e8 0%,
+            #2563eb 38%,
+            #5b3fe4 68%,
+            #a238e8 100%
+        );
 
     border-radius:24px;
 
-    box-shadow:var(--shadow);
+    box-shadow:
+        0 18px 45px rgba(37,99,235,.18);
 
     overflow:hidden;
 }
 
 
-/*=========================*
+/*========================================================
     HERO BACKGROUND
-*=========================*/
+========================================================*/
 
 .hero-bg{
     position:absolute;
+
     inset:0;
 
     overflow:hidden;
 
     pointer-events:none;
+
+    z-index:1;
 }
+
+
+/* Decorative Circles */
 
 .circle{
     position:absolute;
@@ -648,64 +662,65 @@ padding:30px;
     border-radius:50%;
 
     pointer-events:none;
+
+    background:#ffffff;
+
+    opacity:.08;
 }
 
 
 /* Top Right Circle */
 
 .circle.one{
-    width:300px;
-    height:300px;
+    width:330px;
+    height:330px;
 
-    right:80px;
-    top:-190px;
-
-    background:#2563eb;
-
-    opacity:.08;
+    right:70px;
+    top:-210px;
 }
 
 
 /* Bottom Right Circle */
 
 .circle.two{
-    width:420px;
-    height:420px;
+    width:430px;
+    height:430px;
 
-    right:-220px;
-    bottom:-280px;
-
-    background:#3b82f6;
-
-    opacity:.07;
-}
-
-
-/* Decorative Dots */
-
-.dots{
-    position:absolute;
-
-    width:120px;
-    height:120px;
-
-    left:40%;
-    bottom:10px;
-
-    background-image:radial-gradient(
-        #2563eb 1.5px,
-        transparent 1.5px
-    );
-
-    background-size:12px 12px;
+    right:-190px;
+    bottom:-300px;
 
     opacity:.10;
 }
 
 
-/*=========================*
+/*========================================================
+    DECORATIVE DOTS
+========================================================*/
+
+.dots{
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    left:48%;
+    bottom:-20px;
+
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,.45) 1.5px,
+            transparent 1.5px
+        );
+
+    background-size:13px 13px;
+
+    opacity:.22;
+}
+
+
+/*========================================================
     HERO LEFT
-*=========================*/
+========================================================*/
 
 .hero-left{
     position:relative;
@@ -718,32 +733,40 @@ padding:30px;
 }
 
 
-/* Welcome Badge */
+/*========================================================
+    WELCOME BADGE
+========================================================*/
 
 .hero-badge{
     display:inline-flex;
 
     align-items:center;
 
-    padding:8px 16px;
+    padding:8px 15px;
 
-    margin-bottom:16px;
+    margin-bottom:13px;
 
     border-radius:30px;
 
-    background:#eef4ff;
+    background:rgba(255,255,255,.16);
 
-    border:1px solid #dbeafe;
+    border:1px solid rgba(255,255,255,.18);
 
-    color:#2563eb;
+    color:#ffffff;
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:600;
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
 }
 
 
-/* Professional Badge */
+/*========================================================
+    PROFESSIONAL BADGE
+========================================================*/
 
 .hero-left .badge{
     display:inline-flex;
@@ -754,61 +777,67 @@ padding:30px;
 
     margin-left:6px;
 
-    margin-bottom:16px;
+    margin-bottom:13px;
 
     border-radius:30px;
 
-    background:#f8fafc;
+    background:rgba(255,255,255,.12);
 
-    border:1px solid #e5e7eb;
+    border:1px solid rgba(255,255,255,.18);
 
-    color:#64748b;
+    color:rgba(255,255,255,.92);
 
     font-size:12px;
 
     font-weight:600;
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
 }
 
 
-/*=========================*
+/*========================================================
     HERO HEADING
-*=========================*/
+========================================================*/
 
 .hero-left h1{
-    margin:0 0 14px;
+    margin:0 0 13px;
 
-    color:#111827;
+    color:#ffffff;
 
     font-size:42px;
 
-    line-height:1.15;
+    line-height:1.12;
 
     font-weight:800;
 
-    letter-spacing:-.7px;
+    letter-spacing:-.8px;
+
+    max-width:650px;
 }
 
 
-/*=========================*
+/*========================================================
     HERO DESCRIPTION
-*=========================*/
+========================================================*/
 
 .hero-left p{
-    max-width:600px;
+    max-width:610px;
 
     margin:0 0 24px;
 
-    color:#6b7280;
+    color:rgba(255,255,255,.88);
 
-    font-size:15px;
+    font-size:14px;
 
     line-height:1.6;
 }
 
 
-/*=========================*
+/*========================================================
     HERO BUTTONS
-*=========================*/
+========================================================*/
 
 .hero-buttons{
     display:flex;
@@ -819,7 +848,7 @@ padding:30px;
 }
 
 
-/* All Hero Buttons */
+/* All Buttons */
 
 .hero-buttons button{
     display:inline-flex;
@@ -828,13 +857,13 @@ padding:30px;
 
     justify-content:center;
 
-    min-height:44px;
+    min-height:43px;
 
-    padding:11px 20px;
+    padding:10px 19px;
 
     border-radius:9px;
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:700;
 
@@ -844,52 +873,64 @@ padding:30px;
         transform .25s ease,
         box-shadow .25s ease,
         background .25s ease;
+
+    white-space:nowrap;
 }
 
 
-/* Create QR Button */
+/*========================================================
+    CREATE QR BUTTON
+========================================================*/
 
 .hero-buttons .primary-btn{
-    background:#2563eb;
-
-    color:#ffffff;
-
-    border:none;
-
-    box-shadow:
-        0 7px 18px rgba(37,99,235,.20);
-}
-
-.hero-buttons .primary-btn:hover{
-    background:#1d4ed8;
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 22px rgba(37,99,235,.25);
-}
-
-
-/* Scan QR Button */
-
-.hero-buttons .secondary-btn{
     background:#ffffff;
 
     color:#2563eb;
 
-    border:1px solid #2563eb;
+    border:none;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.12);
+}
+
+.hero-buttons .primary-btn:hover{
+    background:#f8fafc;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.18);
+}
+
+
+/*========================================================
+    SCAN QR BUTTON
+========================================================*/
+
+.hero-buttons .secondary-btn{
+    background:rgba(255,255,255,.10);
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.55);
+
+    box-shadow:none;
+
+    backdrop-filter:blur(6px);
+
+    -webkit-backdrop-filter:blur(6px);
 }
 
 .hero-buttons .secondary-btn:hover{
-    background:#eef4ff;
+    background:rgba(255,255,255,.20);
 
     transform:translateY(-2px);
 }
 
 
-/*=========================*
+/*========================================================
     HERO RIGHT
-*=========================*/
+========================================================*/
 
 .hero-right{
     position:relative;
@@ -906,6 +947,10 @@ padding:30px;
 }
 
 
+/*========================================================
+    QR OUTER CARD
+========================================================*/
+
 .hero-qr{
     display:flex;
 
@@ -920,22 +965,22 @@ padding:30px;
     border-radius:24px;
 
     background:
-        linear-gradient(
-            145deg,
-            #eff6ff,
-            #ffffff
-        );
+        rgba(255,255,255,.15);
 
-    border:1px solid #dbeafe;
+    border:1px solid rgba(255,255,255,.28);
 
     box-shadow:
-        0 15px 35px rgba(37,99,235,.10);
+        0 18px 45px rgba(0,0,0,.16);
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
 }
 
 
-/*=========================*
+/*========================================================
     SCANNER FRAME
-*=========================*/
+========================================================*/
 
 .scanner-frame{
     position:relative;
@@ -950,18 +995,22 @@ padding:30px;
 
     justify-content:center;
 
-    padding:14px;
+    padding:13px;
 
     background:#ffffff;
 
     border-radius:14px;
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.08);
+        0 10px 30px rgba(0,0,0,.16);
+
+    overflow:hidden;
 }
 
 
-/* QR Image */
+/*========================================================
+    QR IMAGE
+========================================================*/
 
 .scanner-frame img{
     width:100%;
@@ -970,15 +1019,15 @@ padding:30px;
 
     object-fit:contain;
 
-    border-radius:6px;
+    border-radius:5px;
 
     display:block;
 }
 
 
-/*=========================*
+/*========================================================
     SCANNER CORNERS
-*=========================*/
+========================================================*/
 
 .corner{
     position:absolute;
@@ -992,6 +1041,8 @@ padding:30px;
     border-style:solid;
 
     z-index:3;
+
+    pointer-events:none;
 }
 
 
@@ -1047,9 +1098,9 @@ padding:30px;
 }
 
 
-/*=========================*
+/*========================================================
     HERO RESPONSIVE
-*=========================*/
+========================================================*/
 
 @media(max-width:1200px){
 
@@ -1063,20 +1114,22 @@ padding:30px;
 
     .hero-qr{
         width:220px;
+
         height:220px;
     }
 
     .scanner-frame{
         width:175px;
+
         height:175px;
     }
 
 }
 
 
-/*=========================*
-    TABLET / MOBILE
-*=========================*/
+/*========================================================
+    TABLET
+========================================================*/
 
 @media(max-width:900px){
 
@@ -1126,9 +1179,9 @@ padding:30px;
 }
 
 
-/*=========================*
+/*========================================================
     SMALL MOBILE
-*=========================*/
+========================================================*/
 
 @media(max-width:600px){
 
@@ -1171,7 +1224,6 @@ padding:30px;
     }
 
 }
-
 
 
 
