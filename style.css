@@ -1890,11 +1890,13 @@ CATEGORY RESPONSIVE
 .welcome-box{
     text-align:center;
     color:#fff;
+
     width:100%;
     max-width:420px;
-    max-height:100vh;
-    padding:15px 20px;
-    overflow:hidden;
+
+    padding:12px 20px 20px;
+
+    overflow:visible;
 }
 
 .wave{
@@ -2053,7 +2055,7 @@ CATEGORY RESPONSIVE
     background:rgba(255,255,255,.25);
     border-radius:30px;
     overflow:hidden;
-    margin:20px auto 10px;
+    margin:12px auto 8px;
 }
 
 .progress-bar{
@@ -2068,7 +2070,10 @@ CATEGORY RESPONSIVE
     color:#fff;
     font-size:14px;
     letter-spacing:1px;
+    margin:8px 0 0;
+    line-height:1.4;
 }
+
 .loading-status{
     color:#ffffff;
     font-size:15px;
