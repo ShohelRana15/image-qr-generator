@@ -2209,8 +2209,6 @@ CATEGORY RESPONSIVE
         max-width:360px;
 
         padding:5px 10px 12px;
-
-        transform:scale(.88);
         transform-origin:center center;
     }
 
@@ -2298,3 +2296,135 @@ CATEGORY RESPONSIVE
     }
 }
 
+/* ===========================================
+   WELCOME SCREEN - MOBILE FINAL FIX
+=========================================== */
+
+@media (max-width:600px){
+
+    #welcomeScreen{
+        position:fixed;
+
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+
+        width:100%;
+        height:100dvh;
+        min-height:100dvh;
+
+        padding:8px;
+
+        overflow:hidden;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .welcome-box{
+        width:100%;
+        max-width:380px;
+
+        padding:5px 10px;
+
+        transform:none;
+
+        text-align:center;
+    }
+
+    .wave{
+        font-size:52px;
+    }
+
+    .welcome-box h2{
+        font-size:29px;
+        margin:8px 0 5px;
+    }
+
+    .welcome-box > p{
+        font-size:14px;
+        margin:4px 0;
+    }
+
+    .photo-wrapper{
+        width:155px;
+        height:155px;
+        margin:12px auto;
+    }
+
+    .photo-wrapper::before{
+        width:225px;
+        height:225px;
+    }
+
+    .photo-wrapper::after{
+        width:144px;
+        height:144px;
+    }
+
+    .welcome-photo{
+        width:136px;
+        height:136px;
+    }
+
+    .developer-name{
+        font-size:22px;
+        margin-top:10px;
+        margin-bottom:4px;
+    }
+
+    .developer-title{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .loading-spinner{
+        width:36px;
+        height:36px;
+
+        margin:12px auto 6px;
+
+        border-width:3px;
+    }
+
+    .loading-text{
+        font-size:13px;
+        margin:4px 0;
+    }
+
+    .progress-container{
+        width:230px;
+        height:9px;
+
+        margin:9px auto 5px;
+    }
+
+    #progressText{
+        font-size:12px;
+        line-height:1.3;
+        margin:3px 0 0;
+    }
+
+    .loading-status{
+        font-size:13px;
+        margin-top:4px;
+    }
+
+    .loading-percent{
+        font-size:12px;
+        margin-top:3px;
+    }
+}
+
+/* Prevent dashboard scrolling while Welcome Screen is visible */
+
+body:has(#welcomeScreen:not(.hideWelcome)){
+    overflow:hidden;
+    height:100vh;
+}
+
+html:has(#welcomeScreen:not(.hideWelcome)){
+    overflow:hidden;
+}
