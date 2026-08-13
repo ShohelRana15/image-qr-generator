@@ -1,4 +1,4 @@
-const CACHE_NAME = "qrhub-v3.3";
+const CACHE_NAME = "qrhub-v3.7";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
