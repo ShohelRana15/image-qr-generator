@@ -613,9 +613,9 @@ padding:30px;
     justify-content:space-between;
     align-items:center;
 
-    min-height:310px;
+    min-height:250px;
 
-    padding:42px 50px;
+    padding:30px 50px;
 
     margin-bottom:30px;
 
@@ -958,9 +958,9 @@ padding:30px;
 
     justify-content:center;
 
-    width:240px;
+    width:200px;
 
-    height:240px;
+    height:200px;
 
     border-radius:24px;
 
@@ -985,9 +985,9 @@ padding:30px;
 .scanner-frame{
     position:relative;
 
-    width:190px;
+    width:160px;
 
-    height:190px;
+    height:160px;
 
     display:flex;
 
@@ -1113,15 +1113,15 @@ padding:30px;
     }
 
     .hero-qr{
-        width:220px;
+        width:200px;
 
-        height:220px;
+        height:200px;
     }
 
     .scanner-frame{
-        width:175px;
+        width:160px;
 
-        height:175px;
+        height:160px;
     }
 
 }
@@ -1165,9 +1165,9 @@ padding:30px;
     }
 
     .hero-qr{
-        width:220px;
+        width:200px;
 
-        height:220px;
+        height:200px;
     }
 
     .scanner-frame{
