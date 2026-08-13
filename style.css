@@ -105,14 +105,12 @@ min-height:100vh;
 /* QR Hub Icon */
 
 .logo-image{
-    width:58px;
-    height:58px;
-
-    flex:0 0 58px;
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
 
     object-fit:cover;
-    border-radius:14px;
-
+    border-radius:12px;
     display:block;
 }
 
