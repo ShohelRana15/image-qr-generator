@@ -602,96 +602,118 @@ padding:30px;
 
 
 
-    /*=========================*
-HERO BANNER - PREMIUM
+/*=========================*
+    HERO BANNER
 *=========================*/
 
 .hero-banner{
     position:relative;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    min-height:390px;
+    min-height:310px;
 
-    background:#ffffff;
-    border-radius:28px;
-    padding:50px 55px;
-
-    box-shadow:var(--shadow);
+    padding:42px 50px;
 
     margin-bottom:30px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
 
     overflow:hidden;
 }
 
 
 /*=========================*
-HERO BACKGROUND
+    HERO BACKGROUND
 *=========================*/
 
 .hero-bg{
     position:absolute;
     inset:0;
+
     overflow:hidden;
+
     pointer-events:none;
 }
 
 .circle{
     position:absolute;
+
     border-radius:50%;
-    opacity:.12;
+
+    pointer-events:none;
 }
+
+
+/* Top Right Circle */
 
 .circle.one{
-    width:260px;
-    height:260px;
+    width:300px;
+    height:300px;
 
-    right:170px;
-    top:-130px;
+    right:80px;
+    top:-190px;
 
     background:#2563eb;
+
+    opacity:.08;
 }
+
+
+/* Bottom Right Circle */
 
 .circle.two{
-    width:190px;
-    height:190px;
+    width:420px;
+    height:420px;
 
-    right:-70px;
-    bottom:-80px;
+    right:-220px;
+    bottom:-280px;
 
     background:#3b82f6;
+
+    opacity:.07;
 }
+
+
+/* Decorative Dots */
 
 .dots{
     position:absolute;
 
-    width:150px;
-    height:150px;
+    width:120px;
+    height:120px;
 
     left:40%;
-    bottom:-50px;
+    bottom:10px;
 
     background-image:radial-gradient(
         #2563eb 1.5px,
         transparent 1.5px
     );
 
-    background-size:14px 14px;
+    background-size:12px 12px;
 
-    opacity:.12;
+    opacity:.10;
 }
 
 
 /*=========================*
-HERO LEFT
+    HERO LEFT
 *=========================*/
 
 .hero-left{
     position:relative;
-    z-index:2;
+
+    z-index:5;
 
     width:58%;
+
     max-width:700px;
 }
 
@@ -700,21 +722,24 @@ HERO LEFT
 
 .hero-badge{
     display:inline-flex;
+
     align-items:center;
 
-    padding:9px 18px;
+    padding:8px 16px;
+
+    margin-bottom:16px;
 
     border-radius:30px;
 
     background:#eef4ff;
-    color:#2563eb;
-
-    font-size:14px;
-    font-weight:700;
-
-    margin-bottom:14px;
 
     border:1px solid #dbeafe;
+
+    color:#2563eb;
+
+    font-size:13px;
+
+    font-weight:600;
 }
 
 
@@ -722,74 +747,95 @@ HERO LEFT
 
 .hero-left .badge{
     display:inline-flex;
+
     align-items:center;
 
-    padding:7px 16px;
+    padding:7px 14px;
+
+    margin-left:6px;
+
+    margin-bottom:16px;
 
     border-radius:30px;
 
     background:#f8fafc;
-    color:#64748b;
 
     border:1px solid #e5e7eb;
 
-    font-size:13px;
+    color:#64748b;
+
+    font-size:12px;
+
     font-weight:600;
-
-    margin-bottom:18px;
-}
-
-
-/* Hero Heading */
-
-.hero-left h1{
-    font-size:46px;
-    font-weight:800;
-
-    line-height:1.15;
-
-    letter-spacing:-1px;
-
-    margin-bottom:18px;
-
-    color:#111827;
-}
-
-
-/* Hero Description */
-
-.hero-left p{
-    font-size:16px;
-
-    line-height:1.7;
-
-    color:#6b7280;
-
-    max-width:620px;
-
-    margin-bottom:28px;
 }
 
 
 /*=========================*
-HERO BUTTONS
+    HERO HEADING
+*=========================*/
+
+.hero-left h1{
+    margin:0 0 14px;
+
+    color:#111827;
+
+    font-size:42px;
+
+    line-height:1.15;
+
+    font-weight:800;
+
+    letter-spacing:-.7px;
+}
+
+
+/*=========================*
+    HERO DESCRIPTION
+*=========================*/
+
+.hero-left p{
+    max-width:600px;
+
+    margin:0 0 24px;
+
+    color:#6b7280;
+
+    font-size:15px;
+
+    line-height:1.6;
+}
+
+
+/*=========================*
+    HERO BUTTONS
 *=========================*/
 
 .hero-buttons{
     display:flex;
+
     align-items:center;
 
-    gap:14px;
+    gap:12px;
 }
 
+
+/* All Hero Buttons */
+
 .hero-buttons button{
-    min-height:52px;
+    display:inline-flex;
 
-    padding:14px 24px;
+    align-items:center;
 
-    border-radius:14px;
+    justify-content:center;
 
-    font-size:15px;
+    min-height:44px;
+
+    padding:11px 20px;
+
+    border-radius:9px;
+
+    font-size:13px;
+
     font-weight:700;
 
     cursor:pointer;
@@ -801,15 +847,17 @@ HERO BUTTONS
 }
 
 
-/* Create QR */
+/* Create QR Button */
 
 .hero-buttons .primary-btn{
     background:#2563eb;
+
     color:#ffffff;
 
     border:none;
 
-    box-shadow:0 8px 20px rgba(37,99,235,.20);
+    box-shadow:
+        0 7px 18px rgba(37,99,235,.20);
 }
 
 .hero-buttons .primary-btn:hover{
@@ -817,17 +865,19 @@ HERO BUTTONS
 
     transform:translateY(-2px);
 
-    box-shadow:0 12px 25px rgba(37,99,235,.28);
+    box-shadow:
+        0 10px 22px rgba(37,99,235,.25);
 }
 
 
-/* Scan QR */
+/* Scan QR Button */
 
 .hero-buttons .secondary-btn{
     background:#ffffff;
+
     color:#2563eb;
 
-    border:1.5px solid #2563eb;
+    border:1px solid #2563eb;
 }
 
 .hero-buttons .secondary-btn:hover{
@@ -838,29 +888,36 @@ HERO BUTTONS
 
 
 /*=========================*
-HERO QR AREA
+    HERO RIGHT
 *=========================*/
 
 .hero-right{
     position:relative;
-    z-index:2;
+
+    z-index:5;
 
     width:38%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
+
 .hero-qr{
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    width:280px;
-    height:280px;
+    width:240px;
 
-    border-radius:32px;
+    height:240px;
+
+    border-radius:24px;
 
     background:
         linear-gradient(
@@ -869,56 +926,66 @@ HERO QR AREA
             #ffffff
         );
 
-    box-shadow:
-        0 20px 45px rgba(37,99,235,.12);
-
     border:1px solid #dbeafe;
+
+    box-shadow:
+        0 15px 35px rgba(37,99,235,.10);
 }
 
 
 /*=========================*
-SCANNER FRAME
+    SCANNER FRAME
 *=========================*/
 
 .scanner-frame{
     position:relative;
 
-    width:210px;
-    height:210px;
+    width:190px;
+
+    height:190px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
+    padding:14px;
 
     background:#ffffff;
 
-    border-radius:22px;
-
-    padding:18px;
+    border-radius:14px;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
+        0 8px 25px rgba(0,0,0,.08);
 }
+
+
+/* QR Image */
 
 .scanner-frame img{
     width:100%;
+
     height:100%;
 
     object-fit:contain;
 
-    border-radius:8px;
+    border-radius:6px;
+
+    display:block;
 }
 
 
 /*=========================*
-SCANNER CORNERS
+    SCANNER CORNERS
 *=========================*/
 
 .corner{
     position:absolute;
 
-    width:28px;
-    height:28px;
+    width:26px;
+
+    height:26px;
 
     border-color:#2563eb;
 
@@ -927,101 +994,76 @@ SCANNER CORNERS
     z-index:3;
 }
 
+
+/* Top Left */
+
 .corner.tl{
-    top:8px;
-    left:8px;
+    top:7px;
+
+    left:7px;
 
     border-width:3px 0 0 3px;
 
-    border-radius:7px 0 0 0;
+    border-radius:6px 0 0 0;
 }
 
+
+/* Top Right */
+
 .corner.tr{
-    top:8px;
-    right:8px;
+    top:7px;
+
+    right:7px;
 
     border-width:3px 3px 0 0;
 
-    border-radius:0 7px 0 0;
+    border-radius:0 6px 0 0;
 }
 
+
+/* Bottom Left */
+
 .corner.bl{
-    bottom:8px;
-    left:8px;
+    bottom:7px;
+
+    left:7px;
 
     border-width:0 0 3px 3px;
 
-    border-radius:0 0 0 7px;
+    border-radius:0 0 0 6px;
 }
 
+
+/* Bottom Right */
+
 .corner.br{
-    bottom:8px;
-    right:8px;
+    bottom:7px;
+
+    right:7px;
 
     border-width:0 3px 3px 0;
 
-    border-radius:0 0 7px 0;
+    border-radius:0 0 6px 0;
 }
 
 
 /*=========================*
-HERO RESPONSIVE
+    HERO RESPONSIVE
 *=========================*/
 
 @media(max-width:1200px){
 
     .hero-banner{
-        padding:40px;
+        padding:38px 40px;
     }
 
     .hero-left h1{
-        font-size:40px;
+        font-size:38px;
     }
 
     .hero-qr{
-        width:240px;
-        height:240px;
-    }
-
-    .scanner-frame{
-        width:180px;
-        height:180px;
-    }
-
-}
-
-
-@media(max-width:900px){
-
-    .hero-banner{
-        flex-direction:column;
-
-        gap:35px;
-
-        text-align:center;
-
-        padding:35px 25px;
-    }
-
-    .hero-left,
-    .hero-right{
-        width:100%;
-        max-width:100%;
-    }
-
-    .hero-left p{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .hero-buttons{
-        justify-content:center;
-        flex-wrap:wrap;
-    }
-
-    .hero-qr{
-        width:230px;
-        height:230px;
+        width:220px;
+        height:220px;
     }
 
     .scanner-frame{
@@ -1032,16 +1074,74 @@ HERO RESPONSIVE
 }
 
 
+/*=========================*
+    TABLET / MOBILE
+*=========================*/
+
+@media(max-width:900px){
+
+    .hero-banner{
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:30px;
+
+        text-align:center;
+
+        padding:35px 25px;
+    }
+
+    .hero-left,
+    .hero-right{
+        width:100%;
+
+        max-width:100%;
+    }
+
+    .hero-left p{
+        margin-left:auto;
+
+        margin-right:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+
+        flex-wrap:wrap;
+    }
+
+    .hero-qr{
+        width:220px;
+
+        height:220px;
+    }
+
+    .scanner-frame{
+        width:170px;
+
+        height:170px;
+    }
+
+}
+
+
+/*=========================*
+    SMALL MOBILE
+*=========================*/
+
 @media(max-width:600px){
 
     .hero-banner{
-        padding:30px 18px;
-        border-radius:22px;
+        padding:28px 18px;
+
+        border-radius:20px;
     }
 
     .hero-left h1{
-        font-size:32px;
-        letter-spacing:-.5px;
+        font-size:29px;
+
+        letter-spacing:-.4px;
     }
 
     .hero-left p{
@@ -1050,6 +1150,7 @@ HERO RESPONSIVE
 
     .hero-buttons{
         flex-direction:column;
+
         width:100%;
     }
 
@@ -1059,11 +1160,13 @@ HERO RESPONSIVE
 
     .hero-qr{
         width:200px;
+
         height:200px;
     }
 
     .scanner-frame{
         width:150px;
+
         height:150px;
     }
 
