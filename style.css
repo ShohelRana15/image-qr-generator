@@ -2275,6 +2275,81 @@ CATEGORY RESPONSIVE
         animation-duration:18s;
     }
 
+
+
+
+    /* =========================================
+   MOBILE SIDEBAR FIX
+   PC DESIGN WILL NOT CHANGE
+========================================= */
+
+@media (max-width: 600px){
+
+    /* Main page must fit mobile screen */
+    html,
+    body{
+        width:100%;
+        max-width:100%;
+        overflow-x:hidden;
+    }
+
+    /* Sidebar */
+    .sidebar{
+        position:fixed !important;
+
+        top:0;
+        left:-280px;
+
+        width:260px !important;
+        max-width:260px !important;
+        height:100dvh;
+
+        z-index:10000;
+
+        overflow-y:auto;
+        overflow-x:hidden;
+
+        transition:left .3s ease;
+
+        box-sizing:border-box;
+    }
+
+    /* When sidebar is opened */
+    .sidebar.mobile-open{
+        left:0 !important;
+    }
+
+    /* Dashboard content */
+    .main-content{
+        width:100% !important;
+        max-width:100% !important;
+
+        margin-left:0 !important;
+
+        box-sizing:border-box;
+
+        overflow-x:hidden;
+    }
+
+    /* All dashboard sections */
+    .dashboard,
+    .content,
+    .main-container{
+        width:100%;
+        max-width:100%;
+
+        box-sizing:border-box;
+
+        overflow-x:hidden;
+    }
+
+}
+
+
+
+
+    
+
 }
 
 
