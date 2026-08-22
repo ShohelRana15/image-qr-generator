@@ -2092,8 +2092,13 @@ CATEGORY RESPONSIVE
 }
 
 /* ===========================================
-   WELCOME SCREEN - MOBILE ONLY
+   QR HUB MOBILE FINAL CSS
    PC DESIGN REMAINS UNCHANGED
+=========================================== */
+
+
+/* ===========================================
+   WELCOME SCREEN - MOBILE ONLY
 =========================================== */
 
 @media (max-width:600px){
@@ -2112,6 +2117,8 @@ CATEGORY RESPONSIVE
         display:flex;
         align-items:center;
         justify-content:center;
+
+        z-index:99999;
     }
 
     .welcome-box{
@@ -2209,9 +2216,6 @@ CATEGORY RESPONSIVE
 }
 
 
-
-
-
 /* ===========================================
    TOP MARQUEE
 =========================================== */
@@ -2256,72 +2260,145 @@ CATEGORY RESPONSIVE
     100%{
         transform:translateX(-100%);
     }
-
 }
-
-
 
 
 /* ===========================================
    MOBILE FINAL LAYOUT
-   PC DESIGN REMAINS UNCHANGED
+   ONLY MOBILE IS CHANGED
 =========================================== */
 
-@media (max-width:900px){
+@media (max-width:600px){
 
-    /* =========================
-       SIDEBAR
-    ========================= */
+    /* =======================================
+       GLOBAL MOBILE WIDTH FIX
+    ======================================= */
+
+    html,
+    body{
+        width:100%;
+        max-width:100%;
+
+        margin:0;
+        padding:0;
+
+        overflow-x:hidden;
+    }
+
+    *,
+    *::before,
+    *::after{
+        box-sizing:border-box;
+    }
+
+
+    /* =======================================
+       SIDEBAR - 138px
+    ======================================= */
 
     .sidebar{
+        position:fixed;
+
+        left:0;
+        top:0;
+
         width:138px;
+        max-width:138px;
+
+        height:100vh;
+
         padding:16px 8px;
+
+        overflow-x:hidden;
+        overflow-y:auto;
+
         transform:translateX(-100%);
+
         transition:transform .3s ease;
+
         z-index:10000;
-        box-sizing:border-box;
     }
 
     .sidebar.mobile-open{
         transform:translateX(0);
     }
 
+
+    /* Sidebar Logo */
+
     .sidebar-logo{
-        gap:7px;
-        padding:3px 4px 12px;
-        margin-bottom:10px;
+        display:flex;
+        flex-direction:column;
+
+        align-items:center;
+        justify-content:center;
+
+        gap:6px;
+
+        padding:3px 3px 12px;
+
+        margin-bottom:9px;
+
+        text-align:center;
     }
 
     .logo-image{
-        width:34px;
-        height:34px;
-        flex:0 0 34px;
-        border-radius:8px;
+        width:38px;
+        height:38px;
+
+        flex:0 0 38px;
+
+        border-radius:9px;
+    }
+
+    .logo-text{
+        width:100%;
+        min-width:0;
+
+        text-align:center;
     }
 
     .logo-text h2{
         font-size:15px;
+
+        margin:0 0 3px;
     }
 
     .logo-text p{
         font-size:7px;
+
+        line-height:1.25;
+
+        white-space:normal;
     }
+
+
+    /* Sidebar Navigation */
 
     .sidebar nav{
         gap:2px;
     }
 
     .sidebar nav a{
-        gap:7px;
+        width:100%;
+
         min-height:38px;
-        padding:8px 7px;
+
+        padding:8px 6px;
+
+        gap:6px;
+
         border-radius:8px;
-        font-size:10px;
+
+        font-size:9px;
+
+        line-height:1.15;
     }
 
     .sidebar nav a i{
         width:15px;
         min-width:15px;
+
         font-size:12px;
     }
 
@@ -2329,122 +2406,336 @@ CATEGORY RESPONSIVE
         margin:7px 0;
     }
 
+
+    /* Upgrade */
+
     .upgrade-card{
-        padding:11px 9px;
-        border-radius:11px;
+        padding:10px 8px;
+
+        border-radius:10px;
     }
 
     .upgrade-icon{
         font-size:15px;
+
         margin-bottom:4px;
     }
 
     .upgrade-card h3{
-        font-size:11px;
+        font-size:10px;
+
         margin-bottom:4px;
     }
 
     .upgrade-card p{
-        font-size:8px;
+        font-size:7px;
+
         line-height:1.35;
     }
 
     .upgrade-btn{
-        margin-top:8px;
-        padding:7px 6px;
-        font-size:9px;
+        margin-top:7px;
+
+        padding:7px 5px;
+
+        font-size:8px;
+
+        border-radius:7px;
     }
 
+
+    /* Dark Mode */
+
     .dark-mode{
-        padding:11px 4px 3px;
-        margin-top:8px;
-        font-size:9px;
+        padding:10px 3px 3px;
+
+        margin-top:7px;
+
+        font-size:8px;
+    }
+
+    .dark-mode > span{
+        gap:5px;
     }
 
     .switch{
-        width:32px;
-        height:19px;
+        width:30px;
+        height:18px;
     }
 
     .slider::before{
-        width:13px;
-        height:13px;
+        width:12px;
+        height:12px;
+
         left:3px;
         top:3px;
     }
 
     .switch input:checked + .slider::before{
-        transform:translateX(13px);
+        transform:translateX(12px);
     }
 
-    .sidebar-footer{
+
+    /* =======================================
+       MAIN CONTENT
+    ======================================= */
+
+    .main-content{
+        margin-left:0 !important;
+
+        width:100% !important;
+        max-width:100% !important;
+
+        min-width:0 !important;
+
+        padding:10px 8px 30px !important;
+
+        overflow:hidden;
+    }
+
+
+    /* =======================================
+       TOP MARQUEE MOBILE
+    ======================================= */
+
+    .top-marquee{
+        width:100%;
+
+        height:30px;
+
+        margin-bottom:10px;
+
+        border-radius:7px;
+    }
+
+    .top-marquee-content{
+        font-size:10px;
+
+        animation-duration:18s;
+
+        padding-left:100%;
+    }
+
+
+    /* =======================================
+       TOPBAR
+    ======================================= */
+
+    .topbar{
+        width:100% !important;
+        max-width:100% !important;
+
+        min-width:0 !important;
+
+        min-height:60px;
+
+        padding:8px 9px;
+
+        gap:6px;
+
+        margin-bottom:12px;
+
+        border-radius:13px;
+
+        overflow:hidden;
+    }
+
+    .topbar-left{
+        min-width:0;
+
+        flex:1 1 auto;
+
+        gap:5px;
+
+        overflow:hidden;
+    }
+
+    .topbar-right{
+        min-width:0;
+
+        flex:0 0 auto;
+
+        display:flex;
+
+        align-items:center;
+
+        gap:6px;
+    }
+
+
+    /* Menu */
+
+    .menu-btn{
+        width:34px;
+        height:34px;
+
+        min-width:34px;
+
+        border-radius:9px;
+
+        font-size:13px;
+    }
+
+
+    /* =======================================
+       TOPBAR COMMON BUTTONS
+    ======================================= */
+
+    .topbar button,
+    .topbar .icon-btn{
+        flex-shrink:0;
+    }
+
+
+    /* =======================================
+       INSTALL BUTTON
+    ======================================= */
+
+    .install-btn{
+        min-width:0 !important;
+
+        padding:8px 10px !important;
+
+        font-size:10px !important;
+
+        border-radius:9px !important;
+
+        white-space:nowrap;
+
+        flex-shrink:1;
+    }
+
+
+    /* =======================================
+       PROFILE
+    ======================================= */
+
+    .profile{
+        display:flex;
+
+        align-items:center;
+
+        gap:5px;
+
+        min-width:0;
+
+        max-width:105px;
+
+        overflow:hidden;
+    }
+
+    .profile img,
+    .profile-image{
+        width:36px !important;
+        height:36px !important;
+
+        min-width:36px !important;
+
+        border-radius:50%;
+    }
+
+    .profile-info{
+        min-width:0;
+
+        max-width:62px;
+
+        overflow:hidden;
+    }
+
+    .profile-info h3,
+    .profile-info .name{
+        margin:0;
+
+        font-size:11px !important;
+
+        white-space:nowrap;
+
+        overflow:hidden;
+
+        text-overflow:ellipsis;
+    }
+
+    .profile-info p,
+    .profile-info .role{
+        margin:0;
+
+        font-size:8px !important;
+
+        white-space:nowrap;
+
+        overflow:hidden;
+
+        text-overflow:ellipsis;
+    }
+
+
+    /* =======================================
+       HERO BANNER
+    ======================================= */
+
+    .hero-banner{
+        width:100% !important;
+        max-width:100% !important;
+
+        min-height:0 !important;
+
+        height:auto !important;
+
+        padding:15px 12px !important;
+
+        margin-bottom:12px !important;
+
+        border-radius:14px !important;
+
+        overflow:hidden;
+    }
+
+    .hero-left{
+        width:100% !important;
+
+        max-width:100% !important;
+    }
+
+    .hero-right{
+        display:none !important;
+    }
+
+    .hero-badge{
+        padding:5px 9px;
+
+        margin-bottom:7px;
+
+        font-size:9px;
+    }
+
+    .hero-left .badge{
+        padding:5px 9px;
+
+        margin-left:3px;
+
+        margin-bottom:7px;
+
         font-size:8px;
     }
 
-
-    /* =========================
-       MAIN CONTENT
-    ========================= */
-
-    .main-content{
-        margin-left:0;
-        width:100%;
-        max-width:100%;
-        padding:14px 10px;
-        box-sizing:border-box;
-    }
-
-
-    /* =========================
-       TOPBAR
-    ========================= */
-
-    .topbar{
-        width:100%;
-        min-width:0;
-        box-sizing:border-box;
-        margin-bottom:14px;
-    }
-
-
-    /* =========================
-       QR OPTIONS
-       3 COLUMNS
-    ========================= */
-
-    .qr-options{
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:8px;
-        width:100%;
-    }
-
-    .qr-option{
-        min-width:0;
-        padding:12px 5px;
-    }
-
-
-    /* =========================
-       HERO COMPACT
-    ========================= */
-
-    .hero-banner{
-        min-height:0;
-        padding:20px 18px;
-        margin-bottom:16px;
-        border-radius:16px;
-    }
-
     .hero-left h1{
-        font-size:25px;
-        margin-bottom:8px;
+        font-size:22px !important;
+
+        line-height:1.15;
+
+        letter-spacing:-.3px;
+
+        margin-bottom:6px;
     }
 
     .hero-left p{
-        font-size:12px;
-        line-height:1.45;
-        margin-bottom:12px;
+        max-width:100%;
+
+        font-size:11px !important;
+
+        line-height:1.4;
+
+        margin-bottom:9px;
     }
 
     .hero-buttons{
@@ -2452,113 +2743,181 @@ CATEGORY RESPONSIVE
     }
 
     .hero-buttons button{
-        min-height:36px;
-        padding:8px 12px;
-        font-size:11px;
-    }
+        min-height:34px;
 
-    .hero-right{
-        display:none;
-    }
+        padding:7px 10px;
 
-
-    /* =========================
-       UPLOAD / DRAG AREA
-    ========================= */
-
-    .upload-area,
-    .drop-zone,
-    .drag-drop-area{
-        min-height:120px !important;
-        height:120px !important;
-        padding:12px !important;
-        box-sizing:border-box;
-    }
-
-}
-
-
-@media (max-width:600px){
-
-    /* =========================
-       MAIN PAGE
-    ========================= */
-
-    .main-content{
-        padding:10px 8px;
-    }
-
-
-    /* =========================
-       TOP MARQUEE
-    ========================= */
-
-    .top-marquee{
-        width:100%;
-        height:30px;
-        margin-bottom:10px;
-        border-radius:7px;
-    }
-
-    .top-marquee-content{
         font-size:10px;
-        animation-duration:18s;
+
+        border-radius:8px;
     }
 
 
-    /* =========================
-       QR OPTIONS - 3 COLUMNS
-    ========================= */
+    /* =======================================
+       QR OPTIONS - 3 PER ROW
+    ======================================= */
 
     .qr-options{
-        grid-template-columns:repeat(3,1fr);
-        gap:7px;
+        width:100% !important;
+
+        max-width:100% !important;
+
+        display:grid !important;
+
+        grid-template-columns:
+            repeat(3,minmax(0,1fr)) !important;
+
+        gap:7px !important;
     }
 
     .qr-option{
-        padding:10px 4px;
+        width:100% !important;
+
+        min-width:0 !important;
+
         min-height:72px;
+
+        padding:10px 4px !important;
+
+        border-radius:11px !important;
+
+        overflow:hidden;
+    }
+
+    .qr-option h3{
+        font-size:11px !important;
+
+        line-height:1.2;
+
+        white-space:nowrap;
+
+        overflow:hidden;
+
+        text-overflow:ellipsis;
+    }
+
+    .qr-option p{
+        font-size:8px !important;
+
+        line-height:1.25;
+
+        overflow:hidden;
     }
 
 
-    /* =========================
-       COMPACT HERO
-    ========================= */
+    /* =======================================
+       OTHER POSSIBLE QR GRID CLASSES
+    ======================================= */
 
-    .hero-banner{
-        padding:16px 13px;
-        margin-bottom:12px;
-        border-radius:14px;
+    .qr-grid,
+    .options-grid{
+        width:100% !important;
+
+        display:grid !important;
+
+        grid-template-columns:
+            repeat(3,minmax(0,1fr)) !important;
+
+        gap:7px !important;
     }
 
-    .hero-left h1{
-        font-size:22px;
-        margin-bottom:6px;
-    }
+    .qr-card,
+    .option-card{
+        width:100% !important;
 
-    .hero-left p{
-        font-size:11px;
-        line-height:1.4;
-        margin-bottom:9px;
-    }
+        min-width:0 !important;
 
-    .hero-buttons button{
-        min-height:34px;
-        padding:7px 10px;
-        font-size:10px;
+        padding:10px 4px !important;
+
+        border-radius:11px !important;
     }
 
 
-    /* =========================
-       COMPACT UPLOAD
-    ========================= */
+    /* =======================================
+       COMPACT UPLOAD / DRAG & DROP
+    ======================================= */
 
     .upload-area,
     .drop-zone,
     .drag-drop-area{
+        width:100% !important;
+
+        max-width:100% !important;
+
         min-height:100px !important;
+
         height:100px !important;
+
         padding:8px !important;
+
+        border-radius:12px !important;
+
+        box-sizing:border-box;
+    }
+
+    .upload-area i,
+    .drop-zone i,
+    .drag-drop-area i{
+        font-size:30px !important;
+    }
+
+    .upload-area h3,
+    .drop-zone h3,
+    .drag-drop-area h3{
+        font-size:14px !important;
+    }
+
+    .upload-area p,
+    .drop-zone p,
+    .drag-drop-area p{
+        font-size:9px !important;
+    }
+
+
+    /* =======================================
+       ALL CARDS / SECTIONS
+    ======================================= */
+
+    .card,
+    .section-card,
+    .main-card{
+        width:100% !important;
+
+        max-width:100% !important;
+
+        min-width:0 !important;
+    }
+
+
+    /* =======================================
+       REMOVE RIGHT EMPTY SPACE
+    ======================================= */
+
+    .container,
+    .dashboard,
+    .content-wrapper{
+        width:100% !important;
+
+        max-width:100% !important;
+
+        min-width:0 !important;
+
+        margin-left:0 !important;
+
+        margin-right:0 !important;
+    }
+
+
+    /* =======================================
+       TABLE
+    ======================================= */
+
+    .table-container{
+        width:100%;
+
+        max-width:100%;
+
+        overflow-x:auto;
     }
 
 }
