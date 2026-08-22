@@ -475,7 +475,6 @@ window.addEventListener("load", () => {
     const progressText = document.getElementById("progressText");
 
     welcome.style.display = "flex";
-    document.body.style.overflow = "hidden";
 
     let progress = 0;
 
@@ -507,7 +506,7 @@ progressText.innerHTML = `
     <div class="loading-percent">Loading${dots} ${progress}%</div>
 `;
 
-        if(progress >= 100){
+       if(progress >= 100){
 
     clearInterval(timer);
 
@@ -516,13 +515,8 @@ progressText.innerHTML = `
         welcome.classList.add("hideWelcome");
 
         setTimeout(() => {
-
             welcome.style.display = "none";
             welcome.classList.remove("hideWelcome");
-
-            /* Dashboard scrolling restore */
-            document.body.style.overflow = "";
-
         },600);
 
     },300);
