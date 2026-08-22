@@ -2262,78 +2262,303 @@ CATEGORY RESPONSIVE
 
 
 
-@media (max-width:600px){
-
-    .top-marquee{
-        height:32px;
-        margin-bottom:14px;
-        border-radius:8px;
-    }
-
-    .top-marquee-content{
-        font-size:11px;
-        animation-duration:18s;
-    }
-
-
-
-
- /* ===========================================
-   MOBILE SIDEBAR + DASHBOARD FIX
-   PC DESIGN WILL NOT CHANGE
+/* ===========================================
+   MOBILE FINAL LAYOUT
+   PC DESIGN REMAINS UNCHANGED
 =========================================== */
 
-@media (max-width: 900px){
+@media (max-width:900px){
 
-    /* Sidebar mobile এ initially hidden */
+    /* =========================
+       SIDEBAR
+    ========================= */
+
     .sidebar{
-        width:270px;
+        width:138px;
+        padding:16px 8px;
         transform:translateX(-100%);
         transition:transform .3s ease;
         z-index:10000;
+        box-sizing:border-box;
     }
 
-    /* Menu চাপলে sidebar দেখা যাবে */
     .sidebar.mobile-open{
         transform:translateX(0);
     }
 
+    .sidebar-logo{
+        gap:7px;
+        padding:3px 4px 12px;
+        margin-bottom:10px;
+    }
 
-    /* Main Content পুরো mobile width নেবে */
+    .logo-image{
+        width:34px;
+        height:34px;
+        flex:0 0 34px;
+        border-radius:8px;
+    }
+
+    .logo-text h2{
+        font-size:15px;
+    }
+
+    .logo-text p{
+        font-size:7px;
+    }
+
+    .sidebar nav{
+        gap:2px;
+    }
+
+    .sidebar nav a{
+        gap:7px;
+        min-height:38px;
+        padding:8px 7px;
+        border-radius:8px;
+        font-size:10px;
+    }
+
+    .sidebar nav a i{
+        width:15px;
+        min-width:15px;
+        font-size:12px;
+    }
+
+    .sidebar hr{
+        margin:7px 0;
+    }
+
+    .upgrade-card{
+        padding:11px 9px;
+        border-radius:11px;
+    }
+
+    .upgrade-icon{
+        font-size:15px;
+        margin-bottom:4px;
+    }
+
+    .upgrade-card h3{
+        font-size:11px;
+        margin-bottom:4px;
+    }
+
+    .upgrade-card p{
+        font-size:8px;
+        line-height:1.35;
+    }
+
+    .upgrade-btn{
+        margin-top:8px;
+        padding:7px 6px;
+        font-size:9px;
+    }
+
+    .dark-mode{
+        padding:11px 4px 3px;
+        margin-top:8px;
+        font-size:9px;
+    }
+
+    .switch{
+        width:32px;
+        height:19px;
+    }
+
+    .slider::before{
+        width:13px;
+        height:13px;
+        left:3px;
+        top:3px;
+    }
+
+    .switch input:checked + .slider::before{
+        transform:translateX(13px);
+    }
+
+    .sidebar-footer{
+        font-size:8px;
+    }
+
+
+    /* =========================
+       MAIN CONTENT
+    ========================= */
+
     .main-content{
         margin-left:0;
         width:100%;
         max-width:100%;
-        padding:20px 15px;
+        padding:14px 10px;
         box-sizing:border-box;
     }
 
 
-    /* Topbar যেন screen-এর বাইরে না যায় */
-    .topbar{
-        width:100%;
-        box-sizing:border-box;
-    }
-
-}
-
-
-/* ===========================================
-   SMALL MOBILE
-=========================================== */
-
-@media (max-width:600px){
-
-    .main-content{
-        padding:15px 12px;
-        width:100%;
-        max-width:100%;
-    }
+    /* =========================
+       TOPBAR
+    ========================= */
 
     .topbar{
         width:100%;
         min-width:0;
+        box-sizing:border-box;
+        margin-bottom:14px;
+    }
+
+
+    /* =========================
+       QR OPTIONS
+       3 COLUMNS
+    ========================= */
+
+    .qr-options{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:8px;
+        width:100%;
+    }
+
+    .qr-option{
+        min-width:0;
+        padding:12px 5px;
+    }
+
+
+    /* =========================
+       HERO COMPACT
+    ========================= */
+
+    .hero-banner{
+        min-height:0;
+        padding:20px 18px;
+        margin-bottom:16px;
+        border-radius:16px;
+    }
+
+    .hero-left h1{
+        font-size:25px;
+        margin-bottom:8px;
+    }
+
+    .hero-left p{
+        font-size:12px;
+        line-height:1.45;
+        margin-bottom:12px;
+    }
+
+    .hero-buttons{
+        gap:7px;
+    }
+
+    .hero-buttons button{
+        min-height:36px;
+        padding:8px 12px;
+        font-size:11px;
+    }
+
+    .hero-right{
+        display:none;
+    }
+
+
+    /* =========================
+       UPLOAD / DRAG AREA
+    ========================= */
+
+    .upload-area,
+    .drop-zone,
+    .drag-drop-area{
+        min-height:120px !important;
+        height:120px !important;
+        padding:12px !important;
+        box-sizing:border-box;
     }
 
 }
 
+
+@media (max-width:600px){
+
+    /* =========================
+       MAIN PAGE
+    ========================= */
+
+    .main-content{
+        padding:10px 8px;
+    }
+
+
+    /* =========================
+       TOP MARQUEE
+    ========================= */
+
+    .top-marquee{
+        width:100%;
+        height:30px;
+        margin-bottom:10px;
+        border-radius:7px;
+    }
+
+    .top-marquee-content{
+        font-size:10px;
+        animation-duration:18s;
+    }
+
+
+    /* =========================
+       QR OPTIONS - 3 COLUMNS
+    ========================= */
+
+    .qr-options{
+        grid-template-columns:repeat(3,1fr);
+        gap:7px;
+    }
+
+    .qr-option{
+        padding:10px 4px;
+        min-height:72px;
+    }
+
+
+    /* =========================
+       COMPACT HERO
+    ========================= */
+
+    .hero-banner{
+        padding:16px 13px;
+        margin-bottom:12px;
+        border-radius:14px;
+    }
+
+    .hero-left h1{
+        font-size:22px;
+        margin-bottom:6px;
+    }
+
+    .hero-left p{
+        font-size:11px;
+        line-height:1.4;
+        margin-bottom:9px;
+    }
+
+    .hero-buttons button{
+        min-height:34px;
+        padding:7px 10px;
+        font-size:10px;
+    }
+
+
+    /* =========================
+       COMPACT UPLOAD
+    ========================= */
+
+    .upload-area,
+    .drop-zone,
+    .drag-drop-area{
+        min-height:100px !important;
+        height:100px !important;
+        padding:8px !important;
+    }
+
+}
