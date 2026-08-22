@@ -475,6 +475,7 @@ window.addEventListener("load", () => {
     const progressText = document.getElementById("progressText");
 
     welcome.style.display = "flex";
+    document.body.style.overflow = "hidden";
 
     let progress = 0;
 
@@ -508,20 +509,25 @@ progressText.innerHTML = `
 
         if(progress >= 100){
 
-            clearInterval(timer);
+    clearInterval(timer);
 
-            setTimeout(() => {
+    setTimeout(() => {
 
-                welcome.classList.add("hideWelcome");
+        welcome.classList.add("hideWelcome");
 
-                setTimeout(() => {
-                    welcome.style.display = "none";
-                    welcome.classList.remove("hideWelcome");
-                },600);
+        setTimeout(() => {
 
-            },300);
+            welcome.style.display = "none";
+            welcome.classList.remove("hideWelcome");
 
-        }
+            /* Dashboard scrolling restore */
+            document.body.style.overflow = "";
+
+        },600);
+
+    },300);
+
+}
 
     },20);
 
