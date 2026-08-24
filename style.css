@@ -3086,6 +3086,218 @@ CATEGORY RESPONSIVE
 
 
 
+/* ==========================================
+   QR CATEGORIES ATTENTION EFFECT
+   ========================================== */
+
+.qr-categories.categories-attention {
+    position: relative;
+    isolation: isolate;
+    animation: categoriesPulse 3s ease-out;
+}
+
+.qr-categories.categories-attention::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 24px;
+    padding: 3px;
+
+    background: linear-gradient(
+        90deg,
+        #ff0055,
+        #ff8a00,
+        #ffe600,
+        #00ff88,
+        #00c8ff,
+        #7b00ff,
+        #ff00d4,
+        #ff0055
+    );
+
+    background-size: 400% 100%;
+
+    animation: categoriesRGB 2s linear infinite;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events: none;
+    z-index: -1;
+
+    filter:
+        drop-shadow(0 0 6px rgba(0, 200, 255, .65))
+        drop-shadow(0 0 14px rgba(255, 0, 180, .45));
+}
+
+
+/* Soft outer glow */
+
+.qr-categories.categories-attention::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 28px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 80, .20),
+        rgba(0, 220, 255, .20),
+        rgba(130, 0, 255, .20),
+        rgba(255, 0, 180, .20)
+    );
+
+    background-size: 300% 100%;
+
+    animation:
+        categoriesGlow 2s linear infinite,
+        categoriesGlowFade 3s ease-out forwards;
+
+    filter: blur(17px);
+
+    pointer-events: none;
+    z-index: -2;
+}
+
+
+/* ==========================================
+   SIX QR CARDS ATTENTION
+   ========================================== */
+
+.qr-categories.categories-attention .category-card {
+    animation: qrCardAttention 2.4s ease-in-out;
+}
+
+
+/* Different timing = natural attention effect */
+
+.qr-categories.categories-attention .category-card:nth-child(1) {
+    animation-delay: .05s;
+}
+
+.qr-categories.categories-attention .category-card:nth-child(2) {
+    animation-delay: .12s;
+}
+
+.qr-categories.categories-attention .category-card:nth-child(3) {
+    animation-delay: .19s;
+}
+
+.qr-categories.categories-attention .category-card:nth-child(4) {
+    animation-delay: .26s;
+}
+
+.qr-categories.categories-attention .category-card:nth-child(5) {
+    animation-delay: .33s;
+}
+
+.qr-categories.categories-attention .category-card:nth-child(6) {
+    animation-delay: .40s;
+}
+
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes categoriesRGB {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 400% 50%;
+    }
+
+}
+
+
+@keyframes categoriesGlow {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+
+}
+
+
+@keyframes categoriesGlowFade {
+
+    0% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes categoriesPulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    12% {
+        transform: scale(1.006);
+    }
+
+    24% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.004);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes qrCardAttention {
+
+    0% {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    25% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-3px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
 
 
 
