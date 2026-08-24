@@ -569,51 +569,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==========================================
-    // AUTO SCROLL
-    // ==========================================
+    
+  // ==========================================
+// AUTO SCROLL + ATTENTION GLOW
+// ==========================================
 
-    function scrollToWorkspace() {
+function scrollToWorkspace() {
 
-        setTimeout(function () {
+    // আগের attention effect থাকলে remove
+    uploadPanel.classList.remove("workspace-attention");
 
-            const rect =
-                uploadPanel.getBoundingClientRect();
+    // Animation আবার চালানোর জন্য reflow
+    void uploadPanel.offsetWidth;
 
-
-            const absoluteTop =
-                window.pageYOffset + rect.top;
-
-
-            /*
-             * Desktop + Mobile
-             * Top offset যাতে header-এর নিচে
-             * workspace সুন্দরভাবে দেখা যায়
-             */
-
-            const isMobile =
-                window.innerWidth <= 768;
+    // নতুন attention effect
+    uploadPanel.classList.add("workspace-attention");
 
 
-            const offset =
-                isMobile ? 70 : 90;
+    setTimeout(function () {
+
+        const rect =
+            uploadPanel.getBoundingClientRect();
+
+        const absoluteTop =
+            window.pageYOffset + rect.top;
+
+        const offset = 85;
 
 
-            window.scrollTo({
+        window.scrollTo({
 
-                top: Math.max(
-                    0,
-                    absoluteTop - offset
-                ),
+            top: Math.max(
+                0,
+                absoluteTop - offset
+            ),
 
-                behavior: "smooth"
+            behavior: "smooth"
 
-            });
+        });
 
-        }, 150);
 
-    }
+    }, 80);
 
+
+    // Glow শেষ হওয়ার পর class remove
+    setTimeout(function () {
+
+        uploadPanel.classList.remove(
+            "workspace-attention"
+        );
+
+    }, 3200);
+
+}
+
+
+    
 
     // ==========================================
     // CATEGORY CLICK
