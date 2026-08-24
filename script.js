@@ -88,16 +88,26 @@ window.addEventListener("load", function () {
 // ==========================================
 // QR HUB v4.0
 // UNIFIED QR WORKSPACE
-// Same Box Content Switching
+// Category Card → Same Workspace
 // PC + MOBILE
+// Auto Scroll
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const qrOptions = document.querySelectorAll(".qr-option");
-    const uploadPanel = document.querySelector(".upload-panel");
+    const categoryCards =
+        document.querySelectorAll(".category-card");
 
-    if (!qrOptions.length || !uploadPanel) {
+    const uploadPanel =
+        document.querySelector(".upload-panel");
+
+
+    // ------------------------------------------
+    // Required elements check
+    // ------------------------------------------
+
+    if (!categoryCards.length || !uploadPanel) {
+        console.warn("QR Hub: Category cards or upload panel not found.");
         return;
     }
 
@@ -110,22 +120,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return `
             <div class="section-header">
+
                 <div>
+
                     <h2>${title}</h2>
+
                     <p>${description}</p>
+
                 </div>
+
             </div>
         `;
     }
 
 
     // ==========================================
-    // PREVIEW
+    // PREVIEW BOX
     // ==========================================
 
     function previewBox() {
 
         return `
+
             <div class="preview-panel">
 
                 <h3>Preview</h3>
@@ -149,18 +165,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button
                         type="button"
                         class="secondary-btn">
+
                         Download
+
                     </button>
 
                     <button
                         type="button"
                         class="primary-btn">
+
                         Share
+
                     </button>
 
                 </div>
 
             </div>
+
         `;
     }
 
@@ -183,7 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-solid fa-cloud-arrow-up"></i>
+
                     </div>
 
                     <h3>Upload Image</h3>
@@ -243,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
+
                 const file = this.files[0];
 
 
@@ -257,8 +281,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 button.innerHTML = `
+
                     <i class="fa-solid fa-check"></i>
+
                     ${file.name}
+
                 `;
 
             });
@@ -286,7 +313,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-solid fa-font"></i>
+
                     </div>
 
                     <h3>Enter Your Text</h3>
@@ -332,7 +361,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-solid fa-link"></i>
+
                     </div>
 
                     <h3>Website URL</h3>
@@ -378,7 +409,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-solid fa-wifi"></i>
+
                     </div>
 
                     <h3>WiFi Network</h3>
@@ -446,7 +479,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-regular fa-address-card"></i>
+
                     </div>
 
                     <h3>Contact Information</h3>
@@ -504,7 +539,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="upload-box">
 
                     <div class="upload-icon">
+
                         <i class="fa-solid fa-location-dot"></i>
+
                     </div>
 
                     <h3>Google Maps Location</h3>
@@ -533,7 +570,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // AUTO SCROLL TO WORKSPACE
+    // AUTO SCROLL
     // ==========================================
 
     function scrollToWorkspace() {
@@ -543,10 +580,24 @@ document.addEventListener("DOMContentLoaded", function () {
             const rect =
                 uploadPanel.getBoundingClientRect();
 
+
             const absoluteTop =
                 window.pageYOffset + rect.top;
 
-            const offset = 85;
+
+            /*
+             * Desktop + Mobile
+             * Top offset যাতে header-এর নিচে
+             * workspace সুন্দরভাবে দেখা যায়
+             */
+
+            const isMobile =
+                window.innerWidth <= 768;
+
+
+            const offset =
+                isMobile ? 70 : 90;
+
 
             window.scrollTo({
 
@@ -559,51 +610,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
             });
 
-        }, 80);
+        }, 150);
 
     }
 
 
     // ==========================================
-    // OPTION CLICK
+    // CATEGORY CLICK
     // ==========================================
 
-    qrOptions.forEach(function (option) {
+    categoryCards.forEach(function (card) {
 
-        option.addEventListener("click", function () {
-
-            // ------------------------------
-            // Active Option
-            // ------------------------------
-
-            qrOptions.forEach(function (item) {
-
-                item.classList.remove("active");
-
-            });
-
-            option.classList.add("active");
+        card.addEventListener("click", function () {
 
 
-            // ------------------------------
-            // Get Option Name
-            // ------------------------------
+            // ----------------------------------
+            // Get title
+            // ----------------------------------
 
-            const title =
-                option.querySelector("h3");
+            const titleElement =
+                card.querySelector("h3");
 
-            if (!title) {
+
+            if (!titleElement) {
                 return;
             }
 
 
             const optionName =
-                title.textContent.trim();
+                titleElement.textContent.trim();
 
 
-            // ------------------------------
-            // Change Workspace
-            // ------------------------------
+            // ----------------------------------
+            // Active card
+            // ----------------------------------
+
+            categoryCards.forEach(function (item) {
+
+                item.classList.remove("active");
+
+            });
+
+
+            card.classList.add("active");
+
+
+            // ----------------------------------
+            // Change workspace
+            // ----------------------------------
 
             switch (optionName) {
 
@@ -642,7 +696,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
 
 
-                case "Location QR":
+                case "More":
+
+                    /*
+                     * More এখন Location QR দেখাবে।
+                     * পরে এখানে আরও QR option যোগ করা যাবে।
+                     */
 
                     showLocationQR();
 
@@ -656,10 +715,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            // ------------------------------
-            // Automatically bring input box
-            // into view
-            // ------------------------------
+            // ----------------------------------
+            // Auto Scroll
+            // ----------------------------------
 
             scrollToWorkspace();
 
@@ -667,6 +725,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-});
 
+});
 
