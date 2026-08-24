@@ -739,3 +739,87 @@ function scrollToWorkspace() {
 
 });
 
+
+
+
+
+
+// ==========================================
+// HERO → QR CATEGORIES ATTENTION
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const createQRButton =
+        document.querySelector(".hero-buttons .primary-btn");
+
+    const qrCategories =
+        document.querySelector(".qr-categories");
+
+
+    if (!createQRButton || !qrCategories) {
+        return;
+    }
+
+
+    createQRButton.addEventListener("click", function () {
+
+        // Remove previous animation
+        qrCategories.classList.remove(
+            "categories-attention"
+        );
+
+        // Restart animation
+        void qrCategories.offsetWidth;
+
+        // Add attention effect
+        qrCategories.classList.add(
+            "categories-attention"
+        );
+
+
+        // ------------------------------
+        // Smooth scroll
+        // ------------------------------
+
+        setTimeout(function () {
+
+            const rect =
+                qrCategories.getBoundingClientRect();
+
+            const absoluteTop =
+                window.pageYOffset + rect.top;
+
+            const offset = 75;
+
+
+            window.scrollTo({
+
+                top: Math.max(
+                    0,
+                    absoluteTop - offset
+                ),
+
+                behavior: "smooth"
+
+            });
+
+        }, 80);
+
+
+        // ------------------------------
+        // Remove effect
+        // ------------------------------
+
+        setTimeout(function () {
+
+            qrCategories.classList.remove(
+                "categories-attention"
+            );
+
+        }, 3200);
+
+    });
+
+});
+
