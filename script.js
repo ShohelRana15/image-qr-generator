@@ -73,12 +73,12 @@ window.addEventListener("load", function () {
                     welcome.style.display = "none";
                     welcome.classList.remove("hideWelcome");
 
-                }, 600);
+                }, 400);
 
-            }, 500);
+            }, 250);
         }
 
-    }, 25);
+    }, 15);
 
 });
 
