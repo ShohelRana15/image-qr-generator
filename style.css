@@ -4083,3 +4083,136 @@ body,
     }
 
 }
+
+
+
+
+/* ==========================================
+   MOBILE WIDTH FIX
+   QR HUB v4.0
+========================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .dashboard {
+        width: 100%;
+        min-width: 0;
+        display: block;
+    }
+
+    .main-content {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+
+        margin-left: 0 !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+
+        box-sizing: border-box;
+    }
+
+    .topbar {
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+
+    .hero-banner,
+    .qr-categories,
+    .stats-section,
+    .dashboard-bottom,
+    .footer {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        box-sizing: border-box;
+    }
+
+    .category-grid,
+    .stats-grid {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .upload-panel,
+    .activity-panel,
+    .quick-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+    /* Prevent cards from forcing horizontal width */
+    .stat-card,
+    .category-card,
+    .upload-box,
+    .preview-panel,
+    .activity-panel,
+    .quick-panel {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Hero content */
+    .hero-left,
+    .hero-right {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Text must wrap normally */
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    span {
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
+}
+
+
+/* ==========================================
+   DARK MODE MOBILE SAFETY
+========================================== */
+
+@media (max-width: 768px) {
+
+    body.dark-mode,
+    body.dark-theme,
+    body.dark {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+
+        overflow-x: hidden !important;
+    }
+
+    body.dark-mode .main-content,
+    body.dark-theme .main-content,
+    body.dark .main-content {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+
+        margin-left: 0 !important;
+    }
+
+}
