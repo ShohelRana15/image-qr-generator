@@ -827,141 +827,159 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ==========================================
-// QR HUB v4.0
-// SIDEBAR QR NAVIGATION
+// SIDEBAR QR OPTIONS
+// Connect Sidebar with QR Workspace
+// PC + MOBILE
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const sidebar =
-        document.querySelector(".sidebar");
-
-    const uploadPanel =
-        document.querySelector(".upload-panel");
+    const sidebar = document.querySelector(".sidebar");
+    const uploadPanel = document.querySelector(".upload-panel");
+    const qrOptions = document.querySelectorAll(".qr-option");
 
     if (!sidebar || !uploadPanel) {
         return;
     }
 
+    // Sidebar QR menu items
+    const sidebarItems = sidebar.querySelectorAll("nav a");
 
-    // ==========================================
-    // SIDEBAR QR ITEMS
-    // ==========================================
+    sidebarItems.forEach(function (item) {
 
-    const qrNames = [
-        "Image QR",
-        "Text QR",
-        "URL QR",
-        "WiFi QR",
-        "Contact QR",
-        "Location QR"
-    ];
+        const text = item.textContent.trim();
 
+        // Only QR creation options
+        const qrTypes = [
+            "Image QR",
+            "Text QR",
+            "URL QR",
+            "WiFi QR",
+            "Contact QR",
+            "Location QR"
+        ];
 
-    // ==========================================
-    // FIND SIDEBAR ITEM
-    // ==========================================
-
-    const sidebarLinks =
-        sidebar.querySelectorAll("nav a");
-
-
-    // ==========================================
-    // CLICK HANDLER
-    // ==========================================
-
-    sidebarLinks.forEach(function (link) {
-
-        const linkText =
-            link.textContent.trim();
-
-
-        // QR option না হলে কিছু করবে না
-
-        if (!qrNames.includes(linkText)) {
+        if (!qrTypes.includes(text)) {
             return;
         }
 
+        item.addEventListener("click", function (e) {
 
-        link.addEventListener("click", function (event) {
+            e.preventDefault();
 
-            event.preventDefault();
-
-
-            // ==================================
-            // Active Sidebar
-            // ==================================
-
-            sidebarLinks.forEach(function (item) {
-
-                const itemText =
-                    item.textContent.trim();
-
-                if (qrNames.includes(itemText)) {
-
-                    item.classList.remove("active");
-
-                }
-
-            });
-
-            link.classList.add("active");
-
-
-            // ==================================
-            // FIND MAIN QR OPTION
-            // ==================================
-
-            const qrOptions =
-                document.querySelectorAll(".qr-option");
-
+            // --------------------------------------
+            // Find matching QR option card
+            // --------------------------------------
 
             let targetOption = null;
 
-
             qrOptions.forEach(function (option) {
 
-                const title =
-                    option.querySelector("h3");
+                const title = option.querySelector("h3");
 
                 if (!title) {
                     return;
                 }
 
-
-                if (
-                    title.textContent.trim() ===
-                    linkText
-                ) {
-
+                if (title.textContent.trim() === text) {
                     targetOption = option;
-
                 }
 
             });
 
 
-            // ==================================
-            // TRIGGER MAIN QR OPTION
-            // ==================================
+            // --------------------------------------
+            // Trigger the SAME QR option
+            // --------------------------------------
 
             if (targetOption) {
 
                 targetOption.click();
+
+            } else {
+
+                console.warn(
+                    "QR option not found:",
+                    text
+                );
 
                 return;
 
             }
 
 
-            // ==================================
-            // FALLBACK
-            // ==================================
+            // --------------------------------------
+            // Highlight Sidebar Item
+            // --------------------------------------
 
-            console.log(
-                "QR option not found:",
-                linkText
-            );
+            sidebarItems.forEach(function (navItem) {
+                navItem.classList.remove("qr-sidebar-active");
+            });
+
+            item.classList.add("qr-sidebar-active");
+
+
+            // --------------------------------------
+            // Attention Effect on QR Cards
+            // --------------------------------------
+
+            setTimeout(function () {
+
+                qrOptions.forEach(function (option) {
+                    option.classList.remove("qr-attention");
+                });
+
+                qrOptions.forEach(function (option) {
+
+                    const title =
+                        option.querySelector("h3");
+
+                    if (
+                        title &&
+                        title.textContent.trim() === text
+                    ) {
+
+                        option.classList.add(
+                            "qr-attention"
+                        );
+
+                    }
+
+                });
+
+            }, 120);
+
+
+            // --------------------------------------
+            // Scroll to QR Category Section
+            // --------------------------------------
+
+            setTimeout(function () {
+
+                const categorySection =
+                    document.querySelector(".qr-categories");
+
+                if (!categorySection) {
+                    return;
+                }
+
+                const rect =
+                    categorySection.getBoundingClientRect();
+
+                const top =
+                    window.pageYOffset +
+                    rect.top -
+                    80;
+
+                window.scrollTo({
+
+                    top: Math.max(0, top),
+
+                    behavior: "smooth"
+
+                });
+
+            }, 180);
 
         });
 
