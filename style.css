@@ -3700,3 +3700,19 @@ CATEGORY RESPONSIVE
     }
 
 }
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* Sidebar open হলে Menu icon লুকাবে */
+    body.sidebar-open .menu-btn {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+}
