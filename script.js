@@ -827,80 +827,139 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ==========================================
-// SIDEBAR QR OPTIONS
-// Connect Sidebar with QR Workspace
-// PC + MOBILE
+// QR HUB v4.0
+// SIDEBAR QR NAVIGATION
+// FIXED VERSION
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const sidebar = document.querySelector(".sidebar");
-    const uploadPanel = document.querySelector(".upload-panel");
-    const qrOptions = document.querySelectorAll(".qr-option");
+
+    const uploadPanel =
+        document.querySelector(".upload-panel");
 
     if (!sidebar || !uploadPanel) {
         return;
     }
 
-    // Sidebar QR menu items
-    const sidebarItems = sidebar.querySelectorAll("nav a");
 
-    sidebarItems.forEach(function (item) {
+    // ==========================================
+    // SIDEBAR QR NAMES
+    // ==========================================
 
-        const text = item.textContent.trim();
+    const qrTypes = [
+        "Image QR",
+        "Text QR",
+        "URL QR",
+        "WiFi QR",
+        "Contact QR"
+    ];
 
-        // Only QR creation options
-        const qrTypes = [
-            "Image QR",
-            "Text QR",
-            "URL QR",
-            "WiFi QR",
-            "Contact QR",
-            "Location QR"
-        ];
 
-        if (!qrTypes.includes(text)) {
+    // ==========================================
+    // SIDEBAR LINKS
+    // ==========================================
+
+    const sidebarLinks =
+        sidebar.querySelectorAll("nav a");
+
+
+    // ==========================================
+    // MAIN CATEGORY CARDS
+    // ==========================================
+
+    const categoryCards =
+        document.querySelectorAll(".category-card");
+
+
+    // ==========================================
+    // SIDEBAR CLICK
+    // ==========================================
+
+    sidebarLinks.forEach(function (link) {
+
+        const name =
+            link.textContent.trim();
+
+
+        // QR menu না হলে বাদ
+
+        if (!qrTypes.includes(name)) {
             return;
         }
 
-        item.addEventListener("click", function (e) {
 
-            e.preventDefault();
+        link.addEventListener("click", function (event) {
 
-            // --------------------------------------
-            // Find matching QR option card
-            // --------------------------------------
+            event.preventDefault();
 
-            let targetOption = null;
 
-            qrOptions.forEach(function (option) {
+            // ==================================
+            // SIDEBAR ACTIVE
+            // ==================================
 
-                const title = option.querySelector("h3");
+            sidebarLinks.forEach(function (item) {
 
-                if (!title) {
-                    return;
-                }
+                if (
+                    qrTypes.includes(
+                        item.textContent.trim()
+                    )
+                ) {
 
-                if (title.textContent.trim() === text) {
-                    targetOption = option;
+                    item.classList.remove(
+                        "qr-sidebar-active"
+                    );
+
                 }
 
             });
 
 
-            // --------------------------------------
-            // Trigger the SAME QR option
-            // --------------------------------------
+            link.classList.add(
+                "qr-sidebar-active"
+            );
 
-            if (targetOption) {
 
-                targetOption.click();
+            // ==================================
+            // FIND MATCHING CATEGORY CARD
+            // ==================================
 
-            } else {
+            let targetCard = null;
+
+
+            categoryCards.forEach(function (card) {
+
+                const title =
+                    card.querySelector("h3");
+
+
+                if (!title) {
+                    return;
+                }
+
+
+                if (
+                    title.textContent.trim() ===
+                    name
+                ) {
+
+                    targetCard = card;
+
+                }
+
+            });
+
+
+            // ==================================
+            // CARD FOUND
+            // ==================================
+
+            if (!targetCard) {
 
                 console.warn(
-                    "QR option not found:",
-                    text
+                    "Category card not found:",
+                    name
                 );
 
                 return;
@@ -908,78 +967,67 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            // --------------------------------------
-            // Highlight Sidebar Item
-            // --------------------------------------
+            // ==================================
+            // CLICK CATEGORY CARD
+            // ==================================
 
-            sidebarItems.forEach(function (navItem) {
-                navItem.classList.remove("qr-sidebar-active");
-            });
-
-            item.classList.add("qr-sidebar-active");
+            targetCard.click();
 
 
-            // --------------------------------------
-            // Attention Effect on QR Cards
-            // --------------------------------------
+            // ==================================
+            // SCROLL TO WORKSPACE
+            // ==================================
 
             setTimeout(function () {
-
-                qrOptions.forEach(function (option) {
-                    option.classList.remove("qr-attention");
-                });
-
-                qrOptions.forEach(function (option) {
-
-                    const title =
-                        option.querySelector("h3");
-
-                    if (
-                        title &&
-                        title.textContent.trim() === text
-                    ) {
-
-                        option.classList.add(
-                            "qr-attention"
-                        );
-
-                    }
-
-                });
-
-            }, 120);
-
-
-            // --------------------------------------
-            // Scroll to QR Category Section
-            // --------------------------------------
-
-            setTimeout(function () {
-
-                const categorySection =
-                    document.querySelector(".qr-categories");
-
-                if (!categorySection) {
-                    return;
-                }
 
                 const rect =
-                    categorySection.getBoundingClientRect();
+                    uploadPanel.getBoundingClientRect();
 
-                const top =
+
+                const absoluteTop =
                     window.pageYOffset +
-                    rect.top -
-                    80;
+                    rect.top;
+
+
+                const offset = 85;
+
 
                 window.scrollTo({
 
-                    top: Math.max(0, top),
+                    top:
+                        Math.max(
+                            0,
+                            absoluteTop - offset
+                        ),
 
                     behavior: "smooth"
 
                 });
 
-            }, 180);
+
+            }, 250);
+
+
+            // ==================================
+            // RGB ATTENTION
+            // ==================================
+
+            setTimeout(function () {
+
+                uploadPanel.classList.remove(
+                    "workspace-attention"
+                );
+
+
+                void uploadPanel.offsetWidth;
+
+
+                uploadPanel.classList.add(
+                    "workspace-attention"
+                );
+
+
+            }, 500);
 
         });
 
