@@ -3367,3 +3367,171 @@ CATEGORY RESPONSIVE
     }
 
 }
+
+
+
+
+
+
+
+/* ==========================================
+   MOBILE SIDEBAR
+   QR HUB v4.0
+========================================== */
+
+.sidebar-overlay {
+
+    display: none;
+
+}
+
+
+/* ==========================================
+   MOBILE ONLY
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* --------------------------------------
+       Sidebar
+    -------------------------------------- */
+
+    .sidebar {
+
+        position: fixed !important;
+
+        top: 0;
+        left: 0;
+
+        width: 285px !important;
+
+        height: 100vh;
+
+        z-index: 10000;
+
+        transform:
+            translateX(-110%);
+
+        transition:
+            transform 0.35s ease;
+
+        overflow-y: auto;
+
+        box-shadow:
+            8px 0 30px
+            rgba(0, 0, 0, 0.25);
+
+    }
+
+
+    /* --------------------------------------
+       Sidebar OPEN
+    -------------------------------------- */
+
+    .sidebar.mobile-sidebar-open {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    /* --------------------------------------
+       Overlay
+    -------------------------------------- */
+
+    .sidebar-overlay {
+
+        position: fixed;
+
+        inset: 0;
+
+        background:
+            rgba(0, 0, 0, 0.45);
+
+        backdrop-filter:
+            blur(3px);
+
+        -webkit-backdrop-filter:
+            blur(3px);
+
+        z-index: 9999;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        display: block;
+
+        transition:
+            opacity 0.3s ease;
+
+    }
+
+
+    .sidebar-overlay.sidebar-overlay-show {
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+    }
+
+
+    /* --------------------------------------
+       Menu Button
+    -------------------------------------- */
+
+    .menu-btn {
+
+        display: flex !important;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 42px;
+        height: 42px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        background:
+            rgba(0, 180, 255, 0.10);
+
+        color:
+            #00b4ff;
+
+        font-size: 19px;
+
+        transition:
+            all 0.25s ease;
+
+        position: relative;
+
+        z-index: 10001;
+
+    }
+
+
+    .menu-btn:active {
+
+        transform:
+            scale(0.92);
+
+    }
+
+
+    /* --------------------------------------
+       Prevent background scrolling
+    -------------------------------------- */
+
+    body.sidebar-open {
+
+        overflow: hidden;
+
+    }
+
+}
