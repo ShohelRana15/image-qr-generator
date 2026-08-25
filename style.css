@@ -3304,86 +3304,37 @@ CATEGORY RESPONSIVE
 
 
 /* ==========================================
-   SIDEBAR QR ACTIVE
+   SIDEBAR ACTIVE
 ========================================== */
 
 .qr-sidebar-active {
-    color: #00b4ff !important;
-    background: rgba(0, 180, 255, 0.12) !important;
+
+    color: #00c8ff !important;
+
+    background:
+        rgba(0, 200, 255, 0.12) !important;
+
     border-radius: 12px;
+
     box-shadow:
-        0 0 10px rgba(0, 180, 255, 0.25),
-        inset 0 0 10px rgba(0, 180, 255, 0.08);
+        0 0 12px rgba(0, 200, 255, 0.30);
+
 }
 
 
 /* ==========================================
-   QR CARD ATTENTION EFFECT
+   WORKSPACE ATTENTION
 ========================================== */
 
-.qr-attention {
-    position: relative;
-    z-index: 5;
+.workspace-attention {
 
     animation:
-        qrAttentionGlow 1.8s ease-in-out 3;
+        workspaceAttention 1.8s ease-in-out 3;
 
-    transform: translateY(-3px) scale(1.015);
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
 }
 
 
-/* RGB Animated Border */
-
-.qr-attention::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: -2px;
-
-    border-radius: inherit;
-
-    padding: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff004c,
-            #ff8a00,
-            #ffe600,
-            #00ff88,
-            #00c8ff,
-            #7a00ff,
-            #ff00c8,
-            #ff004c
-        );
-
-    background-size: 400% 400%;
-
-    animation: rgbBorderMove 2s linear infinite;
-
-    z-index: -1;
-
-    pointer-events: none;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-
-    mask-composite: exclude;
-}
-
-
-/* Glow */
-
-@keyframes qrAttentionGlow {
+@keyframes workspaceAttention {
 
     0% {
 
@@ -3395,16 +3346,16 @@ CATEGORY RESPONSIVE
     30% {
 
         box-shadow:
-            0 0 20px rgba(0, 200, 255, 0.55),
-            0 0 45px rgba(120, 0, 255, 0.35);
+            0 0 25px rgba(0, 200, 255, 0.65),
+            0 0 50px rgba(120, 0, 255, 0.35);
 
     }
 
     60% {
 
         box-shadow:
-            0 0 30px rgba(255, 0, 180, 0.5),
-            0 0 55px rgba(0, 200, 255, 0.35);
+            0 0 30px rgba(255, 0, 180, 0.55),
+            0 0 60px rgba(0, 200, 255, 0.35);
 
     }
 
@@ -3416,28 +3367,3 @@ CATEGORY RESPONSIVE
     }
 
 }
-
-
-/* RGB movement */
-
-@keyframes rgbBorderMove {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-
-}
-
-
-
-
-
-
