@@ -1216,3 +1216,75 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+
+
+
+
+// ==========================================
+// PREMIUM DARK MODE
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const darkModeSwitch =
+        document.querySelector(".dark-mode input[type='checkbox']");
+
+    if (!darkModeSwitch) {
+        return;
+    }
+
+
+    // ------------------------------------------
+    // Load saved mode
+    // ------------------------------------------
+
+    const savedMode =
+        localStorage.getItem("qrHubDarkMode");
+
+
+    if (savedMode === "enabled") {
+
+        document.body.classList.add("dark-mode");
+
+        darkModeSwitch.checked = true;
+
+    }
+    else {
+
+        document.body.classList.remove("dark-mode");
+
+        darkModeSwitch.checked = false;
+
+    }
+
+
+    // ------------------------------------------
+    // Toggle Dark Mode
+    // ------------------------------------------
+
+    darkModeSwitch.addEventListener("change", function () {
+
+        if (this.checked) {
+
+            document.body.classList.add("dark-mode");
+
+            localStorage.setItem(
+                "qrHubDarkMode",
+                "enabled"
+            );
+
+        }
+        else {
+
+            document.body.classList.remove("dark-mode");
+
+            localStorage.setItem(
+                "qrHubDarkMode",
+                "disabled"
+            );
+
+        }
+
+    });
+
+});
