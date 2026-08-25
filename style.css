@@ -3530,3 +3530,173 @@ CATEGORY RESPONSIVE
     }
 
 }
+
+
+
+
+
+/* ==========================================
+   QR HUB v4.0
+   MOBILE SIDEBAR FINAL POLISH
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* ======================================
+       WELCOME SCREEN ABOVE EVERYTHING
+    ====================================== */
+
+    #welcomeScreen {
+
+        z-index: 200000 !important;
+
+    }
+
+
+    /* ======================================
+       MOBILE SIDEBAR
+    ====================================== */
+
+    .sidebar {
+
+        width: 300px !important;
+
+        max-width: 86vw !important;
+
+    }
+
+
+    /* ======================================
+       SIDEBAR LOGO
+    ====================================== */
+
+    .sidebar .sidebar-logo h2 {
+
+        font-size: 22px !important;
+
+    }
+
+    .sidebar .sidebar-logo p {
+
+        font-size: 13px !important;
+
+    }
+
+
+    /* ======================================
+       SIDEBAR NAV TEXT
+    ====================================== */
+
+    .sidebar nav a {
+
+        font-size: 16px !important;
+
+        line-height: 1.4;
+
+        min-height: 48px;
+
+        padding:
+            12px 16px !important;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+
+    }
+
+
+    /* ======================================
+       SIDEBAR ICONS
+    ====================================== */
+
+    .sidebar nav a i {
+
+        font-size: 18px !important;
+
+        width: 23px;
+
+        min-width: 23px;
+
+        text-align: center;
+
+    }
+
+
+    /* ======================================
+       UPGRADE CARD
+    ====================================== */
+
+    .sidebar .upgrade-card h3 {
+
+        font-size: 17px !important;
+
+    }
+
+    .sidebar .upgrade-card p {
+
+        font-size: 13px !important;
+
+        line-height: 1.5;
+
+    }
+
+    .sidebar .upgrade-btn {
+
+        font-size: 14px !important;
+
+        padding: 11px 14px;
+
+    }
+
+
+    /* ======================================
+       DARK MODE
+    ====================================== */
+
+    .sidebar .dark-mode {
+
+        font-size: 15px !important;
+
+    }
+
+    .sidebar .dark-mode i {
+
+        font-size: 17px !important;
+
+    }
+
+
+    /* ======================================
+       FOOTER
+    ====================================== */
+
+    .sidebar .sidebar-footer p {
+
+        font-size: 13px !important;
+
+    }
+
+    .sidebar .sidebar-footer small {
+
+        font-size: 11px !important;
+
+    }
+
+
+    /* ======================================
+       MENU BUTTON
+    ====================================== */
+
+    .menu-btn {
+
+        width: 44px !important;
+
+        height: 44px !important;
+
+        font-size: 20px !important;
+
+    }
+
+}
