@@ -1034,3 +1034,185 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+
+
+// ==========================================
+// MOBILE SIDEBAR
+// QR HUB v4.0
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuBtn = document.querySelector(".menu-btn");
+    const sidebar = document.querySelector(".sidebar");
+
+    if (!menuBtn || !sidebar) {
+        return;
+    }
+
+
+    // ==========================================
+    // CREATE MOBILE OVERLAY
+    // ==========================================
+
+    let sidebarOverlay =
+        document.querySelector(".sidebar-overlay");
+
+
+    if (!sidebarOverlay) {
+
+        sidebarOverlay =
+            document.createElement("div");
+
+        sidebarOverlay.className =
+            "sidebar-overlay";
+
+        document.body.appendChild(
+            sidebarOverlay
+        );
+
+    }
+
+
+    // ==========================================
+    // OPEN SIDEBAR
+    // ==========================================
+
+    function openSidebar() {
+
+        sidebar.classList.add(
+            "mobile-sidebar-open"
+        );
+
+        sidebarOverlay.classList.add(
+            "sidebar-overlay-show"
+        );
+
+        document.body.classList.add(
+            "sidebar-open"
+        );
+
+    }
+
+
+    // ==========================================
+    // CLOSE SIDEBAR
+    // ==========================================
+
+    function closeSidebar() {
+
+        sidebar.classList.remove(
+            "mobile-sidebar-open"
+        );
+
+        sidebarOverlay.classList.remove(
+            "sidebar-overlay-show"
+        );
+
+        document.body.classList.remove(
+            "sidebar-open"
+        );
+
+    }
+
+
+    // ==========================================
+    // MENU BUTTON
+    // ==========================================
+
+    menuBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            if (
+                sidebar.classList.contains(
+                    "mobile-sidebar-open"
+                )
+            ) {
+
+                closeSidebar();
+
+            } else {
+
+                openSidebar();
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // CLICK OUTSIDE SIDEBAR
+    // ==========================================
+
+    sidebarOverlay.addEventListener(
+        "click",
+        function () {
+
+            closeSidebar();
+
+        }
+    );
+
+
+    // ==========================================
+    // SIDEBAR LINKS
+    // ==========================================
+
+    sidebar.addEventListener(
+        "click",
+        function (event) {
+
+            const link =
+                event.target.closest("a");
+
+            if (!link) {
+                return;
+            }
+
+
+            // QR option click হওয়ার পর
+            // Sidebar বন্ধ হবে
+
+            setTimeout(function () {
+
+                if (
+                    window.innerWidth <= 768
+                ) {
+
+                    closeSidebar();
+
+                }
+
+            }, 300);
+
+        }
+    );
+
+
+    // ==========================================
+    // RESIZE
+    // ==========================================
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                window.innerWidth > 768
+            ) {
+
+                closeSidebar();
+
+            }
+
+        }
+    );
+
+});
