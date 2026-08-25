@@ -823,3 +823,172 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
+
+
+// ==========================================
+// QR HUB v4.0
+// SIDEBAR QR OPTIONS
+// Unified with QR Workspace
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebar = document.querySelector(".sidebar");
+    const uploadPanel = document.querySelector(".upload-panel");
+
+    if (!sidebar || !uploadPanel) {
+        return;
+    }
+
+
+    // ==========================================
+    // SIDEBAR QR LINKS
+    // ==========================================
+
+    const sidebarQRLinks = sidebar.querySelectorAll("nav a");
+
+
+    // ==========================================
+    // FIND EXISTING QR OPTION
+    // ==========================================
+
+    function findQROption(type) {
+
+        const options =
+            document.querySelectorAll(".qr-option");
+
+        let foundOption = null;
+
+        options.forEach(function (option) {
+
+            const title =
+                option.querySelector("h3");
+
+            if (!title) {
+                return;
+            }
+
+            if (
+                title.textContent.trim() === type
+            ) {
+
+                foundOption = option;
+
+            }
+
+        });
+
+        return foundOption;
+
+    }
+
+
+    // ==========================================
+    // OPEN QR OPTION
+    // ==========================================
+
+    function openQROption(type) {
+
+        const option = findQROption(type);
+
+        if (!option) {
+
+            console.warn(
+                "QR Option not found:",
+                type
+            );
+
+            return;
+
+        }
+
+
+        // --------------------------------------
+        // Active sidebar
+        // --------------------------------------
+
+        sidebarQRLinks.forEach(function (link) {
+
+            const text =
+                link.textContent.trim();
+
+            if (
+                text === type
+            ) {
+
+                link.classList.add("active");
+
+            }
+            else if (
+                [
+                    "Image QR",
+                    "Text QR",
+                    "URL QR",
+                    "WiFi QR",
+                    "Contact QR",
+                    "Location QR"
+                ].includes(text)
+            ) {
+
+                link.classList.remove("active");
+
+            }
+
+        });
+
+
+        // --------------------------------------
+        // Trigger the existing QR option
+        // --------------------------------------
+
+        option.click();
+
+    }
+
+
+    // ==========================================
+    // SIDEBAR CLICK
+    // ==========================================
+
+    sidebarQRLinks.forEach(function (link) {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const text =
+                    link.textContent.trim();
+
+
+                const qrTypes = [
+
+                    "Image QR",
+                    "Text QR",
+                    "URL QR",
+                    "WiFi QR",
+                    "Contact QR",
+                    "Location QR"
+
+                ];
+
+
+                // Only handle QR options
+
+                if (!qrTypes.includes(text)) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                openQROption(text);
+
+            }
+        );
+
+    });
+
+});
+
