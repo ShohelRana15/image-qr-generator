@@ -4014,3 +4014,72 @@ body,
         border-color 0.35s ease,
         box-shadow 0.35s ease;
 }
+
+
+
+/* ==========================================
+   DARK MODE - MOBILE WIDTH FIX
+========================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .dashboard {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .main-content {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .topbar,
+    .hero-banner,
+    .qr-categories,
+    .stats-section,
+    .dashboard-bottom {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .upload-panel,
+    .activity-panel,
+    .quick-panel {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .upload-layout {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .category-grid,
+    .stats-grid {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .hero-banner {
+        overflow: hidden;
+    }
+
+    /* Dark mode-এ কোনো element
+       page-এর width বাড়িয়ে দেবে না */
+    * {
+        max-width: 100%;
+    }
+
+}
