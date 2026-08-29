@@ -612,7 +612,7 @@ function scrollToWorkspace() {
     }, 80);
 
 
-    // Glow শেষ হওয়ার পর class remove
+    // Glow শেষ হওয়ার পর class remove হবে
     setTimeout(function () {
 
         uploadPanel.classList.remove(
