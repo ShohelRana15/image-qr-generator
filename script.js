@@ -1,5 +1,60 @@
 // ==========================================
 // QR HUB v4.0
+// IMAGE QR - SUPABASE CORE
+// ==========================================
+
+const QRHUB_IMAGE_CONFIG = {
+    supabaseUrl: "https://vbufbeaktxvcxfcskyhr.supabase.co",
+    supabaseKey: "sb_publishable_HD8afj98r3io1rI-qRNVOw__JgSxR87",
+    storageBucket: "images",
+
+    qrWidth: 260,
+    qrMargin: 2,
+    qrErrorCorrection: "H"
+};
+
+let qrHubSupabase = null;
+
+function initializeQRHubSupabase() {
+
+    if (typeof supabase === "undefined") {
+
+        console.error(
+            "QR Hub: Supabase library is not loaded."
+        );
+
+        return false;
+    }
+
+    try {
+
+        qrHubSupabase = supabase.createClient(
+            QRHUB_IMAGE_CONFIG.supabaseUrl,
+            QRHUB_IMAGE_CONFIG.supabaseKey
+        );
+
+        console.log(
+            "QR Hub: Supabase initialized successfully."
+        );
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "QR Hub: Supabase initialization failed.",
+            error
+        );
+
+        return false;
+    }
+}
+
+
+
+
+// ==========================================
+// QR HUB v4.0
 // Dashboard JavaScript
 // Developed by SR Infinity
 // ==========================================
@@ -1459,3 +1514,83 @@ function showUpdateNotification(newWorker) {
     });
 
 }
+
+
+
+
+
+
+
+// ==========================================
+// QR HUB IMAGE QR
+// SUPABASE IMAGE UPLOAD
+// ==========================================
+
+async function uploadQRHubImageToSupabase(file) {
+
+    if (!qrHubSupabase) {
+
+        const initialized =
+            initializeQRHubSupabase();
+
+        if (!initialized) {
+            throw new Error(
+                "Supabase is not available."
+            );
+        }
+    }
+
+    if (!file) {
+        throw new Error(
+            "No image selected."
+        );
+    }
+
+    const safeName =
+        file.name || "image.png";
+
+    const fileName =
+        `${Date.now()}_${safeName}`;
+
+    const {
+        error
+    } = await qrHubSupabase
+        .storage
+        .from(
+            QRHUB_IMAGE_CONFIG.storageBucket
+        )
+        .upload(
+            fileName,
+            file,
+            {
+                upsert: true
+            }
+        );
+
+    if (error) {
+        throw error;
+    }
+
+    const {
+        data
+    } = qrHubSupabase
+        .storage
+        .from(
+            QRHUB_IMAGE_CONFIG.storageBucket
+        )
+        .getPublicUrl(fileName);
+
+    if (!data || !data.publicUrl) {
+
+        throw new Error(
+            "Public image URL could not be generated."
+        );
+    }
+
+    return data.publicUrl;
+}
+
+
+
+
+
