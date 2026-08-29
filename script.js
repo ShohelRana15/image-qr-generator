@@ -1221,7 +1221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ==========================================
-// PREMIUM DARK MODE
+// QR HUB PREMIUM DARK MODE
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1244,14 +1244,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (savedMode === "enabled") {
 
-        document.body.classList.add("dark-mode");
+        document.body.classList.add("qr-dark-mode");
 
         darkModeSwitch.checked = true;
 
-    }
-    else {
+    } else {
 
-        document.body.classList.remove("dark-mode");
+        document.body.classList.remove("qr-dark-mode");
 
         darkModeSwitch.checked = false;
 
@@ -1266,17 +1265,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (this.checked) {
 
-            document.body.classList.add("dark-mode");
+            document.body.classList.add("qr-dark-mode");
 
             localStorage.setItem(
                 "qrHubDarkMode",
                 "enabled"
             );
 
-        }
-        else {
+        } else {
 
-            document.body.classList.remove("dark-mode");
+            document.body.classList.remove("qr-dark-mode");
 
             localStorage.setItem(
                 "qrHubDarkMode",
