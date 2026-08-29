@@ -3990,7 +3990,197 @@ body.dark-mode .footer {
 
 
 /* ==========================================
-   SMOOTH DARK MODE TRANSITION
+   QR HUB PREMIUM DARK MODE
+========================================== */
+
+body.dark-mode {
+    background: #0b1120;
+    color: #e5e7eb;
+}
+
+body.dark-mode .main-content {
+    background: #0b1120;
+}
+
+body.dark-mode .sidebar {
+    background: #111827;
+    color: #e5e7eb;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .sidebar nav a {
+    color: #cbd5e1;
+}
+
+body.dark-mode .sidebar nav a:hover,
+body.dark-mode .sidebar nav a.active {
+    color: #38bdf8;
+    background: rgba(56,189,248,0.12);
+}
+
+body.dark-mode .topbar {
+    background: #111827;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .search-box {
+    background: #1f2937;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .search-box input {
+    color: #f8fafc;
+}
+
+body.dark-mode .search-box input::placeholder {
+    color: #94a3b8;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode p,
+body.dark-mode span {
+    color: inherit;
+}
+
+body.dark-mode .qr-categories,
+body.dark-mode .stats-section,
+body.dark-mode .dashboard-bottom {
+    color: #e5e7eb;
+}
+
+body.dark-mode .category-card {
+    background: #111827;
+    border-color: rgba(255,255,255,0.08);
+    color: #e5e7eb;
+}
+
+body.dark-mode .category-card:hover {
+    background: #172033;
+    border-color: rgba(0,180,255,0.35);
+    box-shadow: 0 0 20px rgba(0,180,255,0.12);
+}
+
+body.dark-mode .category-card p {
+    color: #94a3b8;
+}
+
+body.dark-mode .stat-card {
+    background: #111827;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .stat-card h4 {
+    color: #94a3b8;
+}
+
+body.dark-mode .stat-card h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .stat-card span {
+    color: #38bdf8;
+}
+
+body.dark-mode .upload-panel,
+body.dark-mode .activity-panel,
+body.dark-mode .quick-panel {
+    background: #111827;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .upload-box {
+    background: #0f172a;
+    border-color: rgba(255,255,255,0.10);
+}
+
+body.dark-mode .upload-box p {
+    color: #cbd5e1;
+}
+
+body.dark-mode .upload-box small {
+    color: #64748b;
+}
+
+body.dark-mode .qr-input,
+body.dark-mode .qr-text-input {
+    background: #1f2937;
+    color: #f8fafc;
+    border-color: rgba(255,255,255,0.10);
+}
+
+body.dark-mode .qr-input::placeholder,
+body.dark-mode .qr-text-input::placeholder {
+    color: #64748b;
+}
+
+body.dark-mode .qr-input:focus,
+body.dark-mode .qr-text-input:focus {
+    border-color: #00b4ff;
+    box-shadow: 0 0 0 3px rgba(0,180,255,0.12);
+}
+
+body.dark-mode .preview-panel {
+    background: #0f172a;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .preview-box {
+    background: #111827;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .preview-placeholder {
+    color: #64748b;
+}
+
+body.dark-mode .activity-list li {
+    border-color: rgba(255,255,255,0.07);
+}
+
+body.dark-mode .activity-list strong {
+    color: #f8fafc;
+}
+
+body.dark-mode .activity-list span,
+body.dark-mode .activity-list small {
+    color: #94a3b8;
+}
+
+body.dark-mode .chart-placeholder {
+    background: #0f172a;
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .month-stats,
+body.dark-mode .quick-summary {
+    background: #172033;
+}
+
+body.dark-mode .upgrade-card {
+    background: linear-gradient(145deg, #172033, #111827);
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .dark-mode {
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .dark-mode span {
+    color: #cbd5e1;
+}
+
+body.dark-mode .footer {
+    background: #080d18;
+    color: #94a3b8;
+    border-color: rgba(255,255,255,0.08);
+}
+
+
+/* ==========================================
+   SMOOTH TRANSITION
 ========================================== */
 
 body,
@@ -4013,36 +4203,4 @@ body,
         color 0.35s ease,
         border-color 0.35s ease,
         box-shadow 0.35s ease;
-}
-
-
-
-
-
-/* ==========================================
-   DARK MODE MOBILE SAFETY
-========================================== */
-
-@media (max-width: 768px) {
-
-    body.dark-mode,
-    body.dark-theme,
-    body.dark {
-        width: 100% !important;
-        min-width: 100% !important;
-        max-width: 100% !important;
-
-        overflow-x: hidden !important;
-    }
-
-    body.dark-mode .main-content,
-    body.dark-theme .main-content,
-    body.dark .main-content {
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-
-        margin-left: 0 !important;
-    }
-
 }
