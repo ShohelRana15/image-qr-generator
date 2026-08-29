@@ -1286,3 +1286,176 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+
+
+// ==========================================
+// QR HUB - AUTOMATIC PWA UPDATE SYSTEM
+// ==========================================
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+            .register("./sw.js")
+            .then((registration) => {
+
+                console.log(
+                    "QR Hub Service Worker registered."
+                );
+
+
+                // ----------------------------------
+                // Check for update
+                // ----------------------------------
+
+                registration.update();
+
+
+                // ----------------------------------
+                // New Service Worker detected
+                // ----------------------------------
+
+                registration.addEventListener(
+                    "updatefound",
+                    () => {
+
+                        const newWorker =
+                            registration.installing;
+
+                        if (!newWorker) return;
+
+
+                        newWorker.addEventListener(
+                            "statechange",
+                            () => {
+
+                                if (
+                                    newWorker.state ===
+                                    "installed"
+                                ) {
+
+                                    // পুরোনো SW থাকলে
+                                    // নতুন update এসেছে
+                                    if (
+                                        navigator
+                                            .serviceWorker
+                                            .controller
+                                    ) {
+
+                                        showUpdateNotification(
+                                            newWorker
+                                        );
+
+                                    }
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            })
+            .catch((error) => {
+
+                console.error(
+                    "QR Hub Service Worker Error:",
+                    error
+                );
+
+            });
+
+    });
+
+
+    // ------------------------------------------
+    // New Service Worker activated
+    // ------------------------------------------
+
+    let refreshing = false;
+
+    navigator.serviceWorker.addEventListener(
+        "controllerchange",
+        () => {
+
+            if (refreshing) return;
+
+            refreshing = true;
+
+            console.log(
+                "QR Hub updated. Reloading..."
+            );
+
+            window.location.reload();
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// UPDATE NOTIFICATION
+// ==========================================
+
+function showUpdateNotification(newWorker) {
+
+    // আগে notification থাকলে remove
+    const oldNotification =
+        document.getElementById(
+            "qrHubUpdateNotification"
+        );
+
+    if (oldNotification) {
+        oldNotification.remove();
+    }
+
+
+    // Notification
+    const notification =
+        document.createElement("div");
+
+    notification.id =
+        "qrHubUpdateNotification";
+
+
+    notification.innerHTML = `
+
+        <div class="qrhub-update-icon">
+            🔄
+        </div>
+
+        <div class="qrhub-update-content">
+
+            <strong>
+                New QR Hub Update Available
+            </strong>
+
+            <span>
+                Updating...
+            </span>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        notification
+    );
+
+
+    // ------------------------------------------
+    // Activate new version
+    // ------------------------------------------
+
+    newWorker.postMessage({
+        type: "SKIP_WAITING"
+    });
+
+}
