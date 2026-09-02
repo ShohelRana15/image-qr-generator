@@ -359,6 +359,15 @@ function showImageQR() {
             ".image-upload-box"
         );
 
+    const uploadLayout =
+    uploadPanel.querySelector(".upload-layout");
+
+const previewPanel =
+    uploadPanel.querySelector(".preview-panel");
+
+const previewActions =
+    uploadPanel.querySelector(".preview-actions");
+
 
     const chooseButton =
         uploadPanel.querySelector(
