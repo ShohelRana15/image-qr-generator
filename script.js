@@ -634,41 +634,46 @@ const previewActions =
 
         try {
 
-            const croppedCanvas =
-                window.qrHubCropper.getCroppedCanvas({
-                    imageSmoothingEnabled: true,
-                    imageSmoothingQuality: "high"
-                });
+           const croppedCanvas =
+    window.qrHubCropper.getCroppedCanvas({
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: "high"
+    });
 
-            const croppedBlob =
-                await new Promise((resolve, reject) => {
+if (!croppedCanvas) {
+    throw new Error("Could not create cropped image.");
+}
 
-                    croppedCanvas.toBlob(
-                        function (blob) {
+// Keep PNG — no JPEG compression
+const croppedBlob =
+    await new Promise((resolve, reject) => {
 
-                            if (blob) {
-                                resolve(blob);
-                            } else {
-                                reject(
-                                    new Error(
-                                        "Could not create cropped image."
-                                    )
-                                );
-                            }
+        croppedCanvas.toBlob(
+            function (blob) {
 
-                        },
-                        "image/png",
-                        1
+                if (blob && blob.size > 0) {
+                    resolve(blob);
+                } else {
+                    reject(
+                        new Error(
+                            "Could not create cropped PNG image."
+                        )
                     );
-                });
-
-            const croppedFile = new File(
-                [croppedBlob],
-                `cropped_${Date.now()}.png`,
-                {
-                    type: "image/png"
                 }
-            );
+
+            },
+            "image/png"
+        );
+    });
+
+const croppedFile = new File(
+    [croppedBlob],
+    `cropped_${Date.now()}.png`,
+    {
+        type: "image/png",
+        lastModified: Date.now()
+    }
+);
 
             // Destroy Cropper
             window.qrHubCropper.destroy();
