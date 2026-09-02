@@ -190,165 +190,839 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // PREVIEW BOX
-    // ==========================================
+// PREVIEW BOX
+// ==========================================
 
-    function previewBox() {
+function previewBox() {
 
-        return `
+    return `
 
-            <div class="preview-panel">
+        <div class="preview-panel">
 
-                <h3>Preview</h3>
+            <h3>Preview</h3>
 
-                <div class="preview-box">
+            <div class="preview-box">
 
-                    <div class="preview-placeholder">
+                <div class="preview-placeholder">
 
-                        <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-qrcode"></i>
 
-                        <p>
-                            Your QR code will appear here
-                        </p>
-
-                    </div>
+                    <p>
+                        Your QR code will appear here
+                    </p>
 
                 </div>
 
-                <div class="preview-actions">
-
-                    <button
-                        type="button"
-                        class="secondary-btn">
-
-                        Download
-
-                    </button>
-
-                    <button
-                        type="button"
-                        class="primary-btn">
-
-                        Share
-
-                    </button>
-
-                </div>
+                <canvas
+                    class="image-qr-canvas"
+                    style="
+                        display:none;
+                        max-width:100%;
+                        height:auto;
+                        border-radius:12px;
+                    "
+                ></canvas>
 
             </div>
 
-        `;
+
+            <div class="preview-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn image-download-btn">
+
+                    Download
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="primary-btn image-share-btn">
+
+                    Share
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+    
+
+    // ==========================================
+// IMAGE QR
+// FULL FUNCTION
+// Upload + Drag & Drop + Supabase
+// QR Generate + Download + Share
+// ==========================================
+
+function showImageQR() {
+
+    uploadPanel.innerHTML = `
+
+        ${workspaceHeader(
+            "Create Image QR",
+            "Upload an image to generate your QR code"
+        )}
+
+
+        <div class="upload-layout">
+
+
+            <!-- ==================================
+                 UPLOAD AREA
+            ================================== -->
+
+            <div class="upload-box image-upload-box">
+
+
+                <div class="upload-icon">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                </div>
+
+
+                <h3>
+                    Upload Image
+                </h3>
+
+
+                <p>
+                    Drag & Drop your image here
+                </p>
+
+
+                <span>
+                    or
+                </span>
+
+
+                <button
+                    type="button"
+                    class="primary-btn choose-image-btn">
+
+                    Choose File
+
+                </button>
+
+
+                <input
+                    type="file"
+                    class="image-file-input"
+                    accept="image/png,image/jpeg,image/webp"
+                    hidden
+                >
+
+
+                <small>
+                    JPG, PNG or WEBP • Max 10MB
+                </small>
+
+
+                <div
+                    class="image-upload-status"
+                    style="
+                        margin-top:12px;
+                        font-size:13px;
+                        text-align:center;
+                    "
+                ></div>
+
+
+            </div>
+
+
+            <!-- ==================================
+                 PREVIEW
+            ================================== -->
+
+            ${previewBox()}
+
+
+        </div>
+
+    `;
+
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const uploadBox =
+        uploadPanel.querySelector(
+            ".image-upload-box"
+        );
+
+
+    const chooseButton =
+        uploadPanel.querySelector(
+            ".choose-image-btn"
+        );
+
+
+    const input =
+        uploadPanel.querySelector(
+            ".image-file-input"
+        );
+
+
+    const status =
+        uploadPanel.querySelector(
+            ".image-upload-status"
+        );
+
+
+    const canvas =
+        uploadPanel.querySelector(
+            ".image-qr-canvas"
+        );
+
+
+    const placeholder =
+        uploadPanel.querySelector(
+            ".preview-placeholder"
+        );
+
+
+    const downloadButton =
+        uploadPanel.querySelector(
+            ".image-download-btn"
+        );
+
+
+    const shareButton =
+        uploadPanel.querySelector(
+            ".image-share-btn"
+        );
+
+
+    // ==========================================
+    // CURRENT IMAGE URL
+    // ==========================================
+
+    let currentImageURL = "";
+
+
+    // ==========================================
+    // VALIDATE IMAGE
+    // ==========================================
+
+    function validateImage(file) {
+
+        if (!file) {
+
+            return false;
+
+        }
+
+
+        // File type
+
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+
+        if (!allowedTypes.includes(file.type)) {
+
+            status.innerHTML =
+                "❌ Only JPG, PNG or WEBP images are allowed.";
+
+            status.style.color = "red";
+
+            return false;
+
+        }
+
+
+        // 10MB limit
+
+        if (
+            file.size >
+            10 * 1024 * 1024
+        ) {
+
+            status.innerHTML =
+                "❌ Maximum file size is 10MB.";
+
+            status.style.color = "red";
+
+            return false;
+
+        }
+
+
+        return true;
+
     }
 
 
     // ==========================================
-    // IMAGE QR
+    // PROCESS IMAGE
     // ==========================================
 
-    function showImageQR() {
+    async function processImage(file) {
 
-        uploadPanel.innerHTML = `
+        if (!validateImage(file)) {
 
-            ${workspaceHeader(
-                "Create Image QR",
-                "Upload an image to generate your QR code"
-            )}
+            return;
 
-            <div class="upload-layout">
+        }
 
-                <div class="upload-box">
 
-                    <div class="upload-icon">
+        // --------------------------------------
+        // Show file name
+        // --------------------------------------
 
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
+        chooseButton.innerHTML = `
 
-                    </div>
+            <i class="fa-solid fa-check"></i>
 
-                    <h3>Upload Image</h3>
+            ${file.name}
 
-                    <p>
-                        Drag & Drop your image here
-                    </p>
-
-                    <span>or</span>
-
-                    <button
-                        type="button"
-                        class="primary-btn choose-image-btn">
-
-                        Choose File
-
-                    </button>
-
-                    <input
-                        type="file"
-                        class="image-file-input"
-                        accept="image/png,image/jpeg,image/webp"
-                        hidden
-                    >
-
-                    <small>
-                        JPG, PNG or WEBP • Max 10MB
-                    </small>
-
-                </div>
-
-                ${previewBox()}
-
-            </div>
         `;
 
 
-        const button =
-            uploadPanel.querySelector(".choose-image-btn");
+        status.innerHTML =
+            "Uploading image...";
 
-        const input =
-            uploadPanel.querySelector(".image-file-input");
-
-
-        if (button && input) {
-
-            button.addEventListener("click", function () {
-
-                input.click();
-
-            });
+        status.style.color =
+            "#2563eb";
 
 
-            input.addEventListener("change", function () {
+        // Disable controls
 
-                if (!this.files.length) {
-                    return;
+        chooseButton.disabled = true;
+
+
+        try {
+
+
+            // ==================================
+            // UPLOAD TO SUPABASE
+            // ==================================
+
+            const publicURL =
+                await uploadQRHubImageToSupabase(
+                    file
+                );
+
+
+            if (!publicURL) {
+
+                throw new Error(
+                    "Image URL was not generated."
+                );
+
+            }
+
+
+            currentImageURL =
+                publicURL;
+
+
+            // ==================================
+            // GENERATE QR
+            // ==================================
+
+            await QRCode.toCanvas(
+
+                canvas,
+
+                currentImageURL,
+
+                {
+
+                    width: 260,
+
+                    margin: 2,
+
+                    errorCorrectionLevel: "H",
+
+                    color: {
+
+                        dark: "#000000",
+
+                        light: "#ffffff"
+
+                    }
+
                 }
 
-
-                const file = this.files[0];
-
-
-                if (file.size > 10 * 1024 * 1024) {
-
-                    alert("Maximum file size is 10MB.");
-
-                    this.value = "";
-
-                    return;
-                }
+            );
 
 
-                button.innerHTML = `
+            // ==================================
+            // SHOW QR
+            // ==================================
 
-                    <i class="fa-solid fa-check"></i>
+            placeholder.style.display =
+                "none";
 
-                    ${file.name}
 
-                `;
+            canvas.style.display =
+                "block";
 
-            });
+
+            status.innerHTML =
+                "✅ Image QR generated successfully.";
+
+            status.style.color =
+                "green";
+
+
+            // ==================================
+            // DRAG AREA SUCCESS
+            // ==================================
+
+            uploadBox.classList.add(
+                "image-upload-success"
+            );
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Image QR Error:",
+                error
+            );
+
+
+            status.innerHTML =
+                "❌ " +
+                (
+                    error.message ||
+                    "Image upload failed."
+                );
+
+
+            status.style.color =
+                "red";
+
+
+            currentImageURL = "";
+
+
+        }
+
+
+        finally {
+
+            chooseButton.disabled =
+                false;
 
         }
 
     }
 
+
+    // ==========================================
+    // CHOOSE FILE
+    // ==========================================
+
+    chooseButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            input.click();
+
+        }
+    );
+
+
+    // ==========================================
+    // FILE INPUT CHANGE
+    // ==========================================
+
+    input.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files &&
+                this.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            processImage(file);
+
+        }
+    );
+
+
+    // ==========================================
+    // CLICK UPLOAD BOX
+    // ==========================================
+
+    uploadBox.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target.closest(
+                    ".choose-image-btn"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            input.click();
+
+        }
+    );
+
+
+    // ==========================================
+    // DRAG OVER
+    // ==========================================
+
+    uploadBox.addEventListener(
+        "dragover",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadBox.classList.add(
+                "drag-over"
+            );
+
+
+            status.innerHTML =
+                "📂 Drop your image here";
+
+
+            status.style.color =
+                "#2563eb";
+
+        }
+    );
+
+
+    // ==========================================
+    // DRAG ENTER
+    // ==========================================
+
+    uploadBox.addEventListener(
+        "dragenter",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadBox.classList.add(
+                "drag-over"
+            );
+
+        }
+    );
+
+
+    // ==========================================
+    // DRAG LEAVE
+    // ==========================================
+
+    uploadBox.addEventListener(
+        "dragleave",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadBox.classList.remove(
+                "drag-over"
+            );
+
+
+            if (!currentImageURL) {
+
+                status.innerHTML = "";
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // DROP
+    // ==========================================
+
+    uploadBox.addEventListener(
+        "drop",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadBox.classList.remove(
+                "drag-over"
+            );
+
+
+            const files =
+                event.dataTransfer.files;
+
+
+            if (
+                !files ||
+                !files.length
+            ) {
+
+                return;
+
+            }
+
+
+            const file =
+                files[0];
+
+
+            processImage(file);
+
+        }
+    );
+
+
+    // ==========================================
+    // DOWNLOAD QR
+    // ==========================================
+
+    downloadButton.addEventListener(
+        "click",
+        function () {
+
+            if (!currentImageURL) {
+
+                alert(
+                    "Please upload an image first."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const link =
+                    document.createElement("a");
+
+
+                link.download =
+                    "QR-Hub-Image-QR.png";
+
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+
+                link.click();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Download Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to download QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHARE QR
+    // ==========================================
+
+    shareButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!currentImageURL) {
+
+                alert(
+                    "Please upload an image first."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+
+                // --------------------------------
+                // Convert QR canvas to Blob
+                // --------------------------------
+
+                const blob =
+                    await new Promise(
+                        function (resolve) {
+
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            );
+
+                        }
+                    );
+
+
+                // --------------------------------
+                // Mobile Web Share
+                // --------------------------------
+
+                if (
+                    navigator.share &&
+                    window.File
+                ) {
+
+
+                    const qrFile =
+                        new File(
+
+                            [blob],
+
+                            "QR-Hub-Image-QR.png",
+
+                            {
+                                type:
+                                    "image/png"
+                            }
+
+                        );
+
+
+                    if (
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files: [qrFile]
+                        })
+                    ) {
+
+                        await navigator.share({
+
+                            title:
+                                "QR Hub Image QR",
+
+                            text:
+                                "QR code generated by QR Hub",
+
+                            files: [qrFile]
+
+                        });
+
+
+                        return;
+
+                    }
+
+                }
+
+
+                // --------------------------------
+                // Fallback
+                // --------------------------------
+
+                if (
+                    navigator.share
+                ) {
+
+                    await navigator.share({
+
+                        title:
+                            "QR Hub Image QR",
+
+                        text:
+                            currentImageURL
+
+                    });
+
+                    return;
+
+                }
+
+
+                // --------------------------------
+                // No Share API
+                // --------------------------------
+
+                alert(
+                    "Sharing is not supported on this device. Please use Download."
+                );
+
+
+            }
+
+            catch (error) {
+
+                if (
+                    error.name ===
+                    "AbortError"
+                ) {
+
+                    return;
+
+                }
+
+
+                console.error(
+                    "Share Error:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to share QR code."
+                );
+
+            }
+
+        }
+    );
+
+}
+    
 
     // ==========================================
     // TEXT QR
