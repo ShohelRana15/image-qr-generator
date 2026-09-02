@@ -4548,3 +4548,91 @@ body.qr-dark-mode
         width: 100%;
     }
 }
+
+
+
+
+
+/* ==========================================
+   IMAGE QR - FULL WIDTH CROP MODE
+   ========================================== */
+
+.upload-layout.image-crop-mode {
+    grid-template-columns: 1fr !important;
+}
+
+.upload-layout.image-crop-mode
+.image-upload-box {
+    display: none !important;
+}
+
+.upload-layout.image-crop-mode
+.preview-panel {
+    width: 100%;
+    max-width: 100%;
+}
+
+.upload-layout.image-crop-mode
+.preview-box {
+    width: 100%;
+    max-width: 100%;
+    min-height: 360px;
+    box-sizing: border-box;
+}
+
+.upload-layout.image-crop-mode
+.image-crop-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: 360px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.upload-layout.image-crop-mode
+.crop-action-buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.upload-layout.image-crop-mode
+.crop-action-buttons button {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+}
+
+.upload-layout.image-crop-mode
+.image-upload-status {
+    width: 100%;
+    max-width: 100%;
+    margin: 12px 0 0;
+    text-align: center;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+
+    .upload-layout.image-crop-mode
+    .preview-box {
+        min-height: 300px;
+    }
+
+    .upload-layout.image-crop-mode
+    .image-crop-wrapper {
+        height: 300px;
+    }
+
+    .upload-layout.image-crop-mode
+    .crop-action-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+
