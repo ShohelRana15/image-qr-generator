@@ -687,9 +687,15 @@ const croppedFile = new File(
             status.style.color = "#2563eb";
 
             // Upload cropped image to existing Supabase helper
+            console.log("Cropped file:", {
+            name: croppedFile.name,
+            type: croppedFile.type,
+            size: croppedFile.size
+            });
             const publicURL =
                 await uploadQRHubImageToSupabase(croppedFile);
-
+            console.log("Supabase upload successful:", publicURL);
+            
             if (!publicURL) {
                 throw new Error(
                     "Image URL was not generated."
