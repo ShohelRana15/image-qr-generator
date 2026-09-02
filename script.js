@@ -469,162 +469,270 @@ function showImageQR() {
     // PROCESS IMAGE
     // ==========================================
 
-    async function processImage(file) {
+   async function processImage(file) {
 
-        if (!validateImage(file)) {
+    if (!validateImage(file)) {
+        return;
+    }
 
-            return;
+    chooseButton.innerHTML = `
+        <i class="fa-solid fa-check"></i>
+        ${file.name}
+    `;
 
+    const previewBoxElement =
+        uploadPanel.querySelector(".preview-box");
+
+    status.innerHTML =
+        "✂️ Adjust the crop area, then click Crop & Generate QR.";
+    status.style.color = "#2563eb";
+
+    chooseButton.disabled = true;
+
+    // Remove old cropper if exists
+    if (window.qrHubCropper) {
+        window.qrHubCropper.destroy();
+        window.qrHubCropper = null;
+    }
+
+    // Create temporary image URL
+    const imageURL = URL.createObjectURL(file);
+
+    // Hide QR canvas
+    canvas.style.display = "none";
+    placeholder.style.display = "none";
+
+    // Create crop area
+    const cropWrapper = document.createElement("div");
+    cropWrapper.className = "image-crop-wrapper";
+
+    cropWrapper.innerHTML = `
+        <img
+            class="image-crop-target"
+            src="${imageURL}"
+            alt="Crop image"
+            style="
+                display:block;
+                max-width:100%;
+                width:100%;
+            "
+        >
+    `;
+
+    previewBoxElement.appendChild(cropWrapper);
+
+    // Crop buttons
+    const cropButtons = document.createElement("div");
+
+    cropButtons.className = "crop-action-buttons";
+
+    cropButtons.innerHTML = `
+        <button
+            type="button"
+            class="secondary-btn crop-cancel-btn"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="button"
+            class="primary-btn crop-confirm-btn"
+        >
+            Crop & Generate QR
+        </button>
+    `;
+
+    previewBoxElement.appendChild(cropButtons);
+
+    const cropImage =
+        cropWrapper.querySelector(".image-crop-target");
+
+    const cancelButton =
+        cropButtons.querySelector(".crop-cancel-btn");
+
+    const confirmButton =
+        cropButtons.querySelector(".crop-confirm-btn");
+
+    // Initialize Cropper
+    window.qrHubCropper = new Cropper(cropImage, {
+
+        aspectRatio: NaN,
+
+        viewMode: 1,
+
+        autoCropArea: 0.8,
+
+        responsive: true,
+
+        background: false,
+
+        movable: true,
+
+        zoomable: true,
+
+        cropBoxMovable: true,
+
+        cropBoxResizable: true
+    });
+
+    // CANCEL
+    cancelButton.addEventListener("click", function () {
+
+        if (window.qrHubCropper) {
+            window.qrHubCropper.destroy();
+            window.qrHubCropper = null;
         }
 
+        URL.revokeObjectURL(imageURL);
 
-        // --------------------------------------
-        // Show file name
-        // --------------------------------------
+        cropWrapper.remove();
+        cropButtons.remove();
+
+        placeholder.style.display = "block";
+        canvas.style.display = "none";
 
         chooseButton.innerHTML = `
-
-            <i class="fa-solid fa-check"></i>
-
-            ${file.name}
-
+            <i class="fa-solid fa-upload"></i>
+            Choose Image
         `;
 
+        status.innerHTML = "";
 
-        status.innerHTML =
-            "Uploading image...";
+        chooseButton.disabled = false;
+    });
 
-        status.style.color =
-            "#2563eb";
+    // CONFIRM CROP
+    confirmButton.addEventListener("click", async function () {
 
+        if (!window.qrHubCropper) {
+            return;
+        }
 
-        // Disable controls
+        confirmButton.disabled = true;
+        cancelButton.disabled = true;
 
-        chooseButton.disabled = true;
-
+        status.innerHTML = "✂️ Cropping image...";
+        status.style.color = "#2563eb";
 
         try {
 
+            const croppedCanvas =
+                window.qrHubCropper.getCroppedCanvas({
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: "high"
+                });
 
-            // ==================================
-            // UPLOAD TO SUPABASE
-            // ==================================
+            const croppedBlob =
+                await new Promise((resolve, reject) => {
 
+                    croppedCanvas.toBlob(
+                        function (blob) {
+
+                            if (blob) {
+                                resolve(blob);
+                            } else {
+                                reject(
+                                    new Error(
+                                        "Could not create cropped image."
+                                    )
+                                );
+                            }
+
+                        },
+                        "image/png",
+                        1
+                    );
+                });
+
+            const croppedFile = new File(
+                [croppedBlob],
+                `cropped_${Date.now()}.png`,
+                {
+                    type: "image/png"
+                }
+            );
+
+            // Destroy Cropper
+            window.qrHubCropper.destroy();
+            window.qrHubCropper = null;
+
+            URL.revokeObjectURL(imageURL);
+
+            cropWrapper.remove();
+            cropButtons.remove();
+
+            status.innerHTML =
+                "⬆️ Uploading cropped image...";
+            status.style.color = "#2563eb";
+
+            // Upload cropped image to existing Supabase helper
             const publicURL =
-                await uploadQRHubImageToSupabase(
-                    file
-                );
-
+                await uploadQRHubImageToSupabase(croppedFile);
 
             if (!publicURL) {
-
                 throw new Error(
                     "Image URL was not generated."
                 );
-
             }
 
+            currentImageURL = publicURL;
 
-            currentImageURL =
-                publicURL;
-
-
-            // ==================================
-            // GENERATE QR
-            // ==================================
-
+            // Generate QR
             await QRCode.toCanvas(
-
                 canvas,
-
                 currentImageURL,
-
                 {
-
                     width: 260,
-
                     margin: 2,
-
                     errorCorrectionLevel: "H",
-
                     color: {
-
                         dark: "#000000",
-
                         light: "#ffffff"
-
                     }
-
                 }
-
             );
 
-
-            // ==================================
-            // SHOW QR
-            // ==================================
-
-            placeholder.style.display =
-                "none";
-
-
-            canvas.style.display =
-                "block";
-
+            placeholder.style.display = "none";
+            canvas.style.display = "block";
 
             status.innerHTML =
-                "✅ Image QR generated successfully.";
-
-            status.style.color =
-                "green";
-
-
-            // ==================================
-            // DRAG AREA SUCCESS
-            // ==================================
+                "✅ Cropped image QR generated successfully.";
+            status.style.color = "green";
 
             uploadBox.classList.add(
                 "image-upload-success"
             );
 
-
         }
-
         catch (error) {
 
             console.error(
-                "Image QR Error:",
+                "Image Crop/QR Error:",
                 error
             );
 
-
             status.innerHTML =
                 "❌ " +
-                (
-                    error.message ||
-                    "Image upload failed."
-                );
+                (error.message ||
+                    "Image processing failed.");
 
-
-            status.style.color =
-                "red";
-
+            status.style.color = "red";
 
             currentImageURL = "";
-
-
         }
-
 
         finally {
 
-            chooseButton.disabled =
-                false;
+            chooseButton.disabled = false;
 
+            confirmButton.disabled = false;
+            cancelButton.disabled = false;
         }
+    });
+}
 
-    }
 
+    
 
     // ==========================================
     // CHOOSE FILE
