@@ -485,7 +485,7 @@ const previewActions =
     }
 
     // Move status message below Preview
-    previewPanel.appendChild(status);
+    previewPanel.insertBefore(status, previewActions);
 
     // Activate full-width crop mode
     uploadLayout.classList.add("image-crop-mode");
