@@ -484,6 +484,12 @@ const previewActions =
         return;
     }
 
+    // Move status message below Preview
+    previewPanel.appendChild(status);
+
+    // Activate full-width crop mode
+    uploadLayout.classList.add("image-crop-mode");
+
     chooseButton.innerHTML = `
         <i class="fa-solid fa-check"></i>
         ${file.name}
@@ -593,6 +599,9 @@ const previewActions =
         }
 
         URL.revokeObjectURL(imageURL);
+        // Restore original upload layout
+        uploadBox.appendChild(status);
+        uploadLayout.classList.remove("image-crop-mode");
 
         cropWrapper.remove();
         cropButtons.remove();
