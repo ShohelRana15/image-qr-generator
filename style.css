@@ -4398,3 +4398,108 @@ body,
     }
 
 }
+
+
+
+
+
+/* ==========================================
+   IMAGE QR - DRAG & DROP
+========================================== */
+
+.image-upload-box {
+    transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.image-upload-box.drag-over {
+
+    border-color: #2563eb !important;
+
+    background:
+        rgba(37, 99, 235, 0.08) !important;
+
+    transform:
+        scale(1.015);
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.10),
+        0 15px 35px rgba(37, 99, 235, 0.15);
+
+}
+
+
+.image-upload-box.image-upload-success {
+
+    border-color: #22c55e !important;
+
+}
+
+
+.image-upload-box .image-upload-status {
+
+    min-height: 18px;
+
+    transition:
+        color 0.25s ease;
+
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.qr-dark-mode
+.image-upload-box.drag-over {
+
+    background:
+        rgba(37, 99, 235, 0.12) !important;
+
+    border-color:
+        #38bdf8 !important;
+
+    box-shadow:
+        0 0 0 4px rgba(56, 189, 248, 0.10),
+        0 15px 35px rgba(0, 0, 0, 0.30);
+
+}
+
+
+body.qr-dark-mode
+.image-upload-box.image-upload-success {
+
+    border-color:
+        #22c55e !important;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .image-upload-box {
+
+        width: 100%;
+
+        min-width: 0;
+
+    }
+
+
+    .image-qr-canvas {
+
+        max-width: 100%;
+
+        height: auto;
+
+    }
+
+}
