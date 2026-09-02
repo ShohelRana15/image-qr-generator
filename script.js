@@ -51,8 +51,6 @@ function initializeQRHubSupabase() {
 }
 
 
-
-
 // ==========================================
 // QR HUB v4.0
 // Dashboard JavaScript
@@ -755,7 +753,6 @@ const croppedFile = new File(
 }
 
 
-    
 
     // ==========================================
     // CHOOSE FILE
