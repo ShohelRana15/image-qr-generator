@@ -1568,7 +1568,10 @@ function scrollToWorkspace() {
                     showContactQR();
 
                     break;
-
+                    
+                case "QR Scanner":
+                    showQRScanner();
+                    break;
 
                 case "More":
 
@@ -1711,14 +1714,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // SIDEBAR QR NAMES
     // ==========================================
 
-    const qrTypes = [
-        "Image QR",
-        "Text QR",
-        "URL QR",
-        "WiFi QR",
-        "Contact QR"
-    ];
-
+  const qrTypes = [
+    "Image QR",
+    "Text QR",
+    "URL QR",
+    "WiFi QR",
+    "Contact QR",
+    "QR Scanner"
+];
 
     // ==========================================
     // SIDEBAR LINKS
