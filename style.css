@@ -4829,3 +4829,31 @@ body.qr-dark-mode
 }
 
 
+
+
+/* ==========================================
+   SCANNER RESULT ATTENTION
+   ========================================== */
+
+.scanner-result-attention {
+    animation: scannerResultAttention 0.8s ease;
+}
+
+@keyframes scannerResultAttention {
+
+    0% {
+        transform: scale(0.98);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
