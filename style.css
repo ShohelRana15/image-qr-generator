@@ -4677,3 +4677,97 @@ body.qr-dark-mode
     text-align: center !important;
     flex: none !important;
 }
+
+
+
+/* ==========================================
+   QR SCANNER
+   ========================================== */
+
+.scanner-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.scanner-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.scanner-camera-box,
+.scanner-gallery-box {
+    width: 100%;
+    min-height: 300px;
+    border: 2px dashed rgba(255,255,255,0.15);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.scanner-placeholder i,
+.scanner-gallery-box > i {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.scanner-placeholder h3,
+.scanner-gallery-box h3 {
+    margin: 5px 0;
+}
+
+.scanner-placeholder p,
+.scanner-gallery-box p {
+    margin: 5px 0 20px;
+    opacity: 0.75;
+}
+
+.qr-scanner-video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 14px;
+    display: none;
+}
+
+.scanner-camera-btn,
+.scanner-gallery-btn {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.scanner-result-box {
+    width: 100%;
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 18px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.scanner-result-placeholder i {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.scanner-result-placeholder p {
+    opacity: 0.7;
+}
+
+@media (max-width: 700px) {
+
+    .scanner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .scanner-camera-box,
+    .scanner-gallery-box {
+        min-height: 260px;
+    }
+}
+
