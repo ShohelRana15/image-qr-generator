@@ -268,26 +268,14 @@ function showQRScanner() {
 
             <div class="scanner-card">
 
-                <div class="scanner-camera-box">
+               <div class="scanner-camera-box">
 
-                    <div class="scanner-placeholder">
-                        <i class="fa-solid fa-camera"></i>
+    <div
+        id="qr-scanner-camera"
+        style="width:100%;">
+    </div>
 
-                        <h3>Camera Scanner</h3>
-
-                        <p>
-                            Point your camera at a QR code
-                        </p>
-                    </div>
-
-                    <video
-                        class="qr-scanner-video"
-                        autoplay
-                        playsinline>
-                    </video>
-
-                </div>
-
+</div>
                 <button
                     type="button"
                     class="primary-btn scanner-camera-btn">
@@ -345,9 +333,272 @@ function showQRScanner() {
             </div>
 
         </div>
+
+    // ==========================================
+    // CAMERA SCANNER
+    // ==========================================
+
+    const scannerButton =
+        uploadPanel.querySelector(".scanner-camera-btn");
+
+        // ==========================================
+    // GALLERY SCANNER
+    // ==========================================
+
+    const galleryButton =
+        uploadPanel.querySelector(".scanner-gallery-btn");
+
+    const galleryInput =
+        uploadPanel.querySelector(".qr-scanner-file-input");
+
+
+    galleryButton.addEventListener(
+        "click",
+        function () {
+
+            galleryInput.click();
+
+        }
+    );
+
+
+    galleryInput.addEventListener(
+        "change",
+        async function () {
+
+            const file = this.files[0];
+
+            if (!file) return;
+
+
+            try {
+
+                const galleryScanner =
+                    new Html5Qrcode(
+                        "qr-scanner-camera"
+                    );
+
+
+                const decodedText =
+                    await galleryScanner.scanFile(
+                        file,
+                        true
+                    );
+
+
+                showScannerResult(
+                    decodedText
+                );
+
+
+                galleryScanner.clear();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Gallery QR Scan Error:",
+                    error
+                );
+
+                alert(
+                    "No QR code was found in this image."
+                );
+
+            }
+
+
+            galleryInput.value = "";
+
+        }
+    );
+
+    let qrScanner = null;
+    let cameraRunning = false;
+
+    scannerButton.addEventListener("click", async function () {
+
+        if (cameraRunning) {
+
+            try {
+                await qrScanner.stop();
+                qrScanner.clear();
+            } catch (error) {
+                console.error(error);
+            }
+
+            qrScanner = null;
+            cameraRunning = false;
+
+            scannerButton.innerHTML =
+                '<i class="fa-solid fa-camera"></i> Start Camera';
+
+            return;
+        }
+
+
+        try {
+
+            qrScanner = new Html5Qrcode(
+                "qr-scanner-camera"
+            );
+
+            await qrScanner.start(
+
+                {
+                    facingMode: "environment"
+                },
+
+                {
+                    fps: 10,
+                    qrbox: 250
+                },
+
+                function (decodedText) {
+
+                    console.log(
+                        "QR Result:",
+                        decodedText
+                    );
+
+                    showScannerResult(decodedText);
+
+                },
+
+                function () {
+                    // QR না পাওয়া গেলে কিছু করার দরকার নেই
+                }
+
+            );
+
+            cameraRunning = true;
+
+            scannerButton.innerHTML =
+                '<i class="fa-solid fa-stop"></i> Stop Camera';
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "QR Camera Error:",
+                error
+            );
+
+            alert(
+                "Camera could not be started. Please allow camera permission."
+            );
+
+            qrScanner = null;
+            cameraRunning = false;
+        }
+
+    });
+        
     `;
 }
     
+
+// ==========================================
+// QR SCANNER RESULT
+// ==========================================
+
+function showScannerResult(decodedText) {
+
+    const resultBox =
+        uploadPanel.querySelector(".scanner-result-box");
+
+    if (!resultBox) return;
+
+    resultBox.innerHTML = `
+        <div class="scanner-result-content">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>QR Code Detected</h3>
+
+            <div class="scanner-result-text">
+                ${decodedText}
+            </div>
+
+            <div class="scanner-result-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn scanner-copy-btn">
+                    <i class="fa-solid fa-copy"></i>
+                    Copy
+                </button>
+
+                <button
+                    type="button"
+                    class="primary-btn scanner-open-btn">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    Open
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+
+    // COPY
+    const copyButton =
+        resultBox.querySelector(".scanner-copy-btn");
+
+    copyButton.addEventListener("click", async function () {
+
+        try {
+
+            await navigator.clipboard.writeText(
+                decodedText
+            );
+
+            copyButton.innerHTML =
+                '<i class="fa-solid fa-check"></i> Copied';
+
+        } catch (error) {
+
+            console.error(
+                "Copy Error:",
+                error
+            );
+
+        }
+
+    });
+
+
+    // OPEN
+    const openButton =
+        resultBox.querySelector(".scanner-open-btn");
+
+    openButton.addEventListener("click", function () {
+
+        if (
+            decodedText.startsWith("http://") ||
+            decodedText.startsWith("https://")
+        ) {
+
+            window.open(
+                decodedText,
+                "_blank"
+            );
+
+        } else {
+
+            alert(
+                "This QR code does not contain a web link."
+            );
+
+        }
+
+    });
+
+}
+
     
 
     // ==========================================
