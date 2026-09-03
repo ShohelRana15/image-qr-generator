@@ -502,6 +502,32 @@ function showQRScanner() {
                             decodedText
                         );
 
+                        const resultBox =
+    uploadPanel.querySelector(".scanner-result-box");
+
+if (resultBox) {
+
+    resultBox.classList.remove(
+        "scanner-result-attention"
+    );
+
+    void resultBox.offsetWidth;
+
+    resultBox.classList.add(
+        "scanner-result-attention"
+    );
+
+    setTimeout(() => {
+
+        resultBox.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 150);
+
+}
+
                     },
 
                     function () {
