@@ -334,16 +334,16 @@ function showQRScanner() {
 
         </div>
 
+        
+        `;
+
+
     // ==========================================
-    // CAMERA SCANNER
+    // CAMERA + GALLERY SCANNER
     // ==========================================
 
     const scannerButton =
         uploadPanel.querySelector(".scanner-camera-btn");
-
-        // ==========================================
-    // GALLERY SCANNER
-    // ==========================================
 
     const galleryButton =
         uploadPanel.querySelector(".scanner-gallery-btn");
@@ -351,6 +351,14 @@ function showQRScanner() {
     const galleryInput =
         uploadPanel.querySelector(".qr-scanner-file-input");
 
+
+    let qrScanner = null;
+    let cameraRunning = false;
+
+
+    // ==========================================
+    // GALLERY BUTTON
+    // ==========================================
 
     galleryButton.addEventListener(
         "click",
@@ -361,6 +369,10 @@ function showQRScanner() {
         }
     );
 
+
+    // ==========================================
+    // GALLERY SCAN
+    // ==========================================
 
     galleryInput.addEventListener(
         "change",
@@ -414,89 +426,121 @@ function showQRScanner() {
         }
     );
 
-    let qrScanner = null;
-    let cameraRunning = false;
 
-    scannerButton.addEventListener("click", async function () {
+    // ==========================================
+    // CAMERA SCAN
+    // ==========================================
 
-        if (cameraRunning) {
-
-            try {
-                await qrScanner.stop();
-                qrScanner.clear();
-            } catch (error) {
-                console.error(error);
-            }
-
-            qrScanner = null;
-            cameraRunning = false;
-
-            scannerButton.innerHTML =
-                '<i class="fa-solid fa-camera"></i> Start Camera';
-
-            return;
-        }
+    scannerButton.addEventListener(
+        "click",
+        async function () {
 
 
-        try {
+            // STOP CAMERA
+            if (cameraRunning) {
 
-            qrScanner = new Html5Qrcode(
-                "qr-scanner-camera"
-            );
+                try {
 
-            await qrScanner.start(
+                    await qrScanner.stop();
+                    qrScanner.clear();
 
-                {
-                    facingMode: "environment"
-                },
-
-                {
-                    fps: 10,
-                    qrbox: 250
-                },
-
-                function (decodedText) {
-
-                    console.log(
-                        "QR Result:",
-                        decodedText
-                    );
-
-                    showScannerResult(decodedText);
-
-                },
-
-                function () {
-                    // QR না পাওয়া গেলে কিছু করার দরকার নেই
                 }
 
-            );
+                catch (error) {
 
-            cameraRunning = true;
+                    console.error(
+                        "Camera Stop Error:",
+                        error
+                    );
 
-            scannerButton.innerHTML =
-                '<i class="fa-solid fa-stop"></i> Stop Camera';
+                }
+
+
+                qrScanner = null;
+                cameraRunning = false;
+
+
+                scannerButton.innerHTML =
+                    '<i class="fa-solid fa-camera"></i> Start Camera';
+
+
+                return;
+
+            }
+
+
+            // START CAMERA
+
+            try {
+
+                qrScanner =
+                    new Html5Qrcode(
+                        "qr-scanner-camera"
+                    );
+
+
+                await qrScanner.start(
+
+                    {
+                        facingMode: "environment"
+                    },
+
+                    {
+                        fps: 10,
+                        qrbox: 250
+                    },
+
+                    function (decodedText) {
+
+                        console.log(
+                            "QR Result:",
+                            decodedText
+                        );
+
+
+                        showScannerResult(
+                            decodedText
+                        );
+
+                    },
+
+                    function () {
+                        // QR পাওয়া না গেলে কিছু করার নেই
+                    }
+
+                );
+
+
+                cameraRunning = true;
+
+
+                scannerButton.innerHTML =
+                    '<i class="fa-solid fa-stop"></i> Stop Camera';
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "QR Camera Error:",
+                    error
+                );
+
+
+                alert(
+                    "Camera could not be started. Please allow camera permission."
+                );
+
+
+                qrScanner = null;
+                cameraRunning = false;
+
+            }
 
         }
+    );
 
-        catch (error) {
-
-            console.error(
-                "QR Camera Error:",
-                error
-            );
-
-            alert(
-                "Camera could not be started. Please allow camera permission."
-            );
-
-            qrScanner = null;
-            cameraRunning = false;
-        }
-
-    });
-        
-    `;
 }
     
 
