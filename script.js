@@ -250,6 +250,104 @@ function previewBox() {
     `;
 }
 
+
+
+// ==========================================
+// QR SCANNER
+// ==========================================
+
+function showQRScanner() {
+
+    uploadPanel.innerHTML = `
+        ${workspaceHeader(
+            "QR Scanner",
+            "Scan a QR code using your camera or an image"
+        )}
+
+        <div class="scanner-layout">
+
+            <div class="scanner-card">
+
+                <div class="scanner-camera-box">
+
+                    <div class="scanner-placeholder">
+                        <i class="fa-solid fa-camera"></i>
+
+                        <h3>Camera Scanner</h3>
+
+                        <p>
+                            Point your camera at a QR code
+                        </p>
+                    </div>
+
+                    <video
+                        class="qr-scanner-video"
+                        autoplay
+                        playsinline>
+                    </video>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-btn scanner-camera-btn">
+                    <i class="fa-solid fa-camera"></i>
+                    Start Camera
+                </button>
+
+            </div>
+
+
+            <div class="scanner-card">
+
+                <div class="scanner-gallery-box">
+
+                    <i class="fa-solid fa-image"></i>
+
+                    <h3>Scan from Gallery</h3>
+
+                    <p>
+                        Select an image containing a QR code
+                    </p>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        class="qr-scanner-file-input"
+                        hidden>
+
+                    <button
+                        type="button"
+                        class="secondary-btn scanner-gallery-btn">
+                        <i class="fa-solid fa-folder-open"></i>
+                        Choose Image
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="scanner-result-box">
+
+            <div class="scanner-result-placeholder">
+
+                <i class="fa-solid fa-qrcode"></i>
+
+                <h3>Scan Result</h3>
+
+                <p>
+                    Your QR code result will appear here
+                </p>
+
+            </div>
+
+        </div>
+    `;
+}
+    
     
 
     // ==========================================
