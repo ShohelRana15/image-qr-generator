@@ -511,12 +511,123 @@ function showScannerResult(decodedText) {
 
     if (!resultBox) return;
 
+
+    // ==========================================
+    // DETECT QR TYPE
+    // ==========================================
+
+    let qrType = "Text";
+    let actionHTML = "";
+
+
+    // URL
+    if (
+        decodedText.startsWith("http://") ||
+        decodedText.startsWith("https://")
+    ) {
+
+        qrType = "URL";
+
+        actionHTML = `
+            <button
+                type="button"
+                class="secondary-btn scanner-copy-btn">
+                <i class="fa-solid fa-copy"></i>
+                Copy
+            </button>
+
+            <button
+                type="button"
+                class="primary-btn scanner-open-btn">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Open
+            </button>
+        `;
+
+    }
+
+
+    // PHONE
+    else if (
+        decodedText.startsWith("tel:")
+    ) {
+
+        qrType = "Phone";
+
+        const phoneNumber =
+            decodedText.replace("tel:", "");
+
+        actionHTML = `
+            <button
+                type="button"
+                class="secondary-btn scanner-copy-btn">
+                <i class="fa-solid fa-copy"></i>
+                Copy
+            </button>
+
+            <button
+                type="button"
+                class="primary-btn scanner-call-btn">
+                <i class="fa-solid fa-phone"></i>
+                Call
+            </button>
+        `;
+
+    }
+
+
+    // WIFI
+    else if (
+        decodedText.startsWith("WIFI:")
+    ) {
+
+        qrType = "WiFi";
+
+        actionHTML = `
+            <button
+                type="button"
+                class="primary-btn scanner-copy-btn">
+                <i class="fa-solid fa-copy"></i>
+                Copy WiFi Info
+            </button>
+        `;
+
+    }
+
+
+    // TEXT
+    else {
+
+        qrType = "Text";
+
+        actionHTML = `
+            <button
+                type="button"
+                class="primary-btn scanner-copy-btn">
+                <i class="fa-solid fa-copy"></i>
+                Copy Text
+            </button>
+        `;
+    }
+
+
+    // ==========================================
+    // DISPLAY RESULT
+    // ==========================================
+
     resultBox.innerHTML = `
+
         <div class="scanner-result-content">
 
             <i class="fa-solid fa-circle-check"></i>
 
-            <h3>QR Code Detected</h3>
+            <h3>
+                QR Code Detected
+            </h3>
+
+            <p>
+                Type: <strong>${qrType}</strong>
+            </p>
 
             <div class="scanner-result-text">
                 ${decodedText}
@@ -524,81 +635,102 @@ function showScannerResult(decodedText) {
 
             <div class="scanner-result-actions">
 
-                <button
-                    type="button"
-                    class="secondary-btn scanner-copy-btn">
-                    <i class="fa-solid fa-copy"></i>
-                    Copy
-                </button>
-
-                <button
-                    type="button"
-                    class="primary-btn scanner-open-btn">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    Open
-                </button>
+                ${actionHTML}
 
             </div>
 
         </div>
+
     `;
 
 
+    // ==========================================
     // COPY
+    // ==========================================
+
     const copyButton =
         resultBox.querySelector(".scanner-copy-btn");
 
-    copyButton.addEventListener("click", async function () {
+    if (copyButton) {
 
-        try {
+        copyButton.addEventListener(
+            "click",
+            async function () {
 
-            await navigator.clipboard.writeText(
-                decodedText
-            );
+                try {
 
-            copyButton.innerHTML =
-                '<i class="fa-solid fa-check"></i> Copied';
+                    await navigator.clipboard.writeText(
+                        decodedText
+                    );
 
-        } catch (error) {
+                    copyButton.innerHTML =
+                        '<i class="fa-solid fa-check"></i> Copied';
 
-            console.error(
-                "Copy Error:",
-                error
-            );
+                }
 
-        }
+                catch (error) {
 
-    });
+                    console.error(
+                        "Copy Error:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+    }
 
 
-    // OPEN
+    // ==========================================
+    // OPEN URL
+    // ==========================================
+
     const openButton =
         resultBox.querySelector(".scanner-open-btn");
 
-    openButton.addEventListener("click", function () {
+    if (openButton) {
 
-        if (
-            decodedText.startsWith("http://") ||
-            decodedText.startsWith("https://")
-        ) {
+        openButton.addEventListener(
+            "click",
+            function () {
 
-            window.open(
-                decodedText,
-                "_blank"
-            );
+                window.open(
+                    decodedText,
+                    "_blank"
+                );
 
-        } else {
+            }
+        );
 
-            alert(
-                "This QR code does not contain a web link."
-            );
+    }
 
-        }
 
-    });
+    // ==========================================
+    // CALL PHONE
+    // ==========================================
+
+    const callButton =
+        resultBox.querySelector(".scanner-call-btn");
+
+    if (callButton) {
+
+        callButton.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    decodedText;
+
+            }
+        );
+
+    }
 
 }
 
+    
     
 
     // ==========================================
