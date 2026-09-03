@@ -4771,3 +4771,61 @@ body.qr-dark-mode
     }
 }
 
+
+
+
+
+
+
+ /* ==========================================
+    QR SCANNER RESULT
+    ========================================== */
+
+.scanner-result-content {
+    width: 100%;
+    text-align: center;
+}
+
+.scanner-result-content > i {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.scanner-result-content h3 {
+    margin: 5px 0 15px;
+}
+
+.scanner-result-text {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.scanner-result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.scanner-result-actions button {
+    min-width: 120px;
+}
+
+@media (max-width: 600px) {
+
+    .scanner-result-actions {
+        flex-direction: column;
+    }
+
+    .scanner-result-actions button {
+        width: 100%;
+    }
+
+}
+
+
