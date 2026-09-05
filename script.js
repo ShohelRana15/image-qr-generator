@@ -2417,76 +2417,406 @@ function showURLQR() {
 
 }
 
-    // ==========================================
-    // WIFI QR
-    // ==========================================
+   // ==========================================
+// WIFI QR
+// ==========================================
 
-    function showWiFiQR() {
+function showWiFiQR() {
 
-        uploadPanel.innerHTML = `
+    uploadPanel.innerHTML = `
 
-            ${workspaceHeader(
-                "Create WiFi QR",
-                "Share your WiFi network instantly"
-            )}
+        ${workspaceHeader(
+            "Create WiFi QR",
+            "Share your WiFi network instantly"
+        )}
 
-            <div class="upload-layout">
+        <div class="upload-layout">
 
-                <div class="upload-box">
+            <div class="upload-box">
 
-                    <div class="upload-icon">
-
-                        <i class="fa-solid fa-wifi"></i>
-
-                    </div>
-
-                    <h3>WiFi Network</h3>
-
-                    <input
-                        type="text"
-                        class="qr-input"
-                        placeholder="WiFi Network Name"
-                    >
-
-                    <input
-                        type="password"
-                        class="qr-input"
-                        placeholder="WiFi Password"
-                    >
-
-                    <select class="qr-input">
-
-                        <option value="WPA">
-                            WPA / WPA2
-                        </option>
-
-                        <option value="WEP">
-                            WEP
-                        </option>
-
-                        <option value="nopass">
-                            No Password
-                        </option>
-
-                    </select>
-
-                    <button
-                        type="button"
-                        class="primary-btn generate-qr-btn">
-
-                        Generate QR
-
-                    </button>
-
+                <div class="upload-icon">
+                    <i class="fa-solid fa-wifi"></i>
                 </div>
 
-                ${previewBox()}
+                <h3>WiFi Network</h3>
+
+                <input
+                    type="text"
+                    class="qr-input wifi-name-input"
+                    placeholder="WiFi Network Name"
+                >
+
+                <input
+                    type="password"
+                    class="qr-input wifi-password-input"
+                    placeholder="WiFi Password"
+                >
+
+                <select class="qr-input wifi-security-input">
+
+                    <option value="WPA">
+                        WPA / WPA2
+                    </option>
+
+                    <option value="WEP">
+                        WEP
+                    </option>
+
+                    <option value="nopass">
+                        No Password
+                    </option>
+
+                </select>
+
+                <button
+                    type="button"
+                    class="primary-btn generate-qr-btn">
+
+                    Generate QR
+
+                </button>
 
             </div>
-        `;
-    }
+
+            ${previewBox()}
+
+        </div>
+    `;
 
 
+    const wifiNameInput =
+        uploadPanel.querySelector(".wifi-name-input");
+
+    const wifiPasswordInput =
+        uploadPanel.querySelector(".wifi-password-input");
+
+    const wifiSecurityInput =
+        uploadPanel.querySelector(".wifi-security-input");
+
+    const generateButton =
+        uploadPanel.querySelector(".generate-qr-btn");
+
+    const canvas =
+        uploadPanel.querySelector(".image-qr-canvas");
+
+    const placeholder =
+        uploadPanel.querySelector(".preview-placeholder");
+
+    const downloadButton =
+        uploadPanel.querySelector(".image-download-btn");
+
+    const shareButton =
+        uploadPanel.querySelector(".image-share-btn");
+
+
+    let currentWiFiData = "";
+
+
+    // ==========================================
+    // GENERATE WIFI QR
+    // ==========================================
+
+    generateButton.addEventListener(
+        "click",
+        async function () {
+
+            const ssid =
+                wifiNameInput.value.trim();
+
+            const password =
+                wifiPasswordInput.value;
+
+            const security =
+                wifiSecurityInput.value;
+
+
+            if (!ssid) {
+
+                alert(
+                    "Please enter your WiFi network name."
+                );
+
+                wifiNameInput.focus();
+
+                return;
+            }
+
+
+            if (
+                security !== "nopass" &&
+                !password
+            ) {
+
+                alert(
+                    "Please enter your WiFi password."
+                );
+
+                wifiPasswordInput.focus();
+
+                return;
+            }
+
+
+            try {
+
+                // Escape special characters
+                const escapeWiFi =
+                    function (value) {
+
+                        return value
+                            .replace(/\\/g, "\\\\")
+                            .replace(/;/g, "\\;")
+                            .replace(/,/g, "\\,")
+                            .replace(/:/g, "\\:");
+
+                    };
+
+
+                const safeSSID =
+                    escapeWiFi(ssid);
+
+                const safePassword =
+                    escapeWiFi(password);
+
+
+                currentWiFiData =
+                    `WIFI:T:${security};S:${safeSSID};P:${safePassword};;`;
+
+
+                await QRCode.toCanvas(
+                    canvas,
+                    currentWiFiData,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                canvas.style.display = "block";
+                canvas.style.width = "260px";
+                canvas.style.height = "260px";
+                canvas.style.maxWidth = "100%";
+                canvas.style.aspectRatio = "1 / 1";
+                canvas.style.objectFit = "contain";
+
+
+                placeholder.style.display = "none";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "WiFi QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate WiFi QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // DOWNLOAD
+    // ==========================================
+
+    downloadButton.addEventListener(
+        "click",
+        function () {
+
+            if (!currentWiFiData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-WiFi-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+            }
+            catch (error) {
+
+                console.error(
+                    "WiFi QR Download Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to download QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHARE
+    // ==========================================
+
+    shareButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!currentWiFiData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const blob =
+                    await new Promise(
+                        function (resolve) {
+
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    navigator.share &&
+                    window.File
+                ) {
+
+                    const qrFile =
+                        new File(
+                            [blob],
+                            "QR-Hub-WiFi-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    if (
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files: [qrFile]
+                        })
+                    ) {
+
+                        await navigator.share({
+
+                            title:
+                                "QR Hub WiFi QR",
+
+                            text:
+                                "WiFi QR generated by QR Hub",
+
+                            files: [qrFile]
+
+                        });
+
+                        return;
+                    }
+
+
+                    await navigator.share({
+
+                        title:
+                            "QR Hub WiFi QR",
+
+                        text:
+                            currentWiFiData
+
+                    });
+
+                    return;
+                }
+
+
+                // Browser doesn't support direct sharing
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-WiFi-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+
+                alert(
+                    "Direct sharing is not supported on this browser. QR code downloaded instead."
+                );
+
+            }
+            catch (error) {
+
+                if (
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
+
+                console.error(
+                    "WiFi QR Share Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to share QR code."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+    
     // ==========================================
     // CONTACT QR
     // ==========================================
