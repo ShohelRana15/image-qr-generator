@@ -2817,66 +2817,403 @@ function showWiFiQR() {
 }
 
     
-    // ==========================================
-    // CONTACT QR
-    // ==========================================
+  // ==========================================
+// CONTACT QR
+// ==========================================
 
-    function showContactQR() {
+function showContactQR() {
 
-        uploadPanel.innerHTML = `
+    uploadPanel.innerHTML = `
 
-            ${workspaceHeader(
-                "Create Contact QR",
-                "Share your contact information"
-            )}
+        ${workspaceHeader(
+            "Create Contact QR",
+            "Share your contact information"
+        )}
 
-            <div class="upload-layout">
+        <div class="upload-layout">
 
-                <div class="upload-box">
+            <div class="upload-box">
 
-                    <div class="upload-icon">
-
-                        <i class="fa-regular fa-address-card"></i>
-
-                    </div>
-
-                    <h3>Contact Information</h3>
-
-                    <input
-                        type="text"
-                        class="qr-input"
-                        placeholder="Full Name"
-                    >
-
-                    <input
-                        type="tel"
-                        class="qr-input"
-                        placeholder="Phone Number"
-                    >
-
-                    <input
-                        type="email"
-                        class="qr-input"
-                        placeholder="Email Address"
-                    >
-
-                    <button
-                        type="button"
-                        class="primary-btn generate-qr-btn">
-
-                        Generate QR
-
-                    </button>
-
+                <div class="upload-icon">
+                    <i class="fa-regular fa-address-card"></i>
                 </div>
 
-                ${previewBox()}
+                <h3>Contact Information</h3>
+
+                <input
+                    type="text"
+                    class="qr-input contact-name-input"
+                    placeholder="Full Name"
+                >
+
+                <input
+                    type="tel"
+                    class="qr-input contact-phone-input"
+                    placeholder="Phone Number"
+                >
+
+                <input
+                    type="email"
+                    class="qr-input contact-email-input"
+                    placeholder="Email Address"
+                >
+
+                <button
+                    type="button"
+                    class="primary-btn generate-qr-btn">
+
+                    Generate QR
+
+                </button>
 
             </div>
-        `;
-    }
+
+            ${previewBox()}
+
+        </div>
+    `;
 
 
+    const nameInput =
+        uploadPanel.querySelector(".contact-name-input");
+
+    const phoneInput =
+        uploadPanel.querySelector(".contact-phone-input");
+
+    const emailInput =
+        uploadPanel.querySelector(".contact-email-input");
+
+    const generateButton =
+        uploadPanel.querySelector(".generate-qr-btn");
+
+    const canvas =
+        uploadPanel.querySelector(".image-qr-canvas");
+
+    const placeholder =
+        uploadPanel.querySelector(".preview-placeholder");
+
+    const downloadButton =
+        uploadPanel.querySelector(".image-download-btn");
+
+    const shareButton =
+        uploadPanel.querySelector(".image-share-btn");
+
+
+    let currentContactData = "";
+
+
+    // ==========================================
+    // GENERATE CONTACT QR
+    // ==========================================
+
+    generateButton.addEventListener(
+        "click",
+        async function () {
+
+            const name =
+                nameInput.value.trim();
+
+            const phone =
+                phoneInput.value.trim();
+
+            const email =
+                emailInput.value.trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Please enter the contact name."
+                );
+
+                nameInput.focus();
+
+                return;
+            }
+
+
+            if (!phone && !email) {
+
+                alert(
+                    "Please enter a phone number or email address."
+                );
+
+                phoneInput.focus();
+
+                return;
+            }
+
+
+            try {
+
+                // Escape vCard special characters
+                const escapeVCard =
+                    function (value) {
+
+                        return value
+                            .replace(/\\/g, "\\\\")
+                            .replace(/\n/g, "\\n")
+                            .replace(/;/g, "\\;")
+                            .replace(/,/g, "\\,");
+
+                    };
+
+
+                const safeName =
+                    escapeVCard(name);
+
+                const safePhone =
+                    escapeVCard(phone);
+
+                const safeEmail =
+                    escapeVCard(email);
+
+
+                // Create vCard
+                currentContactData =
+                    `BEGIN:VCARD
+VERSION:3.0
+FN:${safeName}
+N:${safeName};;;;
+TEL:${safePhone}
+EMAIL:${safeEmail}
+END:VCARD`;
+
+
+                await QRCode.toCanvas(
+                    canvas,
+                    currentContactData,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                canvas.style.display = "block";
+                canvas.style.width = "260px";
+                canvas.style.height = "260px";
+                canvas.style.maxWidth = "100%";
+                canvas.style.aspectRatio = "1 / 1";
+                canvas.style.objectFit = "contain";
+
+
+                placeholder.style.display = "none";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Contact QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate Contact QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // DOWNLOAD
+    // ==========================================
+
+    downloadButton.addEventListener(
+        "click",
+        function () {
+
+            if (!currentContactData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Contact-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Contact QR Download Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to download QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHARE
+    // ==========================================
+
+    shareButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!currentContactData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const blob =
+                    await new Promise(
+                        function (resolve) {
+
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    navigator.share &&
+                    window.File
+                ) {
+
+                    const qrFile =
+                        new File(
+                            [blob],
+                            "QR-Hub-Contact-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    if (
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files: [qrFile]
+                        })
+                    ) {
+
+                        await navigator.share({
+
+                            title:
+                                "QR Hub Contact QR",
+
+                            text:
+                                "Contact QR generated by QR Hub",
+
+                            files: [qrFile]
+
+                        });
+
+                        return;
+                    }
+
+
+                    await navigator.share({
+
+                        title:
+                            "QR Hub Contact QR",
+
+                        text:
+                            currentContactData
+
+                    });
+
+                    return;
+                }
+
+
+                // Browser doesn't support direct sharing
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Contact-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+
+                alert(
+                    "Direct sharing is not supported on this browser. QR code downloaded instead."
+                );
+
+            }
+            catch (error) {
+
+                if (
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
+
+                console.error(
+                    "Contact QR Share Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to share QR code."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+    
     // ==========================================
     // LOCATION QR
     // ==========================================
