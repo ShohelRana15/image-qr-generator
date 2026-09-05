@@ -2984,6 +2984,34 @@ async function uploadQRHubImageToSupabase(file) {
 }
 
 
+// ==========================================
+// HERO SCAN QR BUTTON
+// ==========================================
 
+const heroScanQRBtn =
+    document.getElementById("heroScanQRBtn");
+
+if (heroScanQRBtn) {
+
+    heroScanQRBtn.addEventListener("click", function () {
+
+        const scannerCard =
+            [...document.querySelectorAll(".category-card")]
+            .find(card => {
+
+                const title =
+                    card.querySelector("h3");
+
+                return title &&
+                    title.textContent.trim() === "QR Scanner";
+            });
+
+        if (scannerCard) {
+            scannerCard.click();
+        }
+
+    });
+
+}
 
 
