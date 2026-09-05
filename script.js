@@ -2293,12 +2293,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
 
   const qrTypes = [
-    "QR Scanner"
     "Image QR",
     "Text QR",
     "URL QR",
     "WiFi QR",
-    "Contact QR",   
+    "Contact QR",
+    "QR Scanner"
 ];
 
     // ==========================================
