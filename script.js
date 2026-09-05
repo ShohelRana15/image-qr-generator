@@ -2113,6 +2113,11 @@ function scrollToWorkspace() {
 
             switch (optionName) {
 
+                case "QR Scanner":
+                    showQRScanner();
+                    break;
+
+                    
                 case "Image QR":
 
                     showImageQR();
@@ -2147,9 +2152,7 @@ function scrollToWorkspace() {
 
                     break;
                     
-                case "QR Scanner":
-                    showQRScanner();
-                    break;
+                
 
                 case "More":
 
@@ -2293,12 +2296,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
 
   const qrTypes = [
+    "QR Scanner"
     "Image QR",
     "Text QR",
     "URL QR",
     "WiFi QR",
     "Contact QR",
-    "QR Scanner"
+    
 ];
 
     // ==========================================
