@@ -4895,3 +4895,44 @@ body.qr-dark-mode
 }
 
 
+
+
+
+/* ==========================================
+   PREMIUM SCANNER RESULT COLORS
+   ========================================== */
+
+.scanner-result-box {
+    background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.08),
+        rgba(34, 197, 94, 0.06)
+    );
+
+    border: 1px solid rgba(96, 165, 250, 0.22);
+}
+
+/* QR Code Detected */
+.scanner-result-content h3 {
+    color: #22c55e;
+}
+
+/* Check icon */
+.scanner-result-content > i {
+    color: #22c55e;
+}
+
+/* Type: URL */
+.scanner-result-content p strong {
+    color: #3b82f6;
+}
+
+/* Main Result / URL */
+.scanner-result-text {
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.6;
+
+    background: rgba(37, 99, 235, 0.10);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+}
