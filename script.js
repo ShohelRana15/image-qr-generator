@@ -1780,9 +1780,67 @@ const croppedFile = new File(
                 ${previewBox()}
 
             </div>
-        `;
+                `;
+
+        const generateButton =
+            uploadPanel.querySelector(".generate-qr-btn");
+
+        const textInput =
+            uploadPanel.querySelector(".qr-text-input");
+
+        const canvas =
+            uploadPanel.querySelector(".image-qr-canvas");
+
+        const placeholder =
+            uploadPanel.querySelector(".preview-placeholder");
+
+        if (generateButton && textInput && canvas) {
+
+            generateButton.addEventListener("click", async function () {
+
+                const text =
+                    textInput.value.trim();
+
+                if (!text) {
+                    alert("Please enter some text first.");
+                    textInput.focus();
+                    return;
+                }
+
+                try {
+
+                    placeholder.style.display = "none";
+                    canvas.style.display = "block";
+
+                    await QRCode.toCanvas(
+                        canvas,
+                        text,
+                        {
+                            width: 260,
+                            margin: 2
+                        }
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Text QR Error:",
+                        error
+                    );
+
+                    alert(
+                        "Unable to generate QR code."
+                    );
+
+                }
+
+            });
+
+        }
     }
 
+    
 
     // ==========================================
     // URL QR
