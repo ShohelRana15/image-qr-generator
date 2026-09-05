@@ -714,6 +714,33 @@ function showScannerResult(decodedText) {
     `;
 
 
+
+        // ==========================================
+    // AUTO SCROLL + ATTENTION
+    // ==========================================
+
+    resultBox.classList.remove(
+        "scanner-result-attention"
+    );
+
+    void resultBox.offsetWidth;
+
+    resultBox.classList.add(
+        "scanner-result-attention"
+    );
+
+    setTimeout(function () {
+
+        resultBox.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 200);
+
+    
+
+
     // ==========================================
     // COPY
     // ==========================================
