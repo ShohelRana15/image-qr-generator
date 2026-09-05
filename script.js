@@ -1737,111 +1737,348 @@ const croppedFile = new File(
     
 
     // ==========================================
-    // TEXT QR
-    // ==========================================
+// TEXT QR
+// ==========================================
 
-    function showTextQR() {
+function showTextQR() {
 
-        uploadPanel.innerHTML = `
+    uploadPanel.innerHTML = `
+        ${workspaceHeader(
+            "Create Text QR",
+            "Enter your text and generate your QR code"
+        )}
 
-            ${workspaceHeader(
-                "Create Text QR",
-                "Enter your text and generate your QR code"
-            )}
+        <div class="upload-layout">
 
-            <div class="upload-layout">
+            <div class="upload-box">
 
-                <div class="upload-box">
-
-                    <div class="upload-icon">
-
-                        <i class="fa-solid fa-font"></i>
-
-                    </div>
-
-                    <h3>Enter Your Text</h3>
-
-                    <textarea
-                        class="qr-text-input"
-                        placeholder="Write your text here..."
-                        rows="6"
-                    ></textarea>
-
-                    <button
-                        type="button"
-                        class="primary-btn generate-qr-btn">
-
-                        Generate QR
-
-                    </button>
-
+                <div class="upload-icon">
+                    <i class="fa-solid fa-font"></i>
                 </div>
 
-                ${previewBox()}
+                <h3>Enter Your Text</h3>
+
+                <textarea
+                    class="qr-text-input"
+                    placeholder="Write your text here..."
+                    rows="6"
+                ></textarea>
+
+                <button
+                    type="button"
+                    class="primary-btn generate-qr-btn">
+                    Generate QR
+                </button>
 
             </div>
-                `;
 
-        const generateButton =
-            uploadPanel.querySelector(".generate-qr-btn");
+            ${previewBox()}
 
-        const textInput =
-            uploadPanel.querySelector(".qr-text-input");
+        </div>
+    `;
 
-        const canvas =
-            uploadPanel.querySelector(".image-qr-canvas");
 
-        const placeholder =
-            uploadPanel.querySelector(".preview-placeholder");
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
 
-        if (generateButton && textInput && canvas) {
+    const textInput =
+        uploadPanel.querySelector(".qr-text-input");
 
-            generateButton.addEventListener("click", async function () {
+    const generateButton =
+        uploadPanel.querySelector(".generate-qr-btn");
 
-                const text =
-                    textInput.value.trim();
+    const canvas =
+        uploadPanel.querySelector(".image-qr-canvas");
 
-                if (!text) {
-                    alert("Please enter some text first.");
-                    textInput.focus();
-                    return;
-                }
+    const placeholder =
+        uploadPanel.querySelector(".preview-placeholder");
 
-                try {
+    const downloadButton =
+        uploadPanel.querySelector(".image-download-btn");
 
-                    placeholder.style.display = "none";
-                    canvas.style.display = "block";
+    const shareButton =
+        uploadPanel.querySelector(".image-share-btn");
 
-                    await QRCode.toCanvas(
-                        canvas,
-                        text,
-                        {
-                            width: 260,
-                            margin: 2
+
+    let currentText = "";
+
+
+    // ==========================================
+    // GENERATE TEXT QR
+    // ==========================================
+
+    generateButton.addEventListener(
+        "click",
+        async function () {
+
+            const text =
+                textInput.value.trim();
+
+            if (!text) {
+
+                alert(
+                    "Please enter some text first."
+                );
+
+                textInput.focus();
+
+                return;
+            }
+
+
+            try {
+
+                currentText = text;
+
+
+                // Generate QR
+                await QRCode.toCanvas(
+                    canvas,
+                    text,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                // ==================================
+                // FORCE SQUARE QR DISPLAY
+                // ==================================
+
+                canvas.style.display = "block";
+                canvas.style.width = "260px";
+                canvas.style.height = "260px";
+                canvas.style.maxWidth = "100%";
+                canvas.style.aspectRatio = "1 / 1";
+                canvas.style.objectFit = "contain";
+
+
+                placeholder.style.display = "none";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Text QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // DOWNLOAD TEXT QR
+    // ==========================================
+
+    downloadButton.addEventListener(
+        "click",
+        function () {
+
+            if (!currentText) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Text-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Text QR Download Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to download QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHARE TEXT QR
+    // ==========================================
+
+    shareButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!currentText) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const blob =
+                    await new Promise(
+                        function (resolve) {
+
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            );
+
                         }
                     );
 
-                }
-                catch (error) {
 
-                    console.error(
-                        "Text QR Error:",
-                        error
+                // ------------------------------
+                // Mobile / Supported Share
+                // ------------------------------
+
+                if (
+                    navigator.share &&
+                    window.File
+                ) {
+
+                    const qrFile =
+                        new File(
+                            [blob],
+                            "QR-Hub-Text-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    if (
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files: [qrFile]
+                        })
+                    ) {
+
+                        await navigator.share({
+
+                            title:
+                                "QR Hub Text QR",
+
+                            text:
+                                "QR code generated by QR Hub",
+
+                            files: [qrFile]
+
+                        });
+
+                        return;
+                    }
+
+
+                    // Share text if file sharing
+                    // is not supported
+
+                    await navigator.share({
+
+                        title:
+                            "QR Hub Text QR",
+
+                        text:
+                            currentText
+
+                    });
+
+                    return;
+                }
+
+
+                // ------------------------------
+                // Desktop fallback
+                // ------------------------------
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Text-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
                     );
 
-                    alert(
-                        "Unable to generate QR code."
-                    );
+                document.body.appendChild(link);
 
+                link.click();
+
+                document.body.removeChild(link);
+
+
+                alert(
+                    "Direct sharing is not supported on this browser. QR code downloaded instead."
+                );
+
+            }
+            catch (error) {
+
+                if (
+                    error.name === "AbortError"
+                ) {
+                    return;
                 }
 
-            });
+
+                console.error(
+                    "Text QR Share Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to share QR code."
+                );
+
+            }
 
         }
-    }
+    );
 
-    
-
+}
     // ==========================================
     // URL QR
     // ==========================================
