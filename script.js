@@ -2817,7 +2817,7 @@ function showWiFiQR() {
 }
 
     
-  // ==========================================
+ // ==========================================
 // CONTACT QR
 // ==========================================
 
@@ -2849,14 +2849,75 @@ function showContactQR() {
                 <input
                     type="tel"
                     class="qr-input contact-phone-input"
-                    placeholder="Phone Number"
+                    placeholder="Phone"
                 >
 
                 <input
                     type="email"
                     class="qr-input contact-email-input"
-                    placeholder="Email Address"
+                    placeholder="Email"
                 >
+
+
+                <!-- ==================================
+                     ADD MORE INFORMATION
+                     ================================== -->
+
+                <button
+                    type="button"
+                    class="secondary-btn contact-more-btn">
+
+                    + Add More Information
+
+                </button>
+
+
+                <!-- ==================================
+                     EXTRA INFORMATION
+                     ================================== -->
+
+                <div
+                    class="contact-extra-fields"
+                    style="display:none;">
+
+                    <input
+                        type="url"
+                        class="qr-input contact-website-input"
+                        placeholder="Website"
+                    >
+
+                    <input
+                        type="text"
+                        class="qr-input contact-company-input"
+                        placeholder="Company"
+                    >
+
+                    <input
+                        type="text"
+                        class="qr-input contact-job-input"
+                        placeholder="Job Title"
+                    >
+
+                    <input
+                        type="text"
+                        class="qr-input contact-department-input"
+                        placeholder="Department"
+                    >
+
+                    <input
+                        type="text"
+                        class="qr-input contact-address-input"
+                        placeholder="Address"
+                    >
+
+                    <textarea
+                        class="qr-text-input contact-note-input"
+                        placeholder="Note"
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
 
                 <button
                     type="button"
@@ -2868,38 +2929,138 @@ function showContactQR() {
 
             </div>
 
+
             ${previewBox()}
 
         </div>
     `;
 
 
+    // ==========================================
+    // INPUTS
+    // ==========================================
+
     const nameInput =
-        uploadPanel.querySelector(".contact-name-input");
+        uploadPanel.querySelector(
+            ".contact-name-input"
+        );
 
     const phoneInput =
-        uploadPanel.querySelector(".contact-phone-input");
+        uploadPanel.querySelector(
+            ".contact-phone-input"
+        );
 
     const emailInput =
-        uploadPanel.querySelector(".contact-email-input");
+        uploadPanel.querySelector(
+            ".contact-email-input"
+        );
+
+    const websiteInput =
+        uploadPanel.querySelector(
+            ".contact-website-input"
+        );
+
+    const companyInput =
+        uploadPanel.querySelector(
+            ".contact-company-input"
+        );
+
+    const jobInput =
+        uploadPanel.querySelector(
+            ".contact-job-input"
+        );
+
+    const departmentInput =
+        uploadPanel.querySelector(
+            ".contact-department-input"
+        );
+
+    const addressInput =
+        uploadPanel.querySelector(
+            ".contact-address-input"
+        );
+
+    const noteInput =
+        uploadPanel.querySelector(
+            ".contact-note-input"
+        );
+
+
+    const moreButton =
+        uploadPanel.querySelector(
+            ".contact-more-btn"
+        );
+
+    const extraFields =
+        uploadPanel.querySelector(
+            ".contact-extra-fields"
+        );
+
 
     const generateButton =
-        uploadPanel.querySelector(".generate-qr-btn");
+        uploadPanel.querySelector(
+            ".generate-qr-btn"
+        );
 
     const canvas =
-        uploadPanel.querySelector(".image-qr-canvas");
+        uploadPanel.querySelector(
+            ".image-qr-canvas"
+        );
 
     const placeholder =
-        uploadPanel.querySelector(".preview-placeholder");
+        uploadPanel.querySelector(
+            ".preview-placeholder"
+        );
 
     const downloadButton =
-        uploadPanel.querySelector(".image-download-btn");
+        uploadPanel.querySelector(
+            ".image-download-btn"
+        );
 
     const shareButton =
-        uploadPanel.querySelector(".image-share-btn");
+        uploadPanel.querySelector(
+            ".image-share-btn"
+        );
 
 
     let currentContactData = "";
+
+
+    // ==========================================
+    // ADD MORE INFORMATION TOGGLE
+    // ==========================================
+
+    moreButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                extraFields.style.display ===
+                "none"
+            ) {
+
+                extraFields.style.display =
+                    "flex";
+
+                extraFields.style.flexDirection =
+                    "column";
+
+                moreButton.textContent =
+                    "− Hide More Information";
+
+            }
+            else {
+
+                extraFields.style.display =
+                    "none";
+
+                moreButton.textContent =
+                    "+ Add More Information";
+
+            }
+
+        }
+    );
 
 
     // ==========================================
@@ -2919,6 +3080,28 @@ function showContactQR() {
             const email =
                 emailInput.value.trim();
 
+            const website =
+                websiteInput.value.trim();
+
+            const company =
+                companyInput.value.trim();
+
+            const job =
+                jobInput.value.trim();
+
+            const department =
+                departmentInput.value.trim();
+
+            const address =
+                addressInput.value.trim();
+
+            const note =
+                noteInput.value.trim();
+
+
+            // ==================================
+            // VALIDATION
+            // ==================================
 
             if (!name) {
 
@@ -2946,15 +3129,30 @@ function showContactQR() {
 
             try {
 
-                // Escape vCard special characters
+                // ==================================
+                // ESCAPE vCARD VALUES
+                // ==================================
+
                 const escapeVCard =
                     function (value) {
 
                         return value
-                            .replace(/\\/g, "\\\\")
-                            .replace(/\n/g, "\\n")
-                            .replace(/;/g, "\\;")
-                            .replace(/,/g, "\\,");
+                            .replace(
+                                /\\/g,
+                                "\\\\"
+                            )
+                            .replace(
+                                /\n/g,
+                                "\\n"
+                            )
+                            .replace(
+                                /;/g,
+                                "\\;"
+                            )
+                            .replace(
+                                /,/g,
+                                "\\,"
+                            );
 
                     };
 
@@ -2968,17 +3166,111 @@ function showContactQR() {
                 const safeEmail =
                     escapeVCard(email);
 
+                const safeWebsite =
+                    escapeVCard(website);
 
-                // Create vCard
+                const safeCompany =
+                    escapeVCard(company);
+
+                const safeJob =
+                    escapeVCard(job);
+
+                const safeDepartment =
+                    escapeVCard(department);
+
+                const safeAddress =
+                    escapeVCard(address);
+
+                const safeNote =
+                    escapeVCard(note);
+
+
+                // ==================================
+                // BUILD vCARD
+                // ==================================
+
+                let vCard =
+                    "BEGIN:VCARD\n" +
+                    "VERSION:3.0\n" +
+                    `FN:${safeName}\n` +
+                    `N:${safeName};;;;\n`;
+
+
+                if (safePhone) {
+
+                    vCard +=
+                        `TEL:${safePhone}\n`;
+
+                }
+
+
+                if (safeEmail) {
+
+                    vCard +=
+                        `EMAIL:${safeEmail}\n`;
+
+                }
+
+
+                if (safeWebsite) {
+
+                    vCard +=
+                        `URL:${safeWebsite}\n`;
+
+                }
+
+
+                if (safeCompany) {
+
+                    vCard +=
+                        `ORG:${safeCompany}\n`;
+
+                }
+
+
+                if (safeJob) {
+
+                    vCard +=
+                        `TITLE:${safeJob}\n`;
+
+                }
+
+
+                if (safeDepartment) {
+
+                    vCard +=
+                        `X-DEPARTMENT:${safeDepartment}\n`;
+
+                }
+
+
+                if (safeAddress) {
+
+                    vCard +=
+                        `ADR:;;${safeAddress};;;;\n`;
+
+                }
+
+
+                if (safeNote) {
+
+                    vCard +=
+                        `NOTE:${safeNote}\n`;
+
+                }
+
+
+                vCard +=
+                    "END:VCARD";
+
+
                 currentContactData =
-                    `BEGIN:VCARD
-VERSION:3.0
-FN:${safeName}
-N:${safeName};;;;
-TEL:${safePhone}
-EMAIL:${safeEmail}
-END:VCARD`;
+                    vCard;
 
+
+                // ==================================
+                // GENERATE QR
+                // ==================================
 
                 await QRCode.toCanvas(
                     canvas,
@@ -2996,15 +3288,27 @@ END:VCARD`;
                 );
 
 
-                canvas.style.display = "block";
-                canvas.style.width = "260px";
-                canvas.style.height = "260px";
-                canvas.style.maxWidth = "100%";
-                canvas.style.aspectRatio = "1 / 1";
-                canvas.style.objectFit = "contain";
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
 
 
-                placeholder.style.display = "none";
+                placeholder.style.display =
+                    "none";
 
             }
             catch (error) {
@@ -3055,11 +3359,15 @@ END:VCARD`;
                         "image/png"
                     );
 
-                document.body.appendChild(link);
+                document.body.appendChild(
+                    link
+                );
 
                 link.click();
 
-                document.body.removeChild(link);
+                document.body.removeChild(
+                    link
+                );
 
             }
             catch (error) {
@@ -3122,7 +3430,8 @@ END:VCARD`;
                             [blob],
                             "QR-Hub-Contact-QR.png",
                             {
-                                type: "image/png"
+                                type:
+                                    "image/png"
                             }
                         );
 
@@ -3130,7 +3439,8 @@ END:VCARD`;
                     if (
                         navigator.canShare &&
                         navigator.canShare({
-                            files: [qrFile]
+                            files:
+                                [qrFile]
                         })
                     ) {
 
@@ -3142,7 +3452,8 @@ END:VCARD`;
                             text:
                                 "Contact QR generated by QR Hub",
 
-                            files: [qrFile]
+                            files:
+                                [qrFile]
 
                         });
 
@@ -3164,7 +3475,10 @@ END:VCARD`;
                 }
 
 
-                // Browser doesn't support direct sharing
+                // ==================================
+                // FALLBACK DOWNLOAD
+                // ==================================
+
                 const link =
                     document.createElement("a");
 
@@ -3176,11 +3490,15 @@ END:VCARD`;
                         "image/png"
                     );
 
-                document.body.appendChild(link);
+                document.body.appendChild(
+                    link
+                );
 
                 link.click();
 
-                document.body.removeChild(link);
+                document.body.removeChild(
+                    link
+                );
 
 
                 alert(
@@ -3191,9 +3509,12 @@ END:VCARD`;
             catch (error) {
 
                 if (
-                    error.name === "AbortError"
+                    error.name ===
+                    "AbortError"
                 ) {
+
                     return;
+
                 }
 
 
@@ -3212,7 +3533,6 @@ END:VCARD`;
     );
 
 }
-
     
     // ==========================================
     // LOCATION QR
