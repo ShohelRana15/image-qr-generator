@@ -4857,3 +4857,41 @@ body.qr-dark-mode
     }
 
 }
+
+
+
+
+
+/* ==========================================
+   SCANNER RESULT AUTO HIGHLIGHT
+   ========================================== */
+
+.scanner-result-attention {
+    animation: scannerResultAttention 1s ease;
+}
+
+@keyframes scannerResultAttention {
+
+    0% {
+        transform: scale(0.96);
+        opacity: 0.4;
+    }
+
+    40% {
+        transform: scale(1.03);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(1.01);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
