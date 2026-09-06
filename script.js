@@ -4246,17 +4246,11 @@ function scrollToWorkspace() {
                     break;
 
                     
-                case "More":
-
-                    /*
-                     * More এখন Location QR দেখাবে।
-                     * পরে এখানে আরও QR option যোগ করা যাবে।
-                     */
-
+              case "Location QR":
+   
                     showLocationQR();
-
+    
                     break;
-
 
                 default:
 
