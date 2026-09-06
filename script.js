@@ -4381,13 +4381,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // SIDEBAR QR NAMES
     // ==========================================
 
-  const qrTypes = [
+ const qrTypes = [
     "Image QR",
     "Text QR",
     "URL QR",
     "WiFi QR",
     "Contact QR",
-    "QR Scanner"
+    "QR Scanner",
+    "Location QR"
 ];
 
     // ==========================================
