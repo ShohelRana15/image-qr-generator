@@ -3535,53 +3535,572 @@ function showContactQR() {
 }
     
     // ==========================================
-    // LOCATION QR
-    // ==========================================
+// LOCATION QR
+// ==========================================
 
-    function showLocationQR() {
+function showLocationQR() {
 
-        uploadPanel.innerHTML = `
+    uploadPanel.innerHTML = `
 
-            ${workspaceHeader(
-                "Create Location QR",
-                "Share a location using Google Maps"
-            )}
+        ${workspaceHeader(
+            "Create Location QR",
+            "Share a location using Google Maps"
+        )}
 
-            <div class="upload-layout">
+        <div class="upload-layout">
 
-                <div class="upload-box">
+            <div class="upload-box">
 
-                    <div class="upload-icon">
+                <div class="upload-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
 
-                        <i class="fa-solid fa-location-dot"></i>
+                <h3>Google Maps Location</h3>
 
-                    </div>
+                <input
+                    type="text"
+                    class="qr-input location-name-input"
+                    placeholder="Place Name (Optional)"
+                >
 
-                    <h3>Google Maps Location</h3>
+                <input
+                    type="url"
+                    class="qr-input location-url-input"
+                    placeholder="Google Maps URL"
+                >
 
-                    <input
-                        type="url"
-                        class="qr-input"
-                        placeholder="Google Maps URL"
-                    >
+                <div
+                    class="location-divider"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        margin:12px 0;
+                        opacity:.7;
+                    ">
 
-                    <button
-                        type="button"
-                        class="primary-btn generate-qr-btn">
+                    <span
+                        style="
+                            flex:1;
+                            height:1px;
+                            background:rgba(255,255,255,.15);
+                        ">
+                    </span>
 
-                        Generate QR
+                    <small>OR USE COORDINATES</small>
 
-                    </button>
+                    <span
+                        style="
+                            flex:1;
+                            height:1px;
+                            background:rgba(255,255,255,.15);
+                        ">
+                    </span>
 
                 </div>
 
-                ${previewBox()}
+                <input
+                    type="number"
+                    step="any"
+                    class="qr-input location-lat-input"
+                    placeholder="Latitude"
+                >
+
+                <input
+                    type="number"
+                    step="any"
+                    class="qr-input location-lng-input"
+                    placeholder="Longitude"
+                >
+
+                <button
+                    type="button"
+                    class="primary-btn generate-qr-btn">
+
+                    Generate QR
+
+                </button>
 
             </div>
-        `;
-    }
+
+            ${previewBox()}
+
+        </div>
+    `;
 
 
+    // ==========================================
+    // INPUTS
+    // ==========================================
+
+    const nameInput =
+        uploadPanel.querySelector(
+            ".location-name-input"
+        );
+
+    const urlInput =
+        uploadPanel.querySelector(
+            ".location-url-input"
+        );
+
+    const latitudeInput =
+        uploadPanel.querySelector(
+            ".location-lat-input"
+        );
+
+    const longitudeInput =
+        uploadPanel.querySelector(
+            ".location-lng-input"
+        );
+
+
+    const generateButton =
+        uploadPanel.querySelector(
+            ".generate-qr-btn"
+        );
+
+    const canvas =
+        uploadPanel.querySelector(
+            ".image-qr-canvas"
+        );
+
+    const placeholder =
+        uploadPanel.querySelector(
+            ".preview-placeholder"
+        );
+
+    const downloadButton =
+        uploadPanel.querySelector(
+            ".image-download-btn"
+        );
+
+    const shareButton =
+        uploadPanel.querySelector(
+            ".image-share-btn"
+        );
+
+
+    let currentLocationData = "";
+
+
+    // ==========================================
+    // GENERATE LOCATION QR
+    // ==========================================
+
+    generateButton.addEventListener(
+        "click",
+        async function () {
+
+            const placeName =
+                nameInput.value.trim();
+
+            const mapsURL =
+                urlInput.value.trim();
+
+            const latitude =
+                latitudeInput.value.trim();
+
+            const longitude =
+                longitudeInput.value.trim();
+
+
+            // ==================================
+            // VALIDATION
+            // ==================================
+
+            if (!mapsURL && !latitude && !longitude) {
+
+                alert(
+                    "Please enter a Google Maps URL or coordinates."
+                );
+
+                urlInput.focus();
+
+                return;
+            }
+
+
+            if (
+                (latitude && !longitude) ||
+                (!latitude && longitude)
+            ) {
+
+                alert(
+                    "Please enter both Latitude and Longitude."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                let finalURL = "";
+
+
+                // ==================================
+                // GOOGLE MAPS URL
+                // ==================================
+
+                if (mapsURL) {
+
+                    finalURL =
+                        mapsURL;
+
+                    if (
+                        !/^https?:\/\//i.test(
+                            finalURL
+                        )
+                    ) {
+
+                        finalURL =
+                            "https://" + finalURL;
+
+                    }
+
+                }
+
+
+                // ==================================
+                // COORDINATES
+                // ==================================
+
+                else {
+
+                    const lat =
+                        parseFloat(latitude);
+
+                    const lng =
+                        parseFloat(longitude);
+
+
+                    if (
+                        Number.isNaN(lat) ||
+                        Number.isNaN(lng)
+                    ) {
+
+                        alert(
+                            "Please enter valid coordinates."
+                        );
+
+                        return;
+                    }
+
+
+                    if (
+                        lat < -90 ||
+                        lat > 90
+                    ) {
+
+                        alert(
+                            "Latitude must be between -90 and 90."
+                        );
+
+                        latitudeInput.focus();
+
+                        return;
+                    }
+
+
+                    if (
+                        lng < -180 ||
+                        lng > 180
+                    ) {
+
+                        alert(
+                            "Longitude must be between -180 and 180."
+                        );
+
+                        longitudeInput.focus();
+
+                        return;
+                    }
+
+
+                    finalURL =
+                        "https://www.google.com/maps/search/?api=1&query=" +
+                        encodeURIComponent(
+                            `${lat},${lng}`
+                        );
+
+                }
+
+
+                // ==================================
+                // PLACE NAME
+                // ==================================
+
+                currentLocationData =
+                    placeName
+                        ? `${placeName}\n${finalURL}`
+                        : finalURL;
+
+
+                // ==================================
+                // GENERATE QR
+                // ==================================
+
+                await QRCode.toCanvas(
+                    canvas,
+                    finalURL,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
+
+
+                placeholder.style.display =
+                    "none";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Location QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate Location QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // DOWNLOAD
+    // ==========================================
+
+    downloadButton.addEventListener(
+        "click",
+        function () {
+
+            if (!currentLocationData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Location-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(
+                    link
+                );
+
+                link.click();
+
+                document.body.removeChild(
+                    link
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Location QR Download Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to download QR code."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHARE
+    // ==========================================
+
+    shareButton.addEventListener(
+        "click",
+        async function () {
+
+            if (!currentLocationData) {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const blob =
+                    await new Promise(
+                        function (resolve) {
+
+                            canvas.toBlob(
+                                resolve,
+                                "image/png"
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    navigator.share &&
+                    window.File
+                ) {
+
+                    const qrFile =
+                        new File(
+                            [blob],
+                            "QR-Hub-Location-QR.png",
+                            {
+                                type:
+                                    "image/png"
+                            }
+                        );
+
+
+                    if (
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files:
+                                [qrFile]
+                        })
+                    ) {
+
+                        await navigator.share({
+
+                            title:
+                                "QR Hub Location QR",
+
+                            text:
+                                currentLocationData,
+
+                            files:
+                                [qrFile]
+
+                        });
+
+                        return;
+                    }
+
+
+                    await navigator.share({
+
+                        title:
+                            "QR Hub Location QR",
+
+                        text:
+                            currentLocationData
+
+                    });
+
+                    return;
+                }
+
+
+                // ==================================
+                // FALLBACK DOWNLOAD
+                // ==================================
+
+                const link =
+                    document.createElement("a");
+
+                link.download =
+                    "QR-Hub-Location-QR.png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                document.body.appendChild(
+                    link
+                );
+
+                link.click();
+
+                document.body.removeChild(
+                    link
+                );
+
+
+                alert(
+                    "Direct sharing is not supported on this browser. QR code downloaded instead."
+                );
+
+            }
+            catch (error) {
+
+                if (
+                    error.name ===
+                    "AbortError"
+                ) {
+
+                    return;
+
+                }
+
+
+                console.error(
+                    "Location QR Share Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to share QR code."
+                );
+
+            }
+
+        }
+    );
+
+}
     
   // ==========================================
 // AUTO SCROLL + ATTENTION GLOW
