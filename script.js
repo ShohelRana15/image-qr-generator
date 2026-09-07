@@ -4698,7 +4698,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "Contact QR",
     "QR Scanner",
     "Location QR"
-    "WhatsApp QR"
 ];
 
     // ==========================================
