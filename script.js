@@ -4101,6 +4101,307 @@ function showLocationQR() {
     );
 
 }
+
+
+
+
+
+
+function showWhatsAppQR() {
+
+    const workspace = document.querySelector(".upload-panel");
+
+    if (!workspace) return;
+
+    workspace.innerHTML = `
+        <div class="qr-generator-panel">
+
+            <h2>WhatsApp QR</h2>
+
+            <p>
+                Create a QR code to start a WhatsApp chat instantly.
+            </p>
+
+            <input
+                type="tel"
+                class="qr-input whatsapp-number-input"
+                placeholder="WhatsApp Number (e.g. 8801XXXXXXXXX)"
+            >
+
+            <textarea
+                class="qr-input whatsapp-message-input"
+                placeholder="Optional message..."
+                rows="4"
+            ></textarea>
+
+            <button
+                type="button"
+                class="primary-btn whatsapp-generate-btn">
+                Generate QR
+            </button>
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <p>Your WhatsApp QR will appear here</p>
+                    </div>
+
+                    <canvas
+                        class="whatsapp-qr-canvas"
+                        style="display:none;">
+                    </canvas>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn whatsapp-download-btn">
+                        Download
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary-btn whatsapp-share-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const numberInput =
+        workspace.querySelector(".whatsapp-number-input");
+
+    const messageInput =
+        workspace.querySelector(".whatsapp-message-input");
+
+    const generateBtn =
+        workspace.querySelector(".whatsapp-generate-btn");
+
+    const canvas =
+        workspace.querySelector(".whatsapp-qr-canvas");
+
+    const placeholder =
+        workspace.querySelector(".preview-placeholder");
+
+    const downloadBtn =
+        workspace.querySelector(".whatsapp-download-btn");
+
+    const shareBtn =
+        workspace.querySelector(".whatsapp-share-btn");
+
+
+    generateBtn.addEventListener("click", async function () {
+
+        let number = numberInput.value.trim();
+
+        const message = messageInput.value.trim();
+
+
+        if (!number) {
+            alert("Please enter a WhatsApp number.");
+            return;
+        }
+
+
+        // Remove +, spaces, brackets and hyphens
+        number = number.replace(/[+\s\-()]/g, "");
+
+
+        if (!/^\d{8,15}$/.test(number)) {
+
+            alert(
+                "Please enter a valid WhatsApp number with country code."
+            );
+
+            return;
+        }
+
+
+        let whatsappURL =
+            `https://wa.me/${number}`;
+
+
+        if (message) {
+
+            whatsappURL +=
+                `?text=${encodeURIComponent(message)}`;
+
+        }
+
+
+        try {
+
+            await QRCode.toCanvas(
+                canvas,
+                whatsappURL,
+                {
+                    width: 260,
+                    margin: 2,
+                    errorCorrectionLevel: "M",
+                    color: {
+                        dark: "#000000",
+                        light: "#ffffff"
+                    }
+                }
+            );
+
+
+            placeholder.style.display = "none";
+
+            canvas.style.display = "block";
+            canvas.style.width = "260px";
+            canvas.style.height = "260px";
+            canvas.style.maxWidth = "100%";
+            canvas.style.aspectRatio = "1 / 1";
+            canvas.style.objectFit = "contain";
+
+
+        } catch (error) {
+
+            console.error(
+                "WhatsApp QR Error:",
+                error
+            );
+
+            alert(
+                "Unable to generate WhatsApp QR."
+            );
+
+        }
+
+    });
+
+
+    downloadBtn.addEventListener(
+        "click",
+        function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate the QR code first."
+                );
+
+                return;
+            }
+
+
+            const link =
+                document.createElement("a");
+
+            link.download =
+                "QR-Hub-WhatsApp-QR.png";
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+            link.click();
+
+        }
+    );
+
+
+    shareBtn.addEventListener(
+        "click",
+        async function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate the QR code first."
+                );
+
+                return;
+            }
+
+
+            canvas.toBlob(
+                async function (blob) {
+
+                    if (!blob) return;
+
+
+                    const file =
+                        new File(
+                            [blob],
+                            "QR-Hub-WhatsApp-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    try {
+
+                        if (
+                            navigator.share &&
+                            navigator.canShare &&
+                            navigator.canShare({
+                                files: [file]
+                            })
+                        ) {
+
+                            await navigator.share({
+                                title: "WhatsApp QR",
+                                text: "Scan to start a WhatsApp chat.",
+                                files: [file]
+                            });
+
+                        } else {
+
+                            const link =
+                                document.createElement("a");
+
+                            link.download =
+                                "QR-Hub-WhatsApp-QR.png";
+
+                            link.href =
+                                URL.createObjectURL(blob);
+
+                            link.click();
+
+                            URL.revokeObjectURL(
+                                link.href
+                            );
+
+                            alert(
+                                "Sharing is not supported. QR downloaded instead."
+                            );
+
+                        }
+
+                    } catch (error) {
+
+                        console.error(
+                            "WhatsApp Share Error:",
+                            error
+                        );
+
+                    }
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+
+}
+
+
+
     
   // ==========================================
 // AUTO SCROLL + ATTENTION GLOW
@@ -4252,6 +4553,14 @@ function scrollToWorkspace() {
     
                     break;
 
+                    
+               case "WhatsApp QR":
+                    
+                    showWhatsAppQR();
+                    
+                    break;     
+
+                    
                 default:
 
                     return;
@@ -4389,6 +4698,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "Contact QR",
     "QR Scanner",
     "Location QR"
+    "WhatsApp QR"
 ];
 
     // ==========================================
