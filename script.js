@@ -4699,7 +4699,11 @@ document.addEventListener("DOMContentLoaded", function () {
     "QR Scanner",
     "Location QR"
 ];
-
+const sidebarQRTypes = [
+    ...qrTypes,
+    "Location QR",
+    "WhatsApp QR"
+];
     // ==========================================
     // SIDEBAR LINKS
     // ==========================================
@@ -4728,9 +4732,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // QR menu না হলে বাদ
 
-        if (!qrTypes.includes(name)) {
-            return;
-        }
+       if (!sidebarQRTypes.includes(name)) {
+    return;
+}
 
 
         link.addEventListener("click", function (event) {
