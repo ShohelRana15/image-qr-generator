@@ -5075,7 +5075,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const sidebarQRTypes = [
     ...qrTypes,
     "Location QR",
-    "WhatsApp QR"
+    "WhatsApp QR",
     "Email QR"
 ];
     // ==========================================
