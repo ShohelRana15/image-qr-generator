@@ -4402,6 +4402,373 @@ function showWhatsAppQR() {
 
 
 
+
+
+
+function showEmailQR() {
+
+    const workspace = document.querySelector(".upload-panel");
+
+    if (!workspace) return;
+
+    workspace.innerHTML = `
+        <div class="qr-generator-panel">
+
+            <h2>Email QR</h2>
+
+            <p>
+                Create a QR code to compose an email instantly.
+            </p>
+
+            <input
+                type="email"
+                class="qr-input email-address-input"
+                placeholder="Email Address"
+            >
+
+            <input
+                type="text"
+                class="qr-input email-subject-input"
+                placeholder="Subject (Optional)"
+            >
+
+            <textarea
+                class="qr-input email-message-input"
+                placeholder="Message (Optional)"
+                rows="4"
+            ></textarea>
+
+            <button
+                type="button"
+                class="primary-btn email-generate-btn">
+                Generate QR
+            </button>
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>Your Email QR will appear here</p>
+                    </div>
+
+                    <canvas
+                        class="email-qr-canvas"
+                        style="display:none;">
+                    </canvas>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn email-download-btn">
+                        Download
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary-btn email-share-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const emailInput =
+        workspace.querySelector(".email-address-input");
+
+    const subjectInput =
+        workspace.querySelector(".email-subject-input");
+
+    const messageInput =
+        workspace.querySelector(".email-message-input");
+
+    const generateBtn =
+        workspace.querySelector(".email-generate-btn");
+
+    const canvas =
+        workspace.querySelector(".email-qr-canvas");
+
+    const placeholder =
+        workspace.querySelector(".preview-placeholder");
+
+    const downloadBtn =
+        workspace.querySelector(".email-download-btn");
+
+    const shareBtn =
+        workspace.querySelector(".email-share-btn");
+
+
+    generateBtn.addEventListener(
+        "click",
+        async function () {
+
+            const email =
+                emailInput.value.trim();
+
+            const subject =
+                subjectInput.value.trim();
+
+            const message =
+                messageInput.value.trim();
+
+
+            if (!email) {
+
+                alert(
+                    "Please enter an email address."
+                );
+
+                emailInput.focus();
+
+                return;
+            }
+
+
+            if (
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+            ) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+                emailInput.focus();
+
+                return;
+            }
+
+
+            let mailtoURL =
+                `mailto:${email}`;
+
+
+            const params = [];
+
+
+            if (subject) {
+
+                params.push(
+                    `subject=${encodeURIComponent(subject)}`
+                );
+
+            }
+
+
+            if (message) {
+
+                params.push(
+                    `body=${encodeURIComponent(message)}`
+                );
+
+            }
+
+
+            if (params.length) {
+
+                mailtoURL +=
+                    "?" + params.join("&");
+
+            }
+
+
+            try {
+
+                await QRCode.toCanvas(
+                    canvas,
+                    mailtoURL,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                placeholder.style.display =
+                    "none";
+
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Email QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate Email QR."
+                );
+
+            }
+
+        }
+    );
+
+
+    downloadBtn.addEventListener(
+        "click",
+        function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            const link =
+                document.createElement("a");
+
+            link.download =
+                "QR-Hub-Email-QR.png";
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+            link.click();
+
+        }
+    );
+
+
+    shareBtn.addEventListener(
+        "click",
+        async function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            canvas.toBlob(
+                async function (blob) {
+
+                    if (!blob) return;
+
+
+                    const file =
+                        new File(
+                            [blob],
+                            "QR-Hub-Email-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    try {
+
+                        if (
+                            navigator.share &&
+                            navigator.canShare &&
+                            navigator.canShare({
+                                files: [file]
+                            })
+                        ) {
+
+                            await navigator.share({
+
+                                title: "Email QR",
+
+                                text:
+                                    "Scan to compose an email.",
+
+                                files: [file]
+
+                            });
+
+                        }
+                        else {
+
+                            const link =
+                                document.createElement("a");
+
+                            link.download =
+                                "QR-Hub-Email-QR.png";
+
+                            link.href =
+                                URL.createObjectURL(blob);
+
+                            link.click();
+
+                            URL.revokeObjectURL(
+                                link.href
+                            );
+
+                            alert(
+                                "Sharing is not supported. QR downloaded instead."
+                            );
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        if (
+                            error.name ===
+                            "AbortError"
+                        ) {
+                            return;
+                        }
+
+                        console.error(
+                            "Email Share Error:",
+                            error
+                        );
+
+                    }
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+
+}
+
     
   // ==========================================
 // AUTO SCROLL + ATTENTION GLOW
@@ -4560,6 +4927,10 @@ function scrollToWorkspace() {
                     
                     break;     
 
+               case "Email QR":
+                    showEmailQR();
+                    break;
+
                     
                 default:
 
@@ -4703,6 +5074,7 @@ const sidebarQRTypes = [
     ...qrTypes,
     "Location QR",
     "WhatsApp QR"
+    "Email QR"
 ];
     // ==========================================
     // SIDEBAR LINKS
