@@ -5145,6 +5145,13 @@ function scrollToWorkspace() {
                     
                     break;
 
+
+                case "Phone QR":
+                    
+                    showPhoneQR();
+                    
+                    break;
+
                     
                 default:
 
@@ -5287,7 +5294,8 @@ const sidebarQRTypes = [
     ...qrTypes,
     "Location QR",
     "WhatsApp QR",
-    "Email QR"
+    "Email QR",
+    "Phone QR"
 ];
     // ==========================================
     // SIDEBAR LINKS
