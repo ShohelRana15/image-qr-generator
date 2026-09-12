@@ -4927,8 +4927,11 @@ function scrollToWorkspace() {
                     
                     break;     
 
+                    
                case "Email QR":
+                    
                     showEmailQR();
+                    
                     break;
 
                     
@@ -5068,7 +5071,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "WiFi QR",
     "Contact QR",
     "QR Scanner",
-    "Location QR"
 ];
 const sidebarQRTypes = [
     ...qrTypes,
