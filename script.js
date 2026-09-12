@@ -5123,8 +5123,8 @@ const sidebarQRTypes = [
             sidebarLinks.forEach(function (item) {
 
                 if (
-                    qrTypes.includes(
-                        item.textContent.trim()
+                    sidebarQRTypes.includes(
+                    item.textContent.trim()
                     )
                 ) {
 
