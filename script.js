@@ -4772,8 +4772,6 @@ function showEmailQR() {
 
 
 
-
-
     
 function showPhoneQR() {
 
