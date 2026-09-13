@@ -4773,52 +4773,55 @@ function showEmailQR() {
 
 
 
+
+    
 function showPhoneQR() {
-    const mainContent = document.querySelector(".main-content");
 
-    mainContent.innerHTML = `
-        <div class="qr-generator-section">
-            <div class="generator-panel">
-                <h2><i class="fa-solid fa-phone"></i> Phone QR</h2>
-                <p>Scan the QR code to call a phone number instantly.</p>
+    const workspace = document.querySelector(".upload-panel");
 
-                <div class="input-group">
-                    <label>Phone Number</label>
-                    <input
-                        type="tel"
-                        class="qr-input phone-number-input"
-                        placeholder="+8801XXXXXXXXX"
-                    >
-                </div>
+    if (!workspace) return;
 
-                <button
-                    type="button"
-                    class="primary-btn phone-generate-btn">
-                    Generate QR
-                </button>
-            </div>
+    workspace.innerHTML = `
+        <div class="qr-generator-panel">
+
+            <h2>Phone QR</h2>
+
+            <p>
+                Create a QR code to make a phone call instantly.
+            </p>
+
+            <input
+                type="tel"
+                class="qr-input phone-number-input"
+                placeholder="Phone Number (+8801XXXXXXXXX)"
+            >
+
+            <button
+                type="button"
+                class="primary-btn phone-generate-btn">
+                Generate QR
+            </button>
 
             <div class="preview-panel">
+
                 <h3>Preview</h3>
 
                 <div class="preview-box">
+
                     <div class="preview-placeholder">
-                        <i class="fa-solid fa-qrcode"></i>
-                        <p>Your QR code will appear here</p>
+                        <i class="fa-solid fa-phone"></i>
+                        <p>Your Phone QR will appear here</p>
                     </div>
 
                     <canvas
                         class="phone-qr-canvas"
-                        style="
-                            display:none;
-                            max-width:100%;
-                            height:auto;
-                            border-radius:12px;
-                        "
-                    ></canvas>
+                        style="display:none;">
+                    </canvas>
+
                 </div>
 
                 <div class="preview-actions">
+
                     <button
                         type="button"
                         class="secondary-btn phone-download-btn">
@@ -4830,151 +4833,259 @@ function showPhoneQR() {
                         class="primary-btn phone-share-btn">
                         Share
                     </button>
+
                 </div>
+
             </div>
+
         </div>
     `;
 
-    const phoneInput =
-        document.querySelector(".phone-number-input");
 
-    const generateButton =
-        document.querySelector(".phone-generate-btn");
+    const phoneInput =
+        workspace.querySelector(".phone-number-input");
+
+    const generateBtn =
+        workspace.querySelector(".phone-generate-btn");
 
     const canvas =
-        document.querySelector(".phone-qr-canvas");
+        workspace.querySelector(".phone-qr-canvas");
 
     const placeholder =
-        document.querySelector(".preview-placeholder");
+        workspace.querySelector(".preview-placeholder");
 
-    const downloadButton =
-        document.querySelector(".phone-download-btn");
+    const downloadBtn =
+        workspace.querySelector(".phone-download-btn");
 
-    const shareButton =
-        document.querySelector(".phone-share-btn");
-
-
-    generateButton.addEventListener("click", async function () {
-
-        const phoneNumber =
-            phoneInput.value.trim();
-
-        if (!phoneNumber) {
-            alert("Please enter a phone number.");
-            return;
-        }
-
-        const cleanNumber =
-            phoneNumber.replace(/[^\d+]/g, "");
-
-        if (!/^\+?\d{8,15}$/.test(cleanNumber)) {
-            alert("Please enter a valid phone number.");
-            return;
-        }
-
-        const phoneURL =
-            `tel:${cleanNumber}`;
-
-        try {
-
-            await QRCode.toCanvas(
-                canvas,
-                phoneURL,
-                {
-                    width: 260,
-                    margin: 2,
-                    errorCorrectionLevel: "M",
-                    color: {
-                        dark: "#000000",
-                        light: "#ffffff"
-                    }
-                }
-            );
-
-            placeholder.style.display = "none";
-            canvas.style.display = "block";
-
-            canvas.style.width = "260px";
-            canvas.style.height = "260px";
-            canvas.style.maxWidth = "100%";
-            canvas.style.aspectRatio = "1 / 1";
-            canvas.style.objectFit = "contain";
-
-        } catch (error) {
-            console.error("Phone QR Error:", error);
-            alert("Unable to generate QR code.");
-        }
-    });
+    const shareBtn =
+        workspace.querySelector(".phone-share-btn");
 
 
-    downloadButton.addEventListener("click", function () {
+    generateBtn.addEventListener(
+        "click",
+        async function () {
 
-        if (canvas.style.display === "none") {
-            alert("Please generate a QR code first.");
-            return;
-        }
-
-        const link =
-            document.createElement("a");
-
-        link.download =
-            "QR-Hub-Phone-QR.png";
-
-        link.href =
-            canvas.toDataURL("image/png");
-
-        link.click();
-    });
+            const phoneNumber =
+                phoneInput.value.trim();
 
 
-    shareButton.addEventListener("click", async function () {
-
-        if (canvas.style.display === "none") {
-            alert("Please generate a QR code first.");
-            return;
-        }
-
-        try {
-
-            const blob =
-                await new Promise(resolve =>
-                    canvas.toBlob(resolve, "image/png")
-                );
-
-            const file =
-                new File(
-                    [blob],
-                    "QR-Hub-Phone-QR.png",
-                    { type: "image/png" }
-                );
-
-            if (
-                navigator.share &&
-                navigator.canShare &&
-                navigator.canShare({ files: [file] })
-            ) {
-
-                await navigator.share({
-                    title: "QR Hub Phone QR",
-                    text: "Phone QR generated by QR Hub",
-                    files: [file]
-                });
-
-            } else {
+            if (!phoneNumber) {
 
                 alert(
-                    "Sharing files is not supported on this device."
+                    "Please enter a phone number."
                 );
+
+                phoneInput.focus();
+
+                return;
             }
 
-        } catch (error) {
 
-            if (error.name !== "AbortError") {
-                console.error("Share Error:", error);
-                alert("Unable to share QR code.");
+            const cleanNumber =
+                phoneNumber.replace(/[^\d+]/g, "");
+
+
+            if (!/^\+?\d{8,15}$/.test(cleanNumber)) {
+
+                alert(
+                    "Please enter a valid phone number."
+                );
+
+                phoneInput.focus();
+
+                return;
             }
+
+
+            const phoneURL =
+                `tel:${cleanNumber}`;
+
+
+            try {
+
+                await QRCode.toCanvas(
+                    canvas,
+                    phoneURL,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                placeholder.style.display =
+                    "none";
+
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Phone QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate Phone QR."
+                );
+
+            }
+
         }
-    });
+    );
+
+
+    downloadBtn.addEventListener(
+        "click",
+        function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            const link =
+                document.createElement("a");
+
+            link.download =
+                "QR-Hub-Phone-QR.png";
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+            link.click();
+
+        }
+    );
+
+
+    shareBtn.addEventListener(
+        "click",
+        async function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            canvas.toBlob(
+                async function (blob) {
+
+                    if (!blob) return;
+
+
+                    const file =
+                        new File(
+                            [blob],
+                            "QR-Hub-Phone-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    try {
+
+                        if (
+                            navigator.share &&
+                            navigator.canShare &&
+                            navigator.canShare({
+                                files: [file]
+                            })
+                        ) {
+
+                            await navigator.share({
+
+                                title: "Phone QR",
+
+                                text:
+                                    "Scan to make a phone call.",
+
+                                files: [file]
+
+                            });
+
+                        }
+                        else {
+
+                            const link =
+                                document.createElement("a");
+
+                            link.download =
+                                "QR-Hub-Phone-QR.png";
+
+                            link.href =
+                                URL.createObjectURL(blob);
+
+                            link.click();
+
+                            URL.revokeObjectURL(
+                                link.href
+                            );
+
+                            alert(
+                                "Sharing is not supported. QR downloaded instead."
+                            );
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        if (
+                            error.name ===
+                            "AbortError"
+                        ) {
+                            return;
+                        }
+
+                        console.error(
+                            "Phone Share Error:",
+                            error
+                        );
+
+                    }
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+
 }
 
 
