@@ -5087,6 +5087,348 @@ function showPhoneQR() {
 }
 
 
+
+
+
+function showSMSQR() {
+
+    const workspace = document.querySelector(".upload-panel");
+
+    if (!workspace) return;
+
+    workspace.innerHTML = `
+        <div class="qr-generator-panel">
+
+            <h2>SMS QR</h2>
+
+            <p>
+                Create a QR code to send an SMS instantly.
+            </p>
+
+            <input
+                type="tel"
+                class="qr-input sms-number-input"
+                placeholder="Phone Number (+8801XXXXXXXXX)"
+            >
+
+            <textarea
+                class="qr-input sms-message-input"
+                placeholder="SMS Message"
+                rows="4"
+            ></textarea>
+
+            <button
+                type="button"
+                class="primary-btn sms-generate-btn">
+                Generate QR
+            </button>
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+                        <i class="fa-solid fa-comment-sms"></i>
+                        <p>Your SMS QR will appear here</p>
+                    </div>
+
+                    <canvas
+                        class="sms-qr-canvas"
+                        style="display:none;">
+                    </canvas>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn sms-download-btn">
+                        Download
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary-btn sms-share-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const numberInput =
+        workspace.querySelector(".sms-number-input");
+
+    const messageInput =
+        workspace.querySelector(".sms-message-input");
+
+    const generateBtn =
+        workspace.querySelector(".sms-generate-btn");
+
+    const canvas =
+        workspace.querySelector(".sms-qr-canvas");
+
+    const placeholder =
+        workspace.querySelector(".preview-placeholder");
+
+    const downloadBtn =
+        workspace.querySelector(".sms-download-btn");
+
+    const shareBtn =
+        workspace.querySelector(".sms-share-btn");
+
+
+    generateBtn.addEventListener(
+        "click",
+        async function () {
+
+            const phoneNumber =
+                numberInput.value.trim();
+
+            const message =
+                messageInput.value.trim();
+
+
+            if (!phoneNumber) {
+
+                alert(
+                    "Please enter a phone number."
+                );
+
+                numberInput.focus();
+
+                return;
+            }
+
+
+            if (!message) {
+
+                alert(
+                    "Please enter an SMS message."
+                );
+
+                messageInput.focus();
+
+                return;
+            }
+
+
+            const cleanNumber =
+                phoneNumber.replace(/[^\d+]/g, "");
+
+
+            if (!/^\+?\d{8,15}$/.test(cleanNumber)) {
+
+                alert(
+                    "Please enter a valid phone number."
+                );
+
+                numberInput.focus();
+
+                return;
+            }
+
+
+            const smsURL =
+                `sms:${cleanNumber}?body=${encodeURIComponent(message)}`;
+
+
+            try {
+
+                await QRCode.toCanvas(
+                    canvas,
+                    smsURL,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                placeholder.style.display =
+                    "none";
+
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "SMS QR Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to generate SMS QR."
+                );
+
+            }
+
+        }
+    );
+
+
+    downloadBtn.addEventListener(
+        "click",
+        function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            const link =
+                document.createElement("a");
+
+            link.download =
+                "QR-Hub-SMS-QR.png";
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+            link.click();
+
+        }
+    );
+
+
+    shareBtn.addEventListener(
+        "click",
+        async function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            canvas.toBlob(
+                async function (blob) {
+
+                    if (!blob) return;
+
+
+                    const file =
+                        new File(
+                            [blob],
+                            "QR-Hub-SMS-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    try {
+
+                        if (
+                            navigator.share &&
+                            navigator.canShare &&
+                            navigator.canShare({
+                                files: [file]
+                            })
+                        ) {
+
+                            await navigator.share({
+
+                                title: "SMS QR",
+
+                                text:
+                                    "Scan to send an SMS.",
+
+                                files: [file]
+
+                            });
+
+                        }
+                        else {
+
+                            const link =
+                                document.createElement("a");
+
+                            link.download =
+                                "QR-Hub-SMS-QR.png";
+
+                            link.href =
+                                URL.createObjectURL(blob);
+
+                            link.click();
+
+                            URL.revokeObjectURL(
+                                link.href
+                            );
+
+                            alert(
+                                "Sharing is not supported. QR downloaded instead."
+                            );
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        if (
+                            error.name ===
+                            "AbortError"
+                        ) {
+                            return;
+                        }
+
+                        console.error(
+                            "SMS Share Error:",
+                            error
+                        );
+
+                    }
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+
+}
+
+
+    
     
     
     
@@ -5261,6 +5603,12 @@ function scrollToWorkspace() {
                     
                     break;
 
+
+
+                case "SMS QR":
+                    showSMSQR();
+                    break;
+
                     
                 default:
 
@@ -5404,8 +5752,13 @@ const sidebarQRTypes = [
     "Location QR",
     "WhatsApp QR",
     "Email QR",
-    "Phone QR"
+    "Phone QR",
+    "SMS QR"
 ];
+
+
+
+    
     // ==========================================
     // SIDEBAR LINKS
     // ==========================================
