@@ -5429,7 +5429,373 @@ function showSMSQR() {
 
 
     
-    
+function showSocialMediaQR() {
+
+    const workspace = document.querySelector(".upload-panel");
+
+    if (!workspace) return;
+
+    workspace.innerHTML = `
+        <div class="qr-generator-panel">
+
+            <h2>Social Media QR</h2>
+
+            <p>
+                Create a QR code to share your social media profile.
+            </p>
+
+            <select
+                class="qr-input social-platform-input">
+
+                <option value="">
+                    Select Social Media
+                </option>
+
+                <option value="facebook">
+                    Facebook
+                </option>
+
+                <option value="instagram">
+                    Instagram
+                </option>
+
+                <option value="youtube">
+                    YouTube
+                </option>
+
+                <option value="tiktok">
+                    TikTok
+                </option>
+
+                <option value="linkedin">
+                    LinkedIn
+                </option>
+
+                <option value="x">
+                    X (Twitter)
+                </option>
+
+            </select>
+
+            <input
+                type="text"
+                class="qr-input social-profile-input"
+                placeholder="Profile URL"
+            >
+
+            <button
+                type="button"
+                class="primary-btn social-generate-btn">
+                Generate QR
+            </button>
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <p>Your Social Media QR will appear here</p>
+                    </div>
+
+                    <canvas
+                        class="social-qr-canvas"
+                        style="display:none;">
+                    </canvas>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn social-download-btn">
+                        Download
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary-btn social-share-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const platformInput =
+        workspace.querySelector(".social-platform-input");
+
+    const profileInput =
+        workspace.querySelector(".social-profile-input");
+
+    const generateBtn =
+        workspace.querySelector(".social-generate-btn");
+
+    const canvas =
+        workspace.querySelector(".social-qr-canvas");
+
+    const placeholder =
+        workspace.querySelector(".preview-placeholder");
+
+    const downloadBtn =
+        workspace.querySelector(".social-download-btn");
+
+    const shareBtn =
+        workspace.querySelector(".social-share-btn");
+
+
+    generateBtn.addEventListener(
+        "click",
+        async function () {
+
+            const platform =
+                platformInput.value;
+
+            let profileURL =
+                profileInput.value.trim();
+
+
+            if (!platform) {
+
+                alert(
+                    "Please select a social media platform."
+                );
+
+                platformInput.focus();
+
+                return;
+            }
+
+
+            if (!profileURL) {
+
+                alert(
+                    "Please enter a profile URL."
+                );
+
+                profileInput.focus();
+
+                return;
+            }
+
+
+            if (
+                !/^https?:\/\//i.test(profileURL)
+            ) {
+
+                profileURL =
+                    "https://" + profileURL;
+
+            }
+
+
+            try {
+
+                const urlObject =
+                    new URL(profileURL);
+
+
+                if (
+                    !urlObject.hostname
+                ) {
+                    throw new Error(
+                        "Invalid URL"
+                    );
+                }
+
+
+                await QRCode.toCanvas(
+                    canvas,
+                    profileURL,
+                    {
+                        width: 260,
+                        margin: 2,
+                        errorCorrectionLevel: "M",
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff"
+                        }
+                    }
+                );
+
+
+                placeholder.style.display =
+                    "none";
+
+                canvas.style.display =
+                    "block";
+
+                canvas.style.width =
+                    "260px";
+
+                canvas.style.height =
+                    "260px";
+
+                canvas.style.maxWidth =
+                    "100%";
+
+                canvas.style.aspectRatio =
+                    "1 / 1";
+
+                canvas.style.objectFit =
+                    "contain";
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Social Media QR Error:",
+                    error
+                );
+
+                alert(
+                    "Please enter a valid profile URL."
+                );
+
+            }
+
+        }
+    );
+
+
+    downloadBtn.addEventListener(
+        "click",
+        function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            const link =
+                document.createElement("a");
+
+            link.download =
+                "QR-Hub-Social-Media-QR.png";
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+            link.click();
+
+        }
+    );
+
+
+    shareBtn.addEventListener(
+        "click",
+        async function () {
+
+            if (canvas.style.display === "none") {
+
+                alert(
+                    "Please generate a QR code first."
+                );
+
+                return;
+            }
+
+
+            canvas.toBlob(
+                async function (blob) {
+
+                    if (!blob) return;
+
+
+                    const file =
+                        new File(
+                            [blob],
+                            "QR-Hub-Social-Media-QR.png",
+                            {
+                                type: "image/png"
+                            }
+                        );
+
+
+                    try {
+
+                        if (
+                            navigator.share &&
+                            navigator.canShare &&
+                            navigator.canShare({
+                                files: [file]
+                            })
+                        ) {
+
+                            await navigator.share({
+
+                                title:
+                                    "Social Media QR",
+
+                                text:
+                                    "Scan to open my social media profile.",
+
+                                files: [file]
+
+                            });
+
+                        }
+                        else {
+
+                            const link =
+                                document.createElement("a");
+
+                            link.download =
+                                "QR-Hub-Social-Media-QR.png";
+
+                            link.href =
+                                URL.createObjectURL(blob);
+
+                            link.click();
+
+                            URL.revokeObjectURL(
+                                link.href
+                            );
+
+                            alert(
+                                "Sharing is not supported. QR downloaded instead."
+                            );
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        if (
+                            error.name ===
+                            "AbortError"
+                        ) {
+                            return;
+                        }
+
+                        console.error(
+                            "Social Share Error:",
+                            error
+                        );
+
+                    }
+
+                },
+                "image/png"
+            );
+
+        }
+    );
+
+}    
     
     
   // ==========================================
@@ -5609,6 +5975,9 @@ function scrollToWorkspace() {
                     showSMSQR();
                     break;
 
+                case "Social Media QR":
+                    showSocialMediaQR();
+                    break;   
                     
                 default:
 
@@ -5753,7 +6122,8 @@ const sidebarQRTypes = [
     "WhatsApp QR",
     "Email QR",
     "Phone QR",
-    "SMS QR"
+    "SMS QR",
+    "Social Media QR"
 ];
 
 
