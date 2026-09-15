@@ -76,47 +76,50 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
 
-    // শুধু GET request
     if (event.request.method !== "GET") {
         return;
     }
 
-
-    // শুধুমাত্র একই origin-এর request
-    if (new URL(event.request.url).origin !== self.location.origin) {
+    if (
+        new URL(event.request.url).origin !==
+        self.location.origin
+    ) {
         return;
     }
 
-
     event.respondWith(
 
-        fetch(event.request)
+        fetch(event.request, {
+            cache: "no-store"
+        })
 
-            .then((response) => {
+        .then((response) => {
 
-                // সফল response হলে cache update
-                if (response && response.ok) {
+            if (response && response.ok) {
 
-                    const responseClone = response.clone();
+                const responseClone =
+                    response.clone();
 
-                    caches.open(CACHE_NAME).then((cache) => {
+                caches.open(CACHE_NAME).then((cache) => {
 
-                        cache.put(event.request, responseClone);
+                    cache.put(
+                        event.request,
+                        responseClone
+                    );
 
-                    });
+                });
 
-                }
+            }
 
-                return response;
+            return response;
 
-            })
+        })
 
-            .catch(() => {
+        .catch(() => {
 
-                // Internet না থাকলে cache থেকে load
-                return caches.match(event.request);
+            return caches.match(event.request);
 
-            })
+        })
 
     );
 
@@ -141,4 +144,60 @@ self.addEventListener("message", (event) => {
 });
 
 
-                  
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", function () {
+
+        navigator.serviceWorker.register("./sw.js")
+            .then(function (registration) {
+
+                registration.update();
+
+                registration.addEventListener(
+                    "updatefound",
+                    function () {
+
+                        const newWorker =
+                            registration.installing;
+
+                        if (!newWorker) return;
+
+                        newWorker.addEventListener(
+                            "statechange",
+                            function () {
+
+                                if (
+                                    newWorker.state ===
+                                    "installed"
+                                ) {
+
+                                    if (
+                                        navigator.serviceWorker
+                                            .controller
+                                    ) {
+
+                                        window.location.reload();
+
+                                    }
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            })
+            .catch(function (error) {
+
+                console.error(
+                    "Service Worker registration failed:",
+                    error
+                );
+
+            });
+
+    });
+
+}                  
