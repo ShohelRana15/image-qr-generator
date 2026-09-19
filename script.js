@@ -6856,6 +6856,7 @@ if (searchBox) {
         searchBox.querySelector("input");
 
     let searchHighlights = [];
+    let currentSearchIndex = -1;
 
     function clearSearchHighlights() {
 
@@ -7010,13 +7011,78 @@ if (searchBox) {
 
         if (searchHighlights.length) {
 
-            searchHighlights[0].scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+    currentSearchIndex = 0;
+
+    showCurrentSearchResult();
+
+} else {
+
+    currentSearchIndex = -1;
+
+    updateSearchCounter();
+
+}
+function updateSearchCounter() {
+
+    let counter =
+        searchBox.querySelector(
+            ".qrhub-search-counter"
+        );
+
+    if (!counter) return;
+
+    if (!searchHighlights.length) {
+
+        counter.textContent = "0 results";
+
+        return;
+
+    }
+
+    counter.textContent =
+        `${currentSearchIndex + 1} / ${searchHighlights.length}`;
+
+}
+
+
+function showCurrentSearchResult() {
+
+    if (!searchHighlights.length) return;
+
+    searchHighlights.forEach(
+        function (item) {
+
+            item.classList.remove(
+                "qrhub-search-current"
+            );
 
         }
+    );
 
+
+    const current =
+        searchHighlights[
+            currentSearchIndex
+        ];
+
+    current.classList.add(
+        "qrhub-search-current"
+    );
+
+
+    current.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "center"
+
+    });
+
+
+    updateSearchCounter();
+
+}
+        
     }
 
 
