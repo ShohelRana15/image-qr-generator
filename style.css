@@ -4963,3 +4963,49 @@ body.qr-dark-mode
         0 0 10px rgba(250, 204, 21, 0.55);
 
 }
+
+.qrhub-search-current {
+
+    background: #22c55e !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 0 14px rgba(34, 197, 94, 0.75);
+
+}
+
+
+.qrhub-search-counter {
+
+    font-size: 12px;
+
+    color: #94a3b8;
+
+    white-space: nowrap;
+
+}
+
+
+.qrhub-search-prev,
+.qrhub-search-next {
+
+    border: none;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    cursor: pointer;
+
+    padding: 4px;
+
+}
+
+
+.qrhub-search-prev:hover,
+.qrhub-search-next:hover {
+
+    color: #ffffff;
+
+}
