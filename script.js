@@ -6839,3 +6839,196 @@ if (heroScanQRBtn) {
 }
 
 
+
+
+
+
+
+// ==========================================
+// QR HUB - PAGE SEARCH / FIND
+// ==========================================
+
+const searchBox = document.querySelector(".search-box");
+
+if (searchBox) {
+
+    const searchInput =
+        searchBox.querySelector("input");
+
+    let searchHighlights = [];
+
+    function clearSearchHighlights() {
+
+        searchHighlights.forEach(function (item) {
+
+            const parent = item.parentNode;
+
+            if (!parent) return;
+
+            parent.replaceChild(
+                document.createTextNode(
+                    item.textContent
+                ),
+                item
+            );
+
+            parent.normalize();
+
+        });
+
+        searchHighlights = [];
+
+    }
+
+
+    function searchPage(keyword) {
+
+        clearSearchHighlights();
+
+        keyword = keyword.trim();
+
+        if (!keyword) return;
+
+
+        const walker =
+            document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function (node) {
+
+                        if (
+                            !node.nodeValue.trim() ||
+                            node.parentElement.closest(
+                                "script, style, input, textarea, button"
+                            )
+                        ) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+
+        const textNodes = [];
+
+        let node;
+
+        while (
+            node = walker.nextNode()
+        ) {
+            textNodes.push(node);
+        }
+
+
+        const searchRegex =
+            new RegExp(
+                keyword.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                ),
+                "gi"
+            );
+
+
+        textNodes.forEach(function (textNode) {
+
+            const text =
+                textNode.nodeValue;
+
+            if (!searchRegex.test(text)) {
+                return;
+            }
+
+            searchRegex.lastIndex = 0;
+
+
+            const fragment =
+                document.createDocumentFragment();
+
+            let lastIndex = 0;
+
+            text.replace(
+                searchRegex,
+                function (
+                    match,
+                    offset
+                ) {
+
+                    fragment.appendChild(
+                        document.createTextNode(
+                            text.substring(
+                                lastIndex,
+                                offset
+                            )
+                        )
+                    );
+
+
+                    const highlight =
+                        document.createElement(
+                            "mark"
+                        );
+
+                    highlight.className =
+                        "qrhub-search-highlight";
+
+                    highlight.textContent =
+                        match;
+
+                    fragment.appendChild(
+                        highlight
+                    );
+
+                    searchHighlights.push(
+                        highlight
+                    );
+
+                    lastIndex =
+                        offset + match.length;
+
+                }
+            );
+
+
+            fragment.appendChild(
+                document.createTextNode(
+                    text.substring(lastIndex)
+                )
+            );
+
+
+            textNode.parentNode.replaceChild(
+                fragment,
+                textNode
+            );
+
+        });
+
+
+        if (searchHighlights.length) {
+
+            searchHighlights[0].scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            searchPage(
+                searchInput.value
+            );
+
+        }
+    );
+
+}
