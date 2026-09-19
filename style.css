@@ -4936,3 +4936,30 @@ body.qr-dark-mode
     background: rgba(37, 99, 235, 0.10);
     border: 1px solid rgba(96, 165, 250, 0.25);
 }
+
+
+
+
+
+
+
+
+/* ==========================================
+   QR HUB - SEARCH HIGHLIGHT
+   ========================================== */
+
+.qrhub-search-highlight {
+
+    background: #facc15;
+    color: #000000;
+
+    padding: 2px 4px;
+
+    border-radius: 4px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 0 10px rgba(250, 204, 21, 0.55);
+
+}
