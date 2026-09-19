@@ -7098,3 +7098,61 @@ function showCurrentSearchResult() {
     );
 
 }
+
+
+
+
+const prevButton =
+    searchBox.querySelector(
+        ".qrhub-search-prev"
+    );
+
+const nextButton =
+    searchBox.querySelector(
+        ".qrhub-search-next"
+    );
+
+
+prevButton.addEventListener(
+    "click",
+    function () {
+
+        if (!searchHighlights.length) return;
+
+        currentSearchIndex--;
+
+        if (currentSearchIndex < 0) {
+
+            currentSearchIndex =
+                searchHighlights.length - 1;
+
+        }
+
+        showCurrentSearchResult();
+
+    }
+);
+
+
+nextButton.addEventListener(
+    "click",
+    function () {
+
+        if (!searchHighlights.length) return;
+
+        currentSearchIndex++;
+
+        if (
+            currentSearchIndex >=
+            searchHighlights.length
+        ) {
+
+            currentSearchIndex = 0;
+
+        }
+
+        showCurrentSearchResult();
+
+    }
+);
+
