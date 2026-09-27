@@ -7460,6 +7460,9 @@ if (languageSelector) {
                         selectedLanguage === "bn"
                             ? "BN"
                             : "EN";
+                    applyQRHubLanguage(
+                    selectedLanguage
+                    );
 
                     languageDropdown.classList.remove(
                         "language-dropdown-show"
@@ -7482,8 +7485,180 @@ if (languageSelector) {
         );
 
     if (savedLanguage === "bn") {
-        languageBtn.textContent = "BN";
-    }
+
+    languageBtn.textContent = "BN";
+
+    applyQRHubLanguage(
+        "bn"
+    );
 
 }
 
+}
+
+
+
+
+// ==========================================
+// QR HUB - LANGUAGE TRANSLATION SYSTEM
+// ==========================================
+
+const qrHubTranslations = {
+
+    en: {
+        "Dashboard": "Dashboard",
+        "Image QR": "Image QR",
+        "Text QR": "Text QR",
+        "URL QR": "URL QR",
+        "WiFi QR": "WiFi QR",
+        "Contact QR": "Contact QR",
+        "Location QR": "Location QR",
+
+        "My QR Codes": "My QR Codes",
+        "History": "History",
+        "Favorites": "Favorites",
+        "Templates": "Templates",
+        "Analytics": "Analytics",
+        "Settings": "Settings",
+
+        "Upgrade to Pro": "Upgrade to Pro",
+        "Upgrade Now": "Upgrade Now",
+        "Dark Mode": "Dark Mode",
+
+        "Install App": "Install App",
+
+        "Professional QR Platform":
+            "🚀 Professional QR Platform",
+
+        "Create Professional":
+            "Create Professional",
+
+        "QR Codes in Seconds":
+            "QR Codes in Seconds",
+
+        "Create QR Code": "Create QR Code",
+        "Scan QR Code": "Scan QR Code",
+
+        "Create QR from an image":
+            "Create QR from an image",
+
+        "Create QR from plain text":
+            "Create QR from plain text",
+
+        "Create QR for website link":
+            "Create QR for website link",
+
+        "Share WiFi network":
+            "Share WiFi network",
+
+        "Share contact information":
+            "Share contact information",
+
+        "View All →": "View All →"
+    },
+
+    bn: {
+        "Dashboard": "ড্যাশবোর্ড",
+        "Image QR": "ইমেজ QR",
+        "Text QR": "টেক্সট QR",
+        "URL QR": "URL QR",
+        "WiFi QR": "WiFi QR",
+        "Contact QR": "কন্টাক্ট QR",
+        "Location QR": "লোকেশন QR",
+
+        "My QR Codes": "আমার QR কোড",
+        "History": "ইতিহাস",
+        "Favorites": "প্রিয়",
+        "Templates": "টেমপ্লেট",
+        "Analytics": "অ্যানালিটিক্স",
+        "Settings": "সেটিংস",
+
+        "Upgrade to Pro": "Pro-তে আপগ্রেড করুন",
+        "Upgrade Now": "এখনই আপগ্রেড করুন",
+        "Dark Mode": "ডার্ক মোড",
+
+        "Install App": "অ্যাপ ইনস্টল করুন",
+
+        "Professional QR Platform":
+            "🚀 প্রফেশনাল QR প্ল্যাটফর্ম",
+
+        "Create Professional":
+            "প্রফেশনাল",
+
+        "QR Codes in Seconds":
+            "কয়েক সেকেন্ডে QR কোড তৈরি করুন",
+
+        "Create QR Code": "QR কোড তৈরি করুন",
+        "Scan QR Code": "QR কোড স্ক্যান করুন",
+
+        "Create QR from an image":
+            "ছবি থেকে QR তৈরি করুন",
+
+        "Create QR from plain text":
+            "সাধারণ টেক্সট থেকে QR তৈরি করুন",
+
+        "Create QR for website link":
+            "ওয়েবসাইট লিংকের জন্য QR তৈরি করুন",
+
+        "Share WiFi network":
+            "WiFi নেটওয়ার্ক শেয়ার করুন",
+
+        "Share contact information":
+            "কন্টাক্ট তথ্য শেয়ার করুন",
+
+        "View All →": "সব দেখুন →"
+    }
+
+};
+
+function applyQRHubLanguage(language) {
+
+    const dictionary =
+        qrHubTranslations[language];
+
+    if (!dictionary) return;
+
+    const walker =
+        document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT
+        );
+
+    const textNodes = [];
+
+    let node;
+
+    while (
+        node = walker.nextNode()
+    ) {
+        textNodes.push(node);
+    }
+
+    textNodes.forEach(function (textNode) {
+
+        const originalText =
+            textNode.nodeValue.trim();
+
+        if (!originalText) return;
+
+        if (
+            dictionary[
+                originalText
+            ]
+        ) {
+
+            textNode.nodeValue =
+                textNode.nodeValue.replace(
+                    originalText,
+                    dictionary[originalText]
+                );
+
+        }
+
+    });
+
+    localStorage.setItem(
+        "qrHubLanguage",
+        language
+    );
+}
