@@ -7484,15 +7484,7 @@ if (languageSelector) {
             "qrHubLanguage"
         );
 
-    if (savedLanguage === "bn") {
-
-    languageBtn.textContent = "BN";
-
-    applyQRHubLanguage(
-        "bn"
-    );
-
-}
+   
 
 }
 
@@ -7663,7 +7655,15 @@ function applyQRHubLanguage(language) {
     );
 }
 
+ if (savedLanguage === "bn") {
 
+    languageBtn.textContent = "BN";
+
+    applyQRHubLanguage(
+        "bn"
+    );
+
+}
 
 
 
