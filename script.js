@@ -7156,3 +7156,169 @@ nextButton.addEventListener(
     }
 );
 
+
+
+// ==========================================
+// QR HUB - INSTALL APP
+// ==========================================
+
+let qrHubInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function (event) {
+
+    event.preventDefault();
+
+    qrHubInstallPrompt = event;
+
+});
+
+
+const installAppBtn =
+    document.querySelector(".install-app-btn");
+
+
+if (installAppBtn) {
+
+    installAppBtn.addEventListener(
+        "click",
+        async function () {
+
+            // PWA install prompt available
+            if (qrHubInstallPrompt) {
+
+                qrHubInstallPrompt.prompt();
+
+                const result =
+                    await qrHubInstallPrompt.userChoice;
+
+                console.log(
+                    "QR Hub Install:",
+                    result.outcome
+                );
+
+                qrHubInstallPrompt = null;
+
+                return;
+            }
+
+
+            // Already installed / unsupported browser
+            showInstallGuideline();
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// INSTALL GUIDELINE
+// ==========================================
+
+function showInstallGuideline() {
+
+    const oldBox =
+        document.getElementById(
+            "qrHubInstallGuideline"
+        );
+
+    if (oldBox) {
+        oldBox.remove();
+    }
+
+
+    const box =
+        document.createElement("div");
+
+    box.id =
+        "qrHubInstallGuideline";
+
+
+    box.innerHTML = `
+
+        <div class="qrhub-install-overlay">
+
+            <div class="qrhub-install-modal">
+
+                <button
+                    type="button"
+                    class="qrhub-install-close">
+                    ×
+                </button>
+
+                <div class="qrhub-install-icon">
+                    <i class="fa-solid fa-download"></i>
+                </div>
+
+                <h3>
+                    Install QR Hub
+                </h3>
+
+                <p>
+                    Install QR Hub on your device
+                    for quick access.
+                </p>
+
+                <div class="qrhub-install-guide">
+
+                    <strong>Android / Chrome</strong>
+
+                    <span>
+                        Browser Menu → Install App
+                        / Add to Home Screen
+                    </span>
+
+
+                    <strong>iPhone / iPad</strong>
+
+                    <span>
+                        Share → Add to Home Screen
+                    </span>
+
+
+                    <strong>Desktop Chrome / Edge</strong>
+
+                    <span>
+                        Address Bar → Install QR Hub
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(box);
+
+
+    box.querySelector(
+        ".qrhub-install-close"
+    ).addEventListener(
+        "click",
+        function () {
+            box.remove();
+        }
+    );
+
+
+    box.querySelector(
+        ".qrhub-install-overlay"
+    ).addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target.classList.contains(
+                    "qrhub-install-overlay"
+                )
+            ) {
+                box.remove();
+            }
+
+        }
+    );
+
+}
