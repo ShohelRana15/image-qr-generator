@@ -7388,3 +7388,102 @@ function showInstallGuideline() {
     );
 
 }
+
+
+
+
+// ==========================================
+// QR HUB - LANGUAGE SELECTOR
+// ==========================================
+
+const languageSelector =
+    document.querySelector(".language-selector");
+
+if (languageSelector) {
+
+    const languageBtn =
+        languageSelector.querySelector(
+            ".language-btn"
+        );
+
+    const languageDropdown =
+        languageSelector.querySelector(
+            ".language-dropdown"
+        );
+
+    languageBtn.addEventListener(
+        "click",
+        function () {
+
+            languageDropdown.classList.toggle(
+                "language-dropdown-show"
+            );
+
+        }
+    );
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !languageSelector.contains(
+                    event.target
+                )
+            ) {
+
+                languageDropdown.classList.remove(
+                    "language-dropdown-show"
+                );
+
+            }
+
+        }
+    );
+
+    const languageOptions =
+        languageDropdown.querySelectorAll(
+            "[data-language]"
+        );
+
+    languageOptions.forEach(
+        function (option) {
+
+            option.addEventListener(
+                "click",
+                function () {
+
+                    const selectedLanguage =
+                        option.dataset.language;
+
+                    languageBtn.textContent =
+                        selectedLanguage === "bn"
+                            ? "BN"
+                            : "EN";
+
+                    languageDropdown.classList.remove(
+                        "language-dropdown-show"
+                    );
+
+                    localStorage.setItem(
+                        "qrHubLanguage",
+                        selectedLanguage
+                    );
+
+                }
+            );
+
+        }
+    );
+
+    const savedLanguage =
+        localStorage.getItem(
+            "qrHubLanguage"
+        );
+
+    if (savedLanguage === "bn") {
+        languageBtn.textContent = "BN";
+    }
+
+}
+
