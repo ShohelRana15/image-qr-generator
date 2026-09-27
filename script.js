@@ -566,7 +566,73 @@ if (resultBox) {
 
         }
     );
+    // ==========================================
+    // AUTO START CAMERA PREVIEW
+    // ==========================================
 
+    setTimeout(async function () {
+
+        try {
+
+            qrScanner =
+                new Html5Qrcode(
+                    "qr-scanner-camera"
+                );
+
+
+            await qrScanner.start(
+
+                {
+                    facingMode: "environment"
+                },
+
+                {
+                    fps: 10,
+                    qrbox: 250
+                },
+
+                function (decodedText) {
+
+                    console.log(
+                        "QR Result:",
+                        decodedText
+                    );
+
+                    showScannerResult(
+                        decodedText
+                    );
+
+                },
+
+                function () {
+                    // QR পাওয়া না গেলে কিছু করার নেই
+                }
+
+            );
+
+
+            cameraRunning = true;
+
+
+            scannerButton.innerHTML =
+                '<i class="fa-solid fa-stop"></i> Stop Camera';
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Auto Camera Start Error:",
+                error
+            );
+
+            qrScanner = null;
+            cameraRunning = false;
+
+        }
+
+    }, 300);
 }
     
 
