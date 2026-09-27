@@ -5158,3 +5158,71 @@ body.qr-dark-mode
     margin-bottom: 6px;
 
 }
+
+
+
+
+
+
+/* ==========================================
+   QR HUB - LANGUAGE SELECTOR
+   ========================================== */
+
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.language-btn {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+
+    min-width: 150px;
+
+    display: none;
+    flex-direction: column;
+
+    padding: 6px;
+
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+
+    z-index: 9999;
+}
+
+.language-dropdown-show {
+    display: flex;
+}
+
+.language-dropdown button {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+
+    text-align: left;
+
+    padding: 10px 12px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.language-dropdown button:hover {
+    background: rgba(59,130,246,0.15);
+}
