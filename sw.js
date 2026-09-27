@@ -2,7 +2,7 @@
 // QR HUB PWA - AUTOMATIC UPDATE SYSTEM
 // ==========================================
 
-const CACHE_NAME = "qrhub-core-v5.1";
+const CACHE_NAME = "qrhub-core-v5.2";
 
 const APP_FILES = [
     "./",
