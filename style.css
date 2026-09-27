@@ -5226,3 +5226,653 @@ body.qr-dark-mode
 .language-dropdown button:hover {
     background: rgba(59,130,246,0.15);
 }
+
+
+
+
+
+/* ==========================================
+   QR HUB - PRO PLANS
+   ========================================== */
+
+.qrhub-pro-overlay,
+.qrhub-payment-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    background:
+        rgba(0, 0, 0, 0.75);
+
+    backdrop-filter:
+        blur(8px);
+
+    overflow-y: auto;
+}
+
+
+.qrhub-pro-modal {
+
+    position: relative;
+
+    width: min(1100px, 100%);
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    padding: 34px;
+
+    border-radius: 26px;
+
+    background:
+        #0f172a;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.55);
+
+    color: #ffffff;
+}
+
+
+.qrhub-pro-close,
+.qrhub-payment-close {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 18px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: #94a3b8;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+.qrhub-pro-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.qrhub-pro-crown {
+
+    width: 64px;
+
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(250,204,21,0.12);
+
+    font-size: 30px;
+}
+
+
+.qrhub-pro-header h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 30px;
+}
+
+
+.qrhub-pro-header p {
+
+    margin: 0;
+
+    color: #94a3b8;
+}
+
+
+.qrhub-plan-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.qrhub-plan-card {
+
+    position: relative;
+
+    padding: 26px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.qrhub-plan-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(96,165,250,0.45);
+}
+
+
+.qrhub-plan-popular {
+
+    border-color:
+        rgba(250,204,21,0.45);
+
+    box-shadow:
+        0 0 30px
+        rgba(250,204,21,0.08);
+}
+
+
+.qrhub-popular-badge {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(250,204,21,0.14);
+
+    color: #facc15;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.qrhub-plan-icon {
+
+    font-size: 28px;
+
+    margin-bottom: 14px;
+}
+
+
+.qrhub-plan-card h3 {
+
+    margin: 0 0 6px;
+
+    font-size: 21px;
+}
+
+
+.qrhub-plan-description {
+
+    margin: 0 0 18px;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+.qrhub-plan-price {
+
+    margin-bottom: 20px;
+}
+
+
+.qrhub-plan-price strong {
+
+    font-size: 32px;
+
+    color: #ffffff;
+}
+
+
+.qrhub-plan-price span {
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+.qrhub-plan-features {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    min-height: 190px;
+
+    color: #dbeafe;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.qrhub-plan-btn {
+
+    width: 100%;
+
+    padding: 12px 16px;
+
+    border: 1px solid
+        rgba(96,165,250,0.30);
+
+    border-radius: 11px;
+
+    background:
+        rgba(59,130,246,0.10);
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.qrhub-plan-btn:hover {
+
+    background:
+        rgba(59,130,246,0.20);
+}
+
+
+.qrhub-plan-btn-primary {
+
+    border-color: transparent;
+
+    background:
+        #2563eb;
+}
+
+
+.qrhub-plan-btn-primary:hover {
+
+    background:
+        #3b82f6;
+}
+
+
+/* ==========================================
+   UPGRADE GUIDE
+   ========================================== */
+
+.qrhub-upgrade-guide {
+
+    margin-top: 28px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.035);
+}
+
+
+.qrhub-upgrade-guide h3 {
+
+    margin: 0 0 18px;
+
+    font-size: 18px;
+}
+
+
+.qrhub-guide-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+
+.qrhub-guide-grid div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.qrhub-guide-grid span {
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(59,130,246,0.15);
+
+    color: #60a5fa;
+
+    font-weight: 700;
+}
+
+
+.qrhub-guide-grid p {
+
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   PAYMENT MODAL
+   ========================================== */
+
+.qrhub-payment-modal {
+
+    position: relative;
+
+    width: min(540px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    background:
+        #111827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.55);
+}
+
+
+.qrhub-payment-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+
+.qrhub-payment-modal h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 25px;
+}
+
+
+.qrhub-payment-selected {
+
+    color: #cbd5e1;
+
+    line-height: 1.7;
+}
+
+
+.qrhub-payment-selected strong {
+
+    color: #facc15;
+}
+
+
+.qrhub-payment-notice {
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    margin: 20px 0;
+
+    border-radius: 12px;
+
+    background:
+        rgba(59,130,246,0.10);
+
+    border:
+        1px solid
+        rgba(96,165,250,0.18);
+}
+
+
+.qrhub-payment-notice i {
+
+    color: #60a5fa;
+
+    margin-top: 3px;
+}
+
+
+.qrhub-payment-notice p {
+
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+.qrhub-payment-methods h3,
+.qrhub-payment-steps h3 {
+
+    margin: 20px 0 12px;
+
+    font-size: 17px;
+}
+
+
+.qrhub-payment-method {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 13px 15px;
+
+    margin-bottom: 9px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,0.045);
+}
+
+
+.qrhub-payment-method strong {
+
+    color: #ffffff;
+}
+
+
+.qrhub-payment-method span {
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+.qrhub-payment-steps ol {
+
+    margin: 0;
+
+    padding-left: 22px;
+
+    color: #cbd5e1;
+
+    line-height: 1.9;
+
+    font-size: 13px;
+}
+
+
+.qrhub-payment-confirm {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 13px 18px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        #2563eb;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.qrhub-payment-confirm:hover {
+
+    background:
+        #3b82f6;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 850px) {
+
+    .qrhub-plan-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .qrhub-plan-features {
+
+        min-height: auto;
+
+    }
+
+    .qrhub-guide-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .qrhub-pro-modal {
+
+        padding: 22px;
+
+    }
+
+    .qrhub-guide-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .qrhub-payment-modal {
+
+        padding: 22px;
+
+    }
+
+}
