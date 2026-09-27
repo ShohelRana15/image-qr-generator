@@ -7662,3 +7662,611 @@ function applyQRHubLanguage(language) {
         language
     );
 }
+
+
+
+
+
+
+
+// ==========================================
+// QR HUB - PRO PLANS
+// ==========================================
+
+const upgradeBtn =
+    document.querySelector(".upgrade-btn");
+
+if (upgradeBtn) {
+
+    upgradeBtn.addEventListener(
+        "click",
+        function () {
+
+            const oldModal =
+                document.getElementById(
+                    "qrHubProModal"
+                );
+
+            if (oldModal) {
+                oldModal.remove();
+            }
+
+            const modal =
+                document.createElement("div");
+
+            modal.id =
+                "qrHubProModal";
+
+            modal.innerHTML = `
+
+                <div class="qrhub-pro-overlay">
+
+                    <div class="qrhub-pro-modal">
+
+                        <button
+                            type="button"
+                            class="qrhub-pro-close">
+                            ×
+                        </button>
+
+                        <div class="qrhub-pro-header">
+
+                            <div class="qrhub-pro-crown">
+                                👑
+                            </div>
+
+                            <h2>
+                                QR Hub Pro
+                            </h2>
+
+                            <p>
+                                Choose the perfect QR plan
+                                for your needs.
+                            </p>
+
+                        </div>
+
+
+                        <!-- PLAN CARDS -->
+
+                        <div class="qrhub-plan-grid">
+
+
+                            <!-- BASIC -->
+
+                            <div class="qrhub-plan-card">
+
+                                <div class="qrhub-plan-icon">
+                                    ⚡
+                                </div>
+
+                                <h3>
+                                    Basic
+                                </h3>
+
+                                <p class="qrhub-plan-description">
+                                    For personal QR needs
+                                </p>
+
+                                <div class="qrhub-plan-price">
+                                    <strong>৳99</strong>
+                                    <span>/ month</span>
+                                </div>
+
+                                <div class="qrhub-plan-features">
+
+                                    <div>
+                                        ✓ Basic QR Generation
+                                    </div>
+
+                                    <div>
+                                        ✓ Image QR
+                                    </div>
+
+                                    <div>
+                                        ✓ Text QR
+                                    </div>
+
+                                    <div>
+                                        ✓ URL QR
+                                    </div>
+
+                                    <div>
+                                        ✓ PNG Download
+                                    </div>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="qrhub-plan-btn"
+                                    data-plan="Basic"
+                                    data-price="99">
+
+                                    Choose Basic
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- PRO -->
+
+                            <div class="qrhub-plan-card qrhub-plan-popular">
+
+                                <div class="qrhub-popular-badge">
+                                    ⭐ Popular
+                                </div>
+
+                                <div class="qrhub-plan-icon">
+                                    👑
+                                </div>
+
+                                <h3>
+                                    Pro
+                                </h3>
+
+                                <p class="qrhub-plan-description">
+                                    For advanced users
+                                </p>
+
+                                <div class="qrhub-plan-price">
+                                    <strong>৳199</strong>
+                                    <span>/ month</span>
+                                </div>
+
+                                <div class="qrhub-plan-features">
+
+                                    <div>
+                                        ✓ Unlimited QR Generation
+                                    </div>
+
+                                    <div>
+                                        ✓ Advanced QR Design
+                                    </div>
+
+                                    <div>
+                                        ✓ Custom Logo
+                                    </div>
+
+                                    <div>
+                                        ✓ Premium Templates
+                                    </div>
+
+                                    <div>
+                                        ✓ QR Analytics
+                                    </div>
+
+                                    <div>
+                                        ✓ HD Download
+                                    </div>
+
+                                    <div>
+                                        ✓ Remove QR Hub Branding
+                                    </div>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="qrhub-plan-btn qrhub-plan-btn-primary"
+                                    data-plan="Pro"
+                                    data-price="199">
+
+                                    Choose Pro
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- BUSINESS -->
+
+                            <div class="qrhub-plan-card">
+
+                                <div class="qrhub-plan-icon">
+                                    🏢
+                                </div>
+
+                                <h3>
+                                    Business
+                                </h3>
+
+                                <p class="qrhub-plan-description">
+                                    For business & teams
+                                </p>
+
+                                <div class="qrhub-plan-price">
+                                    <strong>৳499</strong>
+                                    <span>/ month</span>
+                                </div>
+
+                                <div class="qrhub-plan-features">
+
+                                    <div>
+                                        ✓ Everything in Pro
+                                    </div>
+
+                                    <div>
+                                        ✓ Dynamic QR
+                                    </div>
+
+                                    <div>
+                                        ✓ Advanced Analytics
+                                    </div>
+
+                                    <div>
+                                        ✓ Cloud QR History
+                                    </div>
+
+                                    <div>
+                                        ✓ Business Branding
+                                    </div>
+
+                                    <div>
+                                        ✓ Priority Support
+                                    </div>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="qrhub-plan-btn"
+                                    data-plan="Business"
+                                    data-price="499">
+
+                                    Choose Business
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HOW TO UPGRADE -->
+
+                        <div class="qrhub-upgrade-guide">
+
+                            <h3>
+                                How to Upgrade
+                            </h3>
+
+                            <div class="qrhub-guide-grid">
+
+                                <div>
+                                    <span>1</span>
+                                    <p>
+                                        Choose your preferred plan
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <span>2</span>
+                                    <p>
+                                        Select a payment method
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <span>3</span>
+                                    <p>
+                                        Complete your payment
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <span>4</span>
+                                    <p>
+                                        Send payment confirmation
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            document.body.appendChild(
+                modal
+            );
+
+
+            // CLOSE
+
+            modal.querySelector(
+                ".qrhub-pro-close"
+            ).addEventListener(
+                "click",
+                function () {
+                    modal.remove();
+                }
+            );
+
+
+            modal.querySelector(
+                ".qrhub-pro-overlay"
+            ).addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target.classList.contains(
+                            "qrhub-pro-overlay"
+                        )
+                    ) {
+                        modal.remove();
+                    }
+
+                }
+            );
+
+
+            // PLAN BUTTONS
+
+            const planButtons =
+                modal.querySelectorAll(
+                    ".qrhub-plan-btn"
+                );
+
+            planButtons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const plan =
+                                button.dataset.plan;
+
+                            const price =
+                                button.dataset.price;
+
+                            showQRHubPaymentInstructions(
+                                plan,
+                                price
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// PAYMENT INSTRUCTION MODAL
+// ==========================================
+
+function showQRHubPaymentInstructions(
+    plan,
+    price
+) {
+
+    const existing =
+        document.getElementById(
+            "qrHubPaymentModal"
+        );
+
+    if (existing) {
+        existing.remove();
+    }
+
+    const paymentModal =
+        document.createElement("div");
+
+    paymentModal.id =
+        "qrHubPaymentModal";
+
+    paymentModal.innerHTML = `
+
+        <div class="qrhub-payment-overlay">
+
+            <div class="qrhub-payment-modal">
+
+                <button
+                    type="button"
+                    class="qrhub-payment-close">
+                    ×
+                </button>
+
+
+                <div class="qrhub-payment-icon">
+                    💳
+                </div>
+
+
+                <h2>
+                    ${plan} Plan
+                </h2>
+
+                <p class="qrhub-payment-selected">
+
+                    Selected Plan:
+                    <strong>
+                        ${plan}
+                    </strong>
+
+                    <br>
+
+                    Amount:
+                    <strong>
+                        ৳${price}
+                    </strong>
+
+                    / month
+
+                </p>
+
+
+                <div class="qrhub-payment-notice">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <p>
+                        Payment gateway is being prepared.
+                        You can use the instructions below
+                        when payment is enabled.
+                    </p>
+
+                </div>
+
+
+                <div class="qrhub-payment-methods">
+
+                    <h3>
+                        Payment Methods
+                    </h3>
+
+                    <div class="qrhub-payment-method">
+
+                        <strong>
+                            bKash
+                        </strong>
+
+                        <span>
+                            Payment details will be
+                            provided here.
+                        </span>
+
+                    </div>
+
+
+                    <div class="qrhub-payment-method">
+
+                        <strong>
+                            Nagad
+                        </strong>
+
+                        <span>
+                            Payment details will be
+                            provided here.
+                        </span>
+
+                    </div>
+
+
+                    <div class="qrhub-payment-method">
+
+                        <strong>
+                            Card / Online Payment
+                        </strong>
+
+                        <span>
+                            Online payment gateway
+                            will be available soon.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="qrhub-payment-steps">
+
+                    <h3>
+                        Payment Instructions
+                    </h3>
+
+                    <ol>
+
+                        <li>
+                            Select your preferred
+                            payment method.
+                        </li>
+
+                        <li>
+                            Complete the payment of
+                            <strong>
+                                ৳${price}
+                            </strong>.
+                        </li>
+
+                        <li>
+                            Keep your transaction ID
+                            or payment screenshot.
+                        </li>
+
+                        <li>
+                            Submit the payment
+                            confirmation.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="qrhub-payment-confirm">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Payment Confirmation
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(
+        paymentModal
+    );
+
+
+    paymentModal.querySelector(
+        ".qrhub-payment-close"
+    ).addEventListener(
+        "click",
+        function () {
+            paymentModal.remove();
+        }
+    );
+
+
+    paymentModal.querySelector(
+        ".qrhub-payment-overlay"
+    ).addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target.classList.contains(
+                    "qrhub-payment-overlay"
+                )
+            ) {
+                paymentModal.remove();
+            }
+
+        }
+    );
+
+
+    paymentModal.querySelector(
+        ".qrhub-payment-confirm"
+    ).addEventListener(
+        "click",
+        function () {
+
+            alert(
+                "Payment confirmation system will be connected here."
+            );
+
+        }
+    );
+
+}
