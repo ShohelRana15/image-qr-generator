@@ -5009,3 +5009,152 @@ body.qr-dark-mode
     color: #ffffff;
 
 }
+
+
+
+
+
+
+
+
+.qrhub-install-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.65);
+
+    backdrop-filter: blur(6px);
+
+}
+
+
+.qrhub-install-modal {
+
+    position: relative;
+
+    width: min(420px, 100%);
+
+    padding: 28px;
+
+    border-radius: 20px;
+
+    background: #111827;
+
+    border: 1px solid
+        rgba(96, 165, 250, 0.25);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    color: #ffffff;
+
+}
+
+
+.qrhub-install-close {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 14px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+
+.qrhub-install-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(59, 130, 246, 0.15);
+
+    color: #60a5fa;
+
+    font-size: 22px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.qrhub-install-modal h3 {
+
+    margin: 0 0 8px;
+
+    font-size: 22px;
+
+}
+
+
+.qrhub-install-modal p {
+
+    margin: 0 0 20px;
+
+    color: #94a3b8;
+
+    line-height: 1.6;
+
+}
+
+
+.qrhub-install-guide {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.qrhub-install-guide strong {
+
+    color: #60a5fa;
+
+}
+
+
+.qrhub-install-guide span {
+
+    color: #e5e7eb;
+
+    line-height: 1.5;
+
+    margin-bottom: 6px;
+
+}
