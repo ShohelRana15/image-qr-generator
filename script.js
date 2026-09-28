@@ -8277,3 +8277,140 @@ function showQRHubPaymentInstructions(
     );
 
 }
+
+
+
+
+
+// ==========================================
+// QR HUB - FLOATING LIQUID GLASS HEART
+// ==========================================
+
+(function () {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "qrhub-floating-heart";
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    let isDragging = false;
+
+    let startX = 0;
+    let startY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+
+    function startDrag(event) {
+
+        isDragging = true;
+
+        heart.classList.add(
+            "qrhub-heart-dragging"
+        );
+
+        const point =
+            event.touches
+                ? event.touches[0]
+                : event;
+
+        startX =
+            point.clientX - currentX;
+
+        startY =
+            point.clientY - currentY;
+
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
+
+    }
+
+
+    function moveDrag(event) {
+
+        if (!isDragging) return;
+
+        const point =
+            event.touches
+                ? event.touches[0]
+                : event;
+
+        currentX =
+            point.clientX - startX;
+
+        currentY =
+            point.clientY - startY;
+
+        heart.style.left =
+            `calc(50% + ${currentX}px)`;
+
+        heart.style.top =
+            `calc(52% + ${currentY}px)`;
+
+    }
+
+
+    function endDrag() {
+
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        heart.classList.remove(
+            "qrhub-heart-dragging"
+        );
+
+    }
+
+
+    /* Mouse */
+
+    heart.addEventListener(
+        "mousedown",
+        startDrag
+    );
+
+    document.addEventListener(
+        "mousemove",
+        moveDrag
+    );
+
+    document.addEventListener(
+        "mouseup",
+        endDrag
+    );
+
+
+    /* Touch */
+
+    heart.addEventListener(
+        "touchstart",
+        startDrag,
+        {
+            passive: false
+        }
+    );
+
+    document.addEventListener(
+        "touchmove",
+        moveDrag,
+        {
+            passive: false
+        }
+    );
+
+    document.addEventListener(
+        "touchend",
+        endDrag
+    );
+
+
+})();
