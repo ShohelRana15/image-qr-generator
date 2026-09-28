@@ -7644,16 +7644,7 @@ function applyQRHubLanguage(language) {
                     originalText,
                     dictionary[originalText]
                 );
-            
-            if (savedLanguage === "bn") {
 
-                languageBtn.textContent = "BN";
-
-                    applyQRHubLanguage(
-                    "bn"
-                );
-
-            }
         }
 
     });
@@ -7664,7 +7655,22 @@ function applyQRHubLanguage(language) {
     );
 }
 
- 
+ const savedLanguage =
+    localStorage.getItem("qrHubLanguage");
+
+if (savedLanguage === "bn") {
+
+    const languageBtn =
+        document.querySelector(
+            ".language-btn"
+        );
+
+    if (languageBtn) {
+        languageBtn.textContent = "BN";
+    }
+
+    applyQRHubLanguage("bn");
+}
 
 
 
