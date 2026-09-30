@@ -342,14 +342,7 @@ min-height:100vh;
 
 
 
-/* Desktop: Sidebar always open, so hide menu button */
-@media (min-width: 769px) {
 
-    .menu-toggle {
-        display: none !important;
-    }
-
-}
 
 /*=========================
 MAIN CONTENT
@@ -5885,5 +5878,17 @@ body.qr-dark-mode
 
 }
 
+
+
+
+
+/* Desktop: Sidebar always open, so hide menu button */
+@media (min-width: 769px) {
+
+    .menu-toggle {
+        display: none !important;
+    }
+
+}
 
 
