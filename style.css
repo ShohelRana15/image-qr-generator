@@ -5881,16 +5881,15 @@ body.qr-dark-mode
 
 
 
-/* Desktop: hamburger hidden */
-@media (min-width: 769px) {
 
+
+/* Mobile Menu Button */
+@media (min-width: 769px) {
     .menu-btn {
         display: none !important;
     }
-
 }
 
-/* Mobile: hamburger visible */
 @media (max-width: 768px) {
     .menu-btn {
         display: flex !important;
@@ -5898,15 +5897,23 @@ body.qr-dark-mode
         justify-content: center;
         width: 42px;
         height: 42px;
-        border: none;
-        background: transparent;
-        color: #ffffff;
-        border-radius: 10px;
+        padding: 0;
+        margin: 0;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
         cursor: pointer;
     }
 
-    .menu-btn i {
-        display: block !important;
-        font-size: 22px;
+    .menu-btn i.fa-bars {
+        display: inline-block !important;
+        color: #111827;
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    /* Dark Mode */
+    body.dark-mode .menu-btn i.fa-bars {
+        color: #ffffff;
     }
 }
