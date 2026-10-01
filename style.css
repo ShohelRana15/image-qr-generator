@@ -5881,11 +5881,32 @@ body.qr-dark-mode
 
 
 
-/* Desktop: sidebar is always visible */
+/* Desktop: hamburger hidden */
 @media (min-width: 769px) {
 
     .menu-btn {
         display: none !important;
     }
 
+}
+
+/* Mobile: hamburger visible */
+@media (max-width: 768px) {
+    .menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .menu-btn i {
+        display: block !important;
+        font-size: 22px;
+    }
 }
