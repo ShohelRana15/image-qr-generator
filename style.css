@@ -5963,3 +5963,65 @@ body.qr-dark-mode
         display: none !important;
     }
 }
+
+
+
+
+/* =================================
+   MOBILE HAMBURGER - FINAL
+================================= */
+
+@media (min-width: 769px) {
+    .menu-btn {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .menu-btn {
+        display: flex !important;
+        position: relative !important;
+        align-items: center;
+        justify-content: center;
+
+        width: 42px !important;
+        height: 42px !important;
+
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+
+        font-size: 0 !important;
+    }
+
+    /* Hide Font Awesome icon */
+    .menu-btn i {
+        display: none !important;
+    }
+
+    /* Create hamburger */
+    .menu-btn::before {
+        content: "☰";
+
+        display: block !important;
+
+        font-family: Arial, sans-serif !important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+
+        color: #111827 !important;
+
+        width: auto !important;
+        height: auto !important;
+
+        background: transparent !important;
+    }
+
+    /* Dark mode */
+    body.dark-mode .menu-btn::before {
+        color: #ffffff !important;
+    }
+}
