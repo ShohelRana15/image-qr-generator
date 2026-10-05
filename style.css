@@ -6021,7 +6021,7 @@ body.qr-dark-mode
     }
 
     /* Dark mode */
-    body.dark-mode .menu-btn::before {
+    body.qr-dark-mode .menu-btn::before {
         color: #ffffff !important;
     }
 }
