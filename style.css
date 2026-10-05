@@ -1,6 +1,6 @@
 /*========================================================
 
-QR HUB v4.0
+QR HUB v5.2
 Premium Dashboard
 Developed by SR Infinity
 
@@ -5915,5 +5915,51 @@ body.qr-dark-mode
     /* Dark Mode */
     body.dark-mode .menu-btn i.fa-bars {
         color: #ffffff;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* Mobile hamburger icon - final override */
+@media (max-width: 768px) {
+
+    .menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 42px !important;
+        height: 42px !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .menu-btn i.fa-bars {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #111827 !important;
+        font-size: 24px !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+    }
+
+    body.dark-mode .menu-btn i.fa-bars {
+        color: #ffffff !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-btn {
+        display: none !important;
     }
 }
