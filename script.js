@@ -7688,6 +7688,24 @@ if (upgradeBtn) {
     upgradeBtn.addEventListener(
         "click",
         function () {
+            
+            // Close mobile sidebar before opening Pro Preview
+const sidebar =
+    document.querySelector(".sidebar");
+
+if (sidebar) {
+    sidebar.classList.remove(
+        "active",
+        "open",
+        "show",
+        "sidebar-open"
+    );
+}
+
+document.body.classList.remove(
+    "sidebar-open",
+    "menu-open"
+);
 
             const oldModal =
                 document.getElementById(
