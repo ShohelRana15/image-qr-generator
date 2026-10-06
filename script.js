@@ -1,5 +1,5 @@
 // ==========================================
-// QR HUB v4.0
+// QR HUB v5.2
 // IMAGE QR - SUPABASE CORE
 // ==========================================
 
@@ -52,7 +52,7 @@ function initializeQRHubSupabase() {
 
 
 // ==========================================
-// QR HUB v4.0
+// QR HUB v5.2
 // Dashboard JavaScript
 // Developed by SR Infinity
 // ==========================================
@@ -139,7 +139,7 @@ window.addEventListener("load", function () {
 
 
 // ==========================================
-// QR HUB v4.0
+// QR HUB v5.2
 // UNIFIED QR WORKSPACE
 // Category Card → Same Workspace
 // PC + MOBILE
@@ -6153,7 +6153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ==========================================
-// QR HUB v4.0
+// QR HUB v5.2
 // SIDEBAR QR NAVIGATION
 // FIXED VERSION
 // ==========================================
@@ -6379,7 +6379,7 @@ const sidebarQRTypes = [
 
 // ==========================================
 // MOBILE SIDEBAR
-// QR HUB v4.0
+// QR HUB v5.2
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
