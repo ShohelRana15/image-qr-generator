@@ -6101,3 +6101,81 @@ body.qr-dark-mode
         color: #ffffff !important;
     }
 }
+
+
+
+
+
+/* =========================================
+   QR HUB - MOBILE MENU
+   Android + iPhone
+========================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        position: relative !important;
+
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+
+        padding: 0 !important;
+        margin: 0 !important;
+
+        border: 0 !important;
+        outline: none !important;
+
+        background: transparent !important;
+        box-shadow: none !important;
+
+        z-index: 99999 !important;
+
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+
+        font-size: 0 !important;
+    }
+
+    .menu-btn::before {
+        content: "☰" !important;
+
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        font-family: Arial, sans-serif !important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        line-height: 42px !important;
+
+        color: #111827 !important;
+
+        background: transparent !important;
+
+        pointer-events: none !important;
+    }
+
+    .menu-btn i {
+        display: none !important;
+    }
+
+    /* Dark Mode */
+    body.qr-dark-mode .menu-btn::before {
+        color: #ffffff !important;
+    }
+}
+
+
+/* Desktop PC */
+@media (hover: hover) and (pointer: fine) {
+
+    .menu-btn {
+        display: none !important;
+    }
+}
