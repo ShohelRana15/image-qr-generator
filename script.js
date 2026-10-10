@@ -7688,24 +7688,25 @@ if (upgradeBtn) {
     upgradeBtn.addEventListener(
         "click",
         function () {
+
+
             
             // Close mobile sidebar before opening Pro Preview
-const sidebar =
-    document.querySelector(".sidebar");
+const sidebar = document.querySelector(".sidebar");
+const overlay = document.querySelector(".sidebar-overlay");
 
 if (sidebar) {
-    sidebar.classList.remove(
-        "active",
-        "open",
-        "show",
-        "sidebar-open"
-    );
+    sidebar.classList.remove("mobile-sidebar-open");
 }
 
-document.body.classList.remove(
-    "sidebar-open",
-    "menu-open"
-);
+if (overlay) {
+    overlay.classList.remove("sidebar-overlay-show");
+}
+
+document.body.classList.remove("sidebar-open");
+
+
+            
 
             const oldModal =
                 document.getElementById(
