@@ -5934,3 +5934,60 @@ body.qr-dark-mode
     }
 }
 
+
+
+
+/* QR Hub - Mobile Hamburger and Profile Fix */
+@media (max-width: 768px) {
+    .menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        flex: 0 0 42px !important;
+        width: 42px !important;
+        height: 42px !important;
+        position: relative !important;
+        z-index: 100002 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+    }
+
+    .menu-btn i {
+        display: none !important;
+    }
+
+    .menu-btn::before {
+        content: "☰" !important;
+        display: block !important;
+        font: bold 28px/1 Arial, sans-serif !important;
+        color: #111827 !important;
+    }
+
+    body.qr-dark-mode .menu-btn::before {
+        color: #ffffff !important;
+    }
+
+    .topbar {
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .topbar-right {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        gap: 4px !important;
+    }
+
+    .profile {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        flex: 0 1 auto !important;
+    }
+
+    .profile-info {
+        min-width: 0 !important;
+        max-width: 75px !important;
+    }
+}
