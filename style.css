@@ -5883,299 +5883,54 @@ body.qr-dark-mode
 
 
 
-/* Mobile Menu Button */
-@media (min-width: 769px) {
-    .menu-btn {
-        display: none !important;
-    }
-}
+/* QR Hub - Final Mobile Hamburger */
 
 @media (max-width: 768px) {
-    .menu-btn {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        padding: 0;
-        margin: 0;
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        cursor: pointer;
-    }
-
-    .menu-btn i.fa-bars {
-        display: inline-block !important;
-        color: #111827;
-        font-size: 24px;
-        line-height: 1;
-    }
-
-    /* Dark Mode */
-    body.dark-mode .menu-btn i.fa-bars {
-        color: #ffffff;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-/* Mobile hamburger icon - final override */
-@media (max-width: 768px) {
-
-    .menu-btn {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 42px !important;
-        height: 42px !important;
-        padding: 0 !important;
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-    }
-
-    .menu-btn i.fa-bars {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        color: #111827 !important;
-        font-size: 24px !important;
-        width: auto !important;
-        height: auto !important;
-        background: transparent !important;
-    }
-
-    body.dark-mode .menu-btn i.fa-bars {
-        color: #ffffff !important;
-    }
-}
-
-@media (min-width: 769px) {
-    .menu-btn {
-        display: none !important;
-    }
-}
-
-
-
-
-/* =================================
-   MOBILE HAMBURGER - FINAL
-================================= */
-
-@media (min-width: 769px) {
-    .menu-btn {
-        display: none !important;
-    }
-}
-
-@media (max-width: 768px) {
-
     .menu-btn {
         display: flex !important;
         position: relative !important;
-        align-items: center;
-        justify-content: center;
+        align-items: center !important;
+        justify-content: center !important;
 
         width: 42px !important;
+        min-width: 42px !important;
         height: 42px !important;
 
         padding: 0 !important;
-        border: 0 !important;
+        border: none !important;
         background: transparent !important;
         box-shadow: none !important;
 
-        font-size: 0 !important;
+        z-index: 100002 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
     }
 
-    /* Hide Font Awesome icon */
-    .menu-btn i {
+    .menu-btn i.fa-bars {
         display: none !important;
     }
 
-    /* Create hamburger */
     .menu-btn::before {
         content: "☰";
-
         display: block !important;
-
         font-family: Arial, sans-serif !important;
         font-size: 28px !important;
         font-weight: 700 !important;
         line-height: 1 !important;
-
         color: #111827 !important;
-
-        width: auto !important;
-        height: auto !important;
-
-        background: transparent !important;
-    }
-
-    /* Dark mode */
-    body.qr-dark-mode .menu-btn::before {
-        color: #ffffff !important;
-    }
-}
-
-
-
-
-
-
-/* =========================================
-   QR HUB - MOBILE MENU FINAL
-========================================= */
-
-@media screen and (min-width: 769px) {
-    .menu-btn {
-        display: none !important;
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    .menu-btn {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: relative !important;
-
-        width: 42px !important;
-        min-width: 42px !important;
-        max-width: 42px !important;
-
-        height: 42px !important;
-        min-height: 42px !important;
-
-        padding: 0 !important;
-        margin: 0 !important;
-
-        border: 0 !important;
-        outline: 0 !important;
-
-        background: transparent !important;
-        box-shadow: none !important;
-
-        z-index: 10001 !important;
-        cursor: pointer !important;
-        touch-action: manipulation !important;
-
-        font-size: 0 !important;
-    }
-
-    .menu-btn::before {
-        content: "☰" !important;
-
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-
-        font-family: Arial, sans-serif !important;
-        font-size: 27px !important;
-        font-weight: 700 !important;
-
-        line-height: 42px !important;
-        text-align: center !important;
-
-        color: #111827 !important;
-
-        background: transparent !important;
-
         pointer-events: none !important;
     }
 
-    .menu-btn i {
-        display: none !important;
-    }
-
     body.qr-dark-mode .menu-btn::before {
         color: #ffffff !important;
     }
 }
 
-
-
-
-
-/* =========================================
-   QR HUB - MOBILE MENU
-   Android + iPhone
-========================================= */
-
-@media (hover: none) and (pointer: coarse) {
-
-    .menu-btn {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-
-        position: relative !important;
-
-        width: 42px !important;
-        height: 42px !important;
-        min-width: 42px !important;
-
-        padding: 0 !important;
-        margin: 0 !important;
-
-        border: 0 !important;
-        outline: none !important;
-
-        background: transparent !important;
-        box-shadow: none !important;
-
-        z-index: 99999 !important;
-
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
-
-        font-size: 0 !important;
-    }
-
-    .menu-btn::before {
-        content: "☰" !important;
-
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-
-        font-family: Arial, sans-serif !important;
-        font-size: 28px !important;
-        font-weight: 700 !important;
-        line-height: 42px !important;
-
-        color: #111827 !important;
-
-        background: transparent !important;
-
-        pointer-events: none !important;
-    }
-
-    .menu-btn i {
-        display: none !important;
-    }
-
-    /* Dark Mode */
-    body.qr-dark-mode .menu-btn::before {
-        color: #ffffff !important;
-    }
-}
-
-
-/* Desktop PC */
-@media (hover: hover) and (pointer: fine) {
-
+@media (min-width: 769px) {
     .menu-btn {
         display: none !important;
     }
 }
+
