@@ -5991,3 +5991,37 @@ body.qr-dark-mode
         max-width: 75px !important;
     }
 }
+
+
+
+
+/* QR Hub - Mobile Search Box Fix */
+@media (max-width: 768px) {
+    .topbar-left {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        gap: 5px !important;
+    }
+
+    .search-box {
+        width: 145px !important;
+        min-width: 90px !important;
+        max-width: 145px !important;
+        flex: 0 1 145px !important;
+        padding: 0 8px !important;
+        gap: 6px !important;
+        box-sizing: border-box !important;
+    }
+
+    .search-box input {
+        min-width: 0 !important;
+        width: 100% !important;
+        font-size: 12px !important;
+    }
+
+    .topbar-right {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        gap: 5px !important;
+    }
+}
