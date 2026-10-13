@@ -6025,3 +6025,73 @@ body.qr-dark-mode
         gap: 5px !important;
     }
 }
+
+
+
+
+
+
+/* Mobile Topbar - Keep Profile Visible */
+@media (max-width: 768px) {
+    .topbar {
+        gap: 4px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .topbar-left {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .search-box {
+        width: 110px !important;
+        min-width: 75px !important;
+        max-width: 110px !important;
+        flex: 0 1 110px !important;
+        padding: 0 7px !important;
+        gap: 5px !important;
+    }
+
+    .topbar-right {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        gap: 4px !important;
+        overflow: hidden !important;
+    }
+
+    .install-app-btn {
+        padding: 0 9px !important;
+        white-space: nowrap !important;
+        font-size: 12px !important;
+    }
+
+    .profile {
+        flex-shrink: 0 !important;
+        min-width: 0 !important;
+        gap: 4px !important;
+    }
+
+    .profile-image {
+        flex-shrink: 0 !important;
+    }
+
+    .profile img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .profile > div:last-child {
+        min-width: 0 !important;
+        max-width: 48px !important;
+        overflow: hidden !important;
+    }
+
+    .profile h4,
+    .profile span {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+}
