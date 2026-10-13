@@ -6095,3 +6095,24 @@ body.qr-dark-mode
         text-overflow: ellipsis !important;
     }
 }
+
+
+
+/* Mobile: Install App icon only */
+@media (max-width: 768px) {
+    .install-app-btn {
+        width: 40px !important;
+        min-width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        overflow: hidden !important;
+        font-size: 0 !important;
+    }
+
+    .install-app-btn i {
+        font-size: 17px !important;
+        margin: 0 !important;
+    }
+}
