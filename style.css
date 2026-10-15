@@ -5881,77 +5881,37 @@ body.qr-dark-mode
 
 
 
-
-
-/* QR Hub - Final Mobile Hamburger */
-
+/* QR Hub - Consolidated Mobile Topbar */
 @media (max-width: 768px) {
-    .menu-btn {
+    .topbar {
         display: flex !important;
-        position: relative !important;
         align-items: center !important;
-        justify-content: center !important;
-
-        width: 42px !important;
-        min-width: 42px !important;
-        height: 42px !important;
-
-        padding: 0 !important;
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-
-        z-index: 100002 !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
+        justify-content: space-between !important;
+        gap: 5px !important;
+        padding: 8px !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
     }
 
-    .menu-btn i.fa-bars {
-        display: none !important;
+    .topbar-left {
+        display: flex !important;
+        align-items: center !important;
+        flex: 0 0 auto !important;
+        gap: 4px !important;
+        min-width: 0 !important;
     }
 
-    .menu-btn::before {
-        content: "☰";
-        display: block !important;
-        font-family: Arial, sans-serif !important;
-        font-size: 28px !important;
-        font-weight: 700 !important;
-        line-height: 1 !important;
-        color: #111827 !important;
-        pointer-events: none !important;
-    }
-
-    body.qr-dark-mode .menu-btn::before {
-        color: #ffffff !important;
-    }
-}
-
-@media (min-width: 769px) {
-    .menu-btn {
-        display: none !important;
-    }
-}
-
-
-
-
-/* QR Hub - Mobile Hamburger and Profile Fix */
-@media (max-width: 768px) {
     .menu-btn {
         display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        flex: 0 0 42px !important;
-        width: 42px !important;
-        height: 42px !important;
-        position: relative !important;
-        z-index: 100002 !important;
+        flex: 0 0 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 40px !important;
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
+        position: relative !important;
+        z-index: 100002 !important;
     }
 
     .menu-btn i {
@@ -5960,163 +5920,124 @@ body.qr-dark-mode
 
     .menu-btn::before {
         content: "☰" !important;
-        display: block !important;
-        font: bold 28px/1 Arial, sans-serif !important;
+        font: bold 26px/1 Arial, sans-serif !important;
         color: #111827 !important;
     }
 
     body.qr-dark-mode .menu-btn::before {
-        color: #ffffff !important;
-    }
-
-    .topbar {
-        min-width: 0 !important;
-        max-width: 100% !important;
-    }
-
-    .topbar-right {
-        min-width: 0 !important;
-        flex: 1 1 auto !important;
-        gap: 4px !important;
-    }
-
-    .profile {
-        min-width: 0 !important;
-        max-width: 100% !important;
-        flex: 0 1 auto !important;
-    }
-
-    .profile-info {
-        min-width: 0 !important;
-        max-width: 75px !important;
-    }
-}
-
-
-
-
-/* QR Hub - Mobile Search Box Fix */
-@media (max-width: 768px) {
-    .topbar-left {
-        flex: 0 1 auto !important;
-        min-width: 0 !important;
-        gap: 5px !important;
+        color: #fff !important;
     }
 
     .search-box {
-        width: 145px !important;
-        min-width: 90px !important;
-        max-width: 145px !important;
-        flex: 0 1 145px !important;
-        padding: 0 8px !important;
-        gap: 6px !important;
-        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        max-width: 36px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        overflow: hidden !important;
     }
 
     .search-box input {
-        min-width: 0 !important;
-        width: 100% !important;
-        font-size: 12px !important;
+        display: none !important;
+    }
+
+    .search-box i {
+        font-size: 17px !important;
+        margin: 0 !important;
     }
 
     .topbar-right {
-        min-width: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
         flex: 1 1 auto !important;
-        gap: 5px !important;
-    }
-}
-
-
-
-
-
-
-/* Mobile Topbar - Keep Profile Visible */
-@media (max-width: 768px) {
-    .topbar {
-        gap: 4px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
-
-    .topbar-left {
-        flex: 0 1 auto !important;
         min-width: 0 !important;
+        gap: 5px !important;
         overflow: hidden !important;
     }
 
-    .search-box {
-        width: 110px !important;
-        min-width: 75px !important;
-        max-width: 110px !important;
-        flex: 0 1 110px !important;
-        padding: 0 7px !important;
-        gap: 5px !important;
+    .topbar-right > i {
+        flex: 0 0 26px !important;
+        width: 26px !important;
+        min-width: 26px !important;
+        height: 36px !important;
+        font-size: 15px !important;
     }
 
-    .topbar-right {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        gap: 4px !important;
-        overflow: hidden !important;
+    .topbar-right .notification span,
+    .topbar-right .notification .badge,
+    .topbar-right .notification-count,
+    .topbar-right .notification-badge {
+        display: none !important;
+    }
+
+    .language {
+        flex: 0 0 auto !important;
+        gap: 0 !important;
+        padding: 0 2px !important;
+    }
+
+    .language span {
+        display: none !important;
     }
 
     .install-app-btn {
-        padding: 0 9px !important;
-        white-space: nowrap !important;
-        font-size: 12px !important;
+        display: flex !important;
+        flex: 0 0 38px !important;
+        width: 38px !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        font-size: 0 !important;
+    }
+
+    .install-app-btn i {
+        font-size: 17px !important;
     }
 
     .profile {
-        flex-shrink: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        flex: 0 1 92px !important;
         min-width: 0 !important;
+        max-width: 92px !important;
         gap: 4px !important;
-    }
-
-    .profile-image {
-        flex-shrink: 0 !important;
+        padding-left: 0 !important;
+        overflow: hidden !important;
     }
 
     .profile img {
-        width: 30px !important;
-        height: 30px !important;
+        flex: 0 0 32px !important;
+        width: 32px !important;
+        min-width: 32px !important;
+        height: 32px !important;
     }
 
     .profile > div:last-child {
+        flex: 1 1 auto !important;
         min-width: 0 !important;
-        max-width: 48px !important;
         overflow: hidden !important;
     }
 
     .profile h4,
     .profile span {
+        display: block !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
 }
 
-
-
-/* Mobile: Install App icon only */
-@media (max-width: 768px) {
-    .install-app-btn {
-        width: 40px !important;
-        min-width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        justify-content: center !important;
-        gap: 0 !important;
-        overflow: hidden !important;
-        font-size: 0 !important;
-    }
-
-    .install-app-btn i {
-        font-size: 17px !important;
-        margin: 0 !important;
+@media (min-width: 769px) {
+    .menu-btn {
+        display: none !important;
     }
 }
-
-
-
 
