@@ -7,7 +7,6 @@ Developed by SR Infinity
 ========================================================*/
 
 :root{
-
 --primary:#2563eb;
 --primary-dark:#1d4ed8;
 
@@ -6203,15 +6202,3 @@ body.qr-dark-mode
 
 
 
-/* Mobile: Keep Profile Aligned to the Right */
-@media (max-width: 768px) {
-    .topbar-right {
-        margin-left: auto !important;
-        justify-content: flex-end !important;
-    }
-
-    .profile {
-        margin-left: auto !important;
-        flex: 0 0 auto !important;
-    }
-}
