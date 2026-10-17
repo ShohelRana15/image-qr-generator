@@ -6117,4 +6117,107 @@ body.qr-dark-mode
 
 
 
+/* Mobile Search: শুধু সার্চ আইকন */
+@media (max-width: 768px) {
+    .topbar-left {
+        flex: 0 0 auto !important;
+        min-width: 0 !important;
+        gap: 8px !important;
+        overflow: visible !important;
+    }
+
+    .menu-btn {
+        flex: 0 0 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+    }
+
+    .search-box {
+        flex: 0 0 28px !important;
+        width: 28px !important;
+        min-width: 28px !important;
+        max-width: 28px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        border: none !important;
+        outline: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .search-box input,
+    .search-box span,
+    .search-box button,
+    .search-box .fa-chevron-up,
+    .search-box .search-results,
+    .search-box .search-count {
+        display: none !important;
+    }
+
+    .search-box > i:first-child {
+        display: flex !important;
+        flex: 0 0 28px !important;
+        width: 28px !important;
+        min-width: 28px !important;
+        height: 36px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        color: #94a3b8 !important;
+    }
+}
+
+
+
+
+
+
+/* Mobile Profile Name - Show More Text */
+@media (max-width: 768px) {
+    .profile {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+        gap: 5px !important;
+    }
+
+    .profile > div:last-child {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+
+    .profile h4,
+    .profile span {
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+
+
+
+
+
+/* Mobile: Keep Profile Aligned to the Right */
+@media (max-width: 768px) {
+    .topbar-right {
+        margin-left: auto !important;
+        justify-content: flex-end !important;
+    }
+
+    .profile {
+        margin-left: auto !important;
+        flex: 0 0 auto !important;
+    }
+}
 
