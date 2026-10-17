@@ -6169,3 +6169,34 @@ body.qr-dark-mode
     }
 }
 
+
+
+
+
+
+/* Mobile Profile Name - Show More Text */
+@media (max-width: 768px) {
+    .profile {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+        gap: 5px !important;
+    }
+
+    .profile > div:last-child {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+
+    .profile h4,
+    .profile span {
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+}
