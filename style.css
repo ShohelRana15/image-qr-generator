@@ -6200,3 +6200,18 @@ body.qr-dark-mode
         white-space: nowrap !important;
     }
 }
+
+
+
+/* Mobile: Keep Profile Aligned to the Right */
+@media (max-width: 768px) {
+    .topbar-right {
+        margin-left: auto !important;
+        justify-content: flex-end !important;
+    }
+
+    .profile {
+        margin-left: auto !important;
+        flex: 0 0 auto !important;
+    }
+}
