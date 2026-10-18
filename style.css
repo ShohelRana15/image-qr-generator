@@ -1435,6 +1435,30 @@ body.qr-dark-mode .stat-card::after {
 }
 
 
+
+
+
+
+
+
+/* FIX: Statistics cards on mobile */
+@media screen and (max-width: 600px) {
+    .stats-section .stats-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-auto-flow: row !important;
+        gap: 14px !important;
+    }
+
+    .stats-section .stat-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
 /*=========================
 QR CATEGORIES
 =========================*/
@@ -6400,4 +6424,7 @@ body.qr-dark-mode
         flex: 0 0 auto !important;
     }
 }
+
+
+
 
