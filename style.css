@@ -6436,8 +6436,6 @@ body.qr-dark-mode
 
 
 
-
-
 /* Mobile: Keep Profile Aligned to the Right */
 @media (max-width: 768px) {
     .topbar-right {
@@ -6450,8 +6448,6 @@ body.qr-dark-mode
         flex: 0 0 auto !important;
     }
 }
-
-
 
 
 
@@ -6480,9 +6476,6 @@ body.qr-dark-mode
         box-shadow: 0 0 18px rgba(0, 180, 255, 0.2);
     }
 }
-
-
-
 
 
 
