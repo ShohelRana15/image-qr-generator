@@ -2007,6 +2007,32 @@ CATEGORY RESPONSIVE
 }
 
 
+
+.heart-blink {
+  display: inline-block;
+  color: #ff1744;
+  animation: heartGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes heartGlow {
+  0%, 100% {
+    opacity: 0.65;
+    text-shadow: 0 0 4px #ff1744;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #ff1744,
+      0 0 12px #ff1744,
+      0 0 22px #ff1744,
+      0 0 35px #ff1744;
+    transform: scale(1.15);
+  }
+}
+
+
 /*=========================*
 * RESPONSIVE
 *=========================*/
