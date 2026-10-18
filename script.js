@@ -8299,3 +8299,17 @@ function showQRHubPaymentInstructions(
 
 
 
+document.addEventListener("pointerdown", function (e) {
+    const ripple = document.createElement("span");
+    ripple.className = "water-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+
+    document.body.appendChild(ripple);
+
+    ripple.addEventListener("animationend", () => {
+        ripple.remove();
+    });
+});
+
+
