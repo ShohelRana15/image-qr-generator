@@ -6531,3 +6531,44 @@ body.qr-dark-mode
     left: -4px;
     top: 1.5px;
 }
+
+
+
+
+.qrhub-magic-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100000;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #00aaff;
+    box-shadow:
+        0 0 5px #00aaff,
+        0 0 10px #0088ff,
+        0 0 18px #0066ff;
+    animation: qrhubSparkle 700ms ease-out forwards;
+    contain: strict;
+}
+
+.qrhub-magic-sparkle::before,
+.qrhub-magic-sparkle::after {
+    content: "";
+    position: absolute;
+    background: #0088ff;
+    border-radius: 2px;
+}
+
+.qrhub-magic-sparkle::before {
+    width: 2px;
+    height: 13px;
+    left: 1.5px;
+    top: -4px;
+}
+
+.qrhub-magic-sparkle::after {
+    width: 13px;
+    height: 2px;
+    left: -4px;
+    top: 1.5px;
+}
