@@ -6480,3 +6480,61 @@ body.qr-dark-mode
         box-shadow: 0 0 18px rgba(0, 180, 255, 0.2);
     }
 }
+
+
+
+
+
+
+
+/* QR Hub - Magic Sparkle */
+.qrhub-magic-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100000;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #00d9ff,
+        0 0 18px #00aaff;
+    animation: qrhubSparkle 700ms ease-out forwards;
+    contain: strict;
+}
+
+@keyframes qrhubSparkle {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translate(var(--sparkle-x), var(--sparkle-y))
+            scale(0);
+    }
+}
+
+.qrhub-magic-sparkle::before,
+.qrhub-magic-sparkle::after {
+    content: "";
+    position: absolute;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+.qrhub-magic-sparkle::before {
+    width: 2px;
+    height: 13px;
+    left: 1.5px;
+    top: -4px;
+}
+
+.qrhub-magic-sparkle::after {
+    width: 13px;
+    height: 2px;
+    left: -4px;
+    top: 1.5px;
+}
