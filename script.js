@@ -8313,3 +8313,50 @@ document.addEventListener("pointerdown", function (e) {
 });
 
 
+
+
+
+/* QR Hub - Magic Sparkle Effect */
+(() => {
+    const sparkleClass = "qrhub-magic-sparkle";
+    const maxSparkles = 12;
+    let activeSparkles = 0;
+
+    document.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 && event.pointerType === "mouse") {
+            return;
+        }
+
+        // প্রতি টাচে সীমিত সংখ্যক স্পার্কল
+        const count = 6;
+
+        for (let i = 0; i < count; i++) {
+            if (activeSparkles >= maxSparkles) break;
+
+            const sparkle = document.createElement("span");
+            sparkle.className = sparkleClass;
+
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 15 + Math.random() * 45;
+
+            sparkle.style.left = event.clientX + "px";
+            sparkle.style.top = event.clientY + "px";
+            sparkle.style.setProperty(
+                "--sparkle-x",
+                `${Math.cos(angle) * distance}px`
+            );
+            sparkle.style.setProperty(
+                "--sparkle-y",
+                `${Math.sin(angle) * distance}px`
+            );
+
+            activeSparkles++;
+            document.body.appendChild(sparkle);
+
+            sparkle.addEventListener("animationend", () => {
+                sparkle.remove();
+                activeSparkles--;
+            }, { once: true });
+        }
+    }, { passive: true });
+})();
