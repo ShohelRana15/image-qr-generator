@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>QR Hub – Free Image, Text &amp; URL QR Code Generator</title>
+<meta name="description" content="QR Hub is a free QR code generator and scanner. Create QR codes from images, text, links, WiFi, contacts, locations, WhatsApp and more.">
+<meta name="theme-color" content="#2563eb">
+<meta name="application-name" content="QR Hub">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="QR Hub">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="canonical" href="https://shohelrana15.github.io/image-qr-generator/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="QR Hub">
+<meta property="og:title" content="QR Hub – Free QR Code Generator &amp; Scanner">
+<meta property="og:description" content="Create QR codes from images, text, links, WiFi, contacts and more. Install it as an app.">
+<meta property="og:url" content="https://shohelrana15.github.io/image-qr-generator/">
+<meta property="og:image" content="https://shohelrana15.github.io/image-qr-generator/icon-512.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://vbufbeaktxvcxfcskyhr.supabase.co" crossorigin>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+
+<!-- Libraries are pinned to exact versions so an upstream update can never break the site -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+<script defer src="script.js"></script>
+
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<noscript>
+    <p style="padding:16px;text-align:center;">QR Hub needs JavaScript to work. Please enable JavaScript and reload.</p>
+</noscript>
+
+<div id="welcomeScreen">
+    <div class="welcome-box">
+        <div class="wave">👋</div>
+        <h2>Welcome to QR Hub</h2>
+        <p>⚡ Fast & Secure QR Generator</p>
+        <p>Developed with ❤️ by SR Infinity</p>
+    <div class="photo-wrapper">
+    <img src="welcome-photo.webp" class="welcome-photo" alt="Shohel Rana" width="512" height="512">
+</div>
+        <h3 class="developer-name">Shohel Rana</h3>
+
+<p class="developer-title">
+    Founder & Lead Developer
+    <br>
+    QR Hub | SR Infinity
+</p>
+
+<div class="loading-spinner"></div>
+
+<p class="loading-text">Loading QR Hub...</p>
+    <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<p id="progressText">Loading... 0%</p>
+        
+    </div>
+</div>
+  
+  
+<div class="top-marquee">
+    <div class="top-marquee-content">
+        🎉 Welcome to QR Hub v5.7 | Developed with ❤️ by SR Infinity | Create QR Codes from Images & Text | Install QR Hub for a faster experience | Free Forever 🚀
+    </div>
+</div>
+
+
+<!-- ===========================
+QR HUB DASHBOARD
+=========================== -->
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+    <img src="icon-192.png" alt="QR Hub logo" class="logo-image" width="192" height="192">
+
+    <div class="logo-text">
+
+        <h2>QR Hub</h2>
+
+        <p>Professional QR Solutions</p>
+
+    </div>
+
+</div>
+
+        <nav aria-label="Main menu">
+
+            <a href="#" class="active" aria-current="page">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+
+            <a href="#">
+                <i class="fa-solid fa-qrcode"></i>
+                QR Scanner
+            </a>
+
+
+            <a href="#">
+                <i class="fa-regular fa-image"></i>
+                Image QR
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-font"></i>
+                Text QR
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-link"></i>
+                URL QR
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-wifi"></i>
+                WiFi QR
+            </a>
+
+            <a href="#">
+                <i class="fa-regular fa-address-card"></i>
+                Contact QR
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-location-dot"></i>
+                Location QR
+            </a>
+
+
+            <a href="#">
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp QR
+            </a>
+
+            
+            <a href="#">
+                <i class="fa-solid fa-envelope"></i>
+                Email QR
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-phone"></i>
+                Phone QR
+            </a>
+
+
+            <a href="#">
+                <i class="fa-solid fa-comment-sms"></i>
+                SMS QR
+            </a>
+
+
+            <a href="#">
+                <i class="fa-solid fa-share-nodes"></i>
+                Social Media QR
+                </a>
+
+            <hr>
+
+            <a href="#">
+                <i class="fa-regular fa-folder"></i>
+                My QR Codes
+            </a>
+
+            <a href="#">
+                <i class="fa-regular fa-clock"></i>
+                History
+            </a>
+
+            <a href="#">
+                <i class="fa-regular fa-heart"></i>
+                Favorites
+            </a>
+
+            <hr>
+
+            <a href="#">
+                <i class="fa-solid fa-table-cells"></i>
+                Templates
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-chart-column"></i>
+                Analytics
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+        </nav>
+
+<!-- Upgrade Card -->
+
+<div class="upgrade-card">
+
+    <div class="upgrade-icon">
+        👑
+    </div>
+
+    <h3>Upgrade to Pro</h3>
+
+    <p>
+        Unlock powerful features and
+        enhance your productivity.
+    </p>
+
+    <button class="upgrade-btn">
+
+        Upgrade Now
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+    </button>
+
+</div>
+
+<!-- Dark Mode -->
+
+<div class="dark-mode">
+
+    <span>
+
+        <i class="fa-solid fa-moon"></i>
+
+        Dark Mode
+
+    </span>
+
+    <label class="switch">
+
+        <input type="checkbox" aria-label="Toggle dark mode">
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+<div class="sidebar-footer">
+
+    <p>QR Hub v5.7</p>
+
+    <small>Powered by SR Infinity</small>
+
+</div>
+
+    </aside>
+
+
+
+
+    <!-- Main Area -->
+
+    <main class="main-content" id="main">
+
+        <!-- Top Navigation -->
+
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <button type="button" class="menu-btn" aria-label="Open or close menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+       
+        
+        
+        <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        type="text"
+        placeholder="Search this page..."
+        aria-label="Search this page"
+        autocomplete="off">
+
+    <span class="qrhub-search-counter">
+        0 results
+    </span>
+
+    <button
+        type="button"
+        class="qrhub-search-prev"
+        title="Previous result">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <button
+        type="button"
+        class="qrhub-search-next"
+        title="Next result">
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <i class="fa-solid fa-microphone"></i>
+
+</div>
+
+
+        
+
+    </div>
+
+    <div class="topbar-right">
+
+        <i class="fa-regular fa-circle-question"></i>
+
+        <div class="notification">
+
+    <i class="fa-regular fa-bell"></i>
+
+</div>
+
+
+
+
+        
+       <div class="language language-selector">
+
+    <i class="fa-solid fa-globe"></i>
+
+    <button
+        type="button"
+        class="language-btn" aria-haspopup="true" aria-label="Change language">
+        EN
+    </button>
+
+    <div class="language-dropdown">
+
+        <button
+            type="button"
+            data-language="en">
+            English
+        </button>
+
+        <button
+            type="button"
+            data-language="bn">
+            বাংলা
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+        
+        
+        <button type="button" class="install-app-btn">
+
+            <i class="fa-solid fa-download"></i>
+
+            Install App
+
+        </button>
+
+        <div class="profile">
+
+    <div class="profile-image">
+
+        <img src="welcome-photo.webp" alt="Shohel Rana profile photo" width="512" height="512">
+
+        <span class="online-dot"></span>
+
+    </div>
+
+    <div>
+
+        <h4>@Shohel</h4>
+
+        <span>Founder</span>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Hero Banner -->
+
+<section class="hero-banner">
+
+<div class="hero-bg">
+
+    <div class="circle one"></div>
+
+    <div class="circle two"></div>
+
+    <div class="dots"></div>
+
+</div>
+
+    <div class="hero-left">
+
+        <span class="hero-badge">
+
+    👋 Welcome Back, Shohel Rana!
+
+</span>
+
+        <span class="badge">
+            🚀 Professional QR Platform
+        </span>
+
+        <h1>
+            Create Professional
+            <br>
+            QR Codes in Seconds
+        </h1>
+
+        <p>
+            Generate beautiful, secure and customizable QR codes
+            for business, marketing and personal use.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="primary-btn">
+                Create QR Code
+            </button>
+
+            <button class="secondary-btn" id="heroScanQRBtn">
+                Scan QR Code
+            </button>
+
+        </div>
+
+    </div>
+
+   <div class="hero-right">
+
+    <div class="hero-qr">
+
+        <div class="scanner-frame">
+
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+
+            <img src="qr-sample.png" alt="Sample QR code" width="512" height="512">
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =======================
+QR Categories
+======================= -->
+
+<section class="qr-categories">
+
+    <div class="section-header">
+
+        <h2>Create QR Code</h2>
+
+        <a href="#">View All →</a>
+
+    </div>
+
+    <div class="category-grid">
+
+        
+        <div class="category-card">
+            <div class="category-icon">
+            <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <h3>QR Scanner</h3>
+            <p>
+            Scan QR code using camera or gallery
+            </p>
+        </div>
+
+        
+
+        <div class="category-card">
+
+            <i class="fa-regular fa-image"></i>
+
+            <h3>Image QR</h3>
+
+            <p>Create QR from an image</p>
+
+        </div>
+
+        
+        <div class="category-card">
+
+            <i class="fa-solid fa-font"></i>
+
+            <h3>Text QR</h3>
+
+            <p>Create QR from plain text</p>
+
+        </div>
+
+        
+        <div class="category-card">
+
+            <i class="fa-solid fa-link"></i>
+
+            <h3>URL QR</h3>
+
+            <p>Create QR for website link</p>
+
+        </div>
+
+        
+        <div class="category-card">
+
+            <i class="fa-solid fa-wifi"></i>
+
+            <h3>WiFi QR</h3>
+
+            <p>Share WiFi network</p>
+
+        </div>
+
+        
+        <div class="category-card">
+
+            <i class="fa-regular fa-address-card"></i>
+
+            <h3>Contact QR</h3>
+
+            <p>Share contact information</p>
+
+        </div>
+
+        
+        <div class="category-card">
+
+             <i class="fa-solid fa-location-dot"></i>
+
+            <h3>Location QR</h3>
+
+            <p>Share a location using Google Maps</p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+            <h3>WhatsApp QR</h3>
+
+            <p>Start a WhatsApp chat instantly</p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            <h3>Email QR</h3>
+
+            <p>Share an email address instantly</p>
+
+        </div>
+
+
+
+        <div class="category-card">
+            <i class="fa-solid fa-phone"></i>
+            <h3>Phone QR</h3>
+            <p>Make a phone call instantly</p>
+        </div>
+
+
+
+        <div class="category-card">
+            <i class="fa-solid fa-comment-sms"></i>
+            <h3>SMS QR</h3>
+            <p>Send an SMS instantly</p>
+        </div>
+
+
+
+
+        <div class="category-card">
+            <i class="fa-solid fa-share-nodes"></i>
+            <h3>Social Media QR</h3>
+            <p>Share your social media profiles</p>
+        </div>
+        
+    </div>
+
+</section>
+
+<!-- =======================
+Statistics Cards
+======================= -->
+
+<section class="stats-section">
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-qrcode"></i>
+
+            <div>
+
+                <h4>Total QR Codes</h4>
+
+                <h2>1,245</h2>
+
+                <span>↑ 12.5% vs last month</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-regular fa-image"></i>
+
+            <div>
+
+                <h4>Images Uploaded</h4>
+
+                <h2>456</h2>
+
+                <span>↑ 8.3%</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-font"></i>
+
+            <div>
+
+                <h4>Text QR Created</h4>
+
+                <h2>789</h2>
+
+                <span>↑ 15.3%</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-download"></i>
+
+            <div>
+
+                <h4>Total Downloads</h4>
+
+                <h2>2,456</h2>
+
+                <span>↑ 18.7%</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-regular fa-folder-open"></i>
+
+            <div>
+
+                <h4>Storage Used</h4>
+
+                <h2>1.2 GB</h2>
+
+                <span>↑ 6.4%</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================
+Bottom Dashboard
+======================= -->
+
+<section class="dashboard-bottom">
+
+    <!-- =======================
+    CREATE QR / UPLOAD + PREVIEW
+    ======================= -->
+
+    <div class="upload-panel">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Create Your QR Code</h2>
+                <p>Upload an image or enter text to generate QR code</p>
+            </div>
+
+        </div>
+
+
+        <div class="upload-layout">
+
+            <!-- Upload Area -->
+
+            <div class="upload-box">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                <p>Drag & Drop an image here</p>
+
+                <span>or</span>
+
+                <button class="primary-btn">
+                    Choose File
+                </button>
+
+                <div class="supported-files">
+                    JPG • PNG • WEBP
+                </div>
+
+                <small>
+                    Max. 10MB
+                </small>
+
+            </div>
+
+
+            <!-- Preview Area -->
+
+            <div class="preview-panel">
+
+                <h3>Preview</h3>
+
+                <div class="preview-box">
+
+                    <div class="preview-placeholder">
+
+                        <i class="fa-solid fa-qrcode"></i>
+
+                        <p>
+                            Your QR code will
+                            appear here
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="preview-actions">
+
+                    <button class="secondary-btn">
+                        Download
+                    </button>
+
+                    <button class="primary-btn">
+                        Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================
+    RECENT ACTIVITY
+    ======================= -->
+
+    <div class="activity-panel">
+
+        <div class="section-header">
+
+            <h2>Recent Activity</h2>
+
+            <a href="#">
+                View All
+            </a>
+
+        </div>
+
+        <ul class="activity-list">
+
+            <li>
+
+                <div>
+                    <strong>My Website</strong>
+                    <span>URL QR Code</span>
+                </div>
+
+                <small>2 mins ago</small>
+
+            </li>
+
+
+            <li>
+
+                <div>
+                    <strong>Product Image</strong>
+                    <span>Image QR Code</span>
+                </div>
+
+                <small>15 mins ago</small>
+
+            </li>
+
+
+            <li>
+
+                <div>
+                    <strong>Meeting Notes</strong>
+                    <span>Text QR Code</span>
+                </div>
+
+                <small>1 hour ago</small>
+
+            </li>
+
+
+            <li>
+
+                <div>
+                    <strong>Home WiFi</strong>
+                    <span>WiFi QR Code</span>
+                </div>
+
+                <small>2 hours ago</small>
+
+            </li>
+
+
+            <li>
+
+                <div>
+                    <strong>My Contact</strong>
+                    <span>Contact QR Code</span>
+                </div>
+
+                <small>3 hours ago</small>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- =======================
+QUICK STATS
+======================= -->
+
+<div class="quick-panel">
+
+    <div class="section-header">
+
+        <h2>Quick Stats</h2>
+
+    </div>
+
+    <div class="chart-placeholder">
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        <strong>1,245</strong>
+
+        <span>Total QR</span>
+
+    </div>
+
+    <div class="month-stats">
+
+        <span>This Month</span>
+
+        <strong>2,156</strong>
+
+        <small>
+            Total Scans
+        </small>
+
+    </div>
+
+
+    <!-- Quick Summary -->
+
+    <div class="quick-summary">
+
+        <div>
+
+            <strong>245</strong>
+
+            <span>Today's QR</span>
+
+        </div>
+
+        <div>
+
+            <strong>98%</strong>
+
+            <span>Success Rate</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+    
+
+<!-- footer -->    
+<footer class="footer">
+
+© 2026 QR Hub v5.7 • Developed with <span class="heart-blink">❤️</span> by SR Infinity • All Rights Reserved.
+
+</footer>
+
+
+  
+</body>
+
+</html>
